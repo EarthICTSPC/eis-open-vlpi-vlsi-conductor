@@ -1,465 +1,75 @@
 # eis-open-vlpi-vlsi-conductor
 
-**Earth ICT, SPC — Open enabling technical disclosure for Very Large Photonic Infrastructure (VLPI)**
+**Earth ICT, SPC (EIS) — Open technical disclosure for Very Large Photonic Infrastructure (VLPI)**
 
-> **Here is the architecture. Here are the contracts. Here are the interfaces. Here are the implementation rules. Here is the verification path. Here is the physical artifact. Make your own.**
+> **EIS is pursuing photonic computation as a potential replacement for energy-intensive electronic accelerator workloads. The path is joint electronic–photonic co-design, formal contracts, physical validation, and system-level evidence.**
 
-This repository is the open technical-disclosure layer of the Earth ICT, SPC (EIS) VLPI project.
+Here is the architecture. Here are the contracts and interfaces. Here is the verification path. Here is the evidence needed to judge whether a physical implementation meets its claims.
 
-It is deliberately organized differently from a research article. The **Research Article** records scientific questions, evidence, results, interpretation, and limits. This repository is intended to provide an **enabling technical disclosure** from which a technically skilled person can understand, reproduce, adapt, and independently implement compatible physical-computation systems.
+## Start here
 
-It is not itself a patent and does not provide legal advice.
+- [PTC and the GPU-replacement hypothesis](docs/01-architecture/PTC_AND_GPU_REPLACEMENT_HYPOTHESIS.md) — what Photonic Transformer Chips are, what published research supports, and what remains a hypothesis.
+- [Electronic–photonic interface contract](docs/01-architecture/ELECTRONIC_PHOTONIC_INTERFACE_CONTRACT.md) — a draft boundary for host control, input encoding, optical computation, readout, state, timing, and energy accounting.
+- [PTC co-design walkthrough](examples/ptc-electronic-photonic-codesign/README.md) — a deliberately small example plan showing how a contract, tests, Lean4 obligations, conductor actions, and evidence fit together.
+- [Independent LLM review guide](docs/00-overview/INDEPENDENT_LLM_REVIEW_GUIDE.md) — canonical review order and evidence boundaries.
+- [Open VLPI disclosure doctrine](docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md) — how to interpret the repository and its claims.
 
-## What is being disclosed?
+**Status note:** the new PTC and electronic–photonic pages are design documentation. The walkthrough is explicitly not yet a reproducible executable demonstration. Do not infer a completed Lean4 proof, a fabricated 512 × 512 PTC, or measured GPU-replacement performance from these documents.
 
-EIS is developing an open framework for physical computation in which the primary object is a **Replicable Unit (RU)**: a bounded, composable physical transformation with an explicit state model, contract, physical realization, verification path, and replication evidence.
+## What is a PTC?
 
-The central working abstraction is:
+A Photonic Transformer Chip (PTC) explores using optical interference in a photonic circuit to perform parts of transformer-related computation. Rather than treating optics only as a communication bus around an electronic accelerator, EIS investigates whether the computational transformation and information movement can be co-designed within a photonic substrate.
 
-[
-S_{RU}=(H,T,R,B,G,C)
-]
+The research of Tian et al., “Photonic transformer chip: interference is all you need,” *PhotoniX* 6, 45 (2025), DOI [10.1186/s43074-025-00182-7](https://doi.org/10.1186/s43074-025-00182-7), is an important reference. It should not be read as evidence that a 512 × 512 or 4K × 4K PTC, complete production LLM, or general-purpose GPU replacement has already been demonstrated. Separate measured results from ideal-model results, projections, and future work.
 
-where:
+## Why electronic–photonic co-design?
 
-- **H** — physical field/state space
-- **T** — physical transformation mapping
-- **R** — constraint-reduction operator
-- **B** — state-boundary acceptance
-- **G** — state-to-field regeneration
-- **C** — machine-checkable contract
+A useful PTC is more than an optical core. The system boundary includes electronic input preparation, electrical-to-optical conversion, photonic transformation, optical detection, readout, configuration, calibration, synchronization, state boundaries, packaging, and thermal overheads.
 
-The abstraction does not assume that photonic computation is inherently a Boolean gate, electronic MAC, or conventional matrix-vector operation.
+The interface must define representations, units, port ordering, field normalization, timing, legal transactions, errors, numerical tolerance, and energy-accounting boundaries. The optical model and electronic interface should evolve together as PDK and physical constraints become clearer.
 
-## The "make your own" principle
+## Why Lean4?
 
-The repository is intended to support independent implementation.
+Lean4 can make mathematical definitions, legal interface traces, state transitions, invariants, and refinement obligations precise—and machine-check properties that follow from those definitions and assumptions. It cannot by itself prove that an analog driver, detector, PDK model, or fabricated device behaves as specified. Such links need appropriate tests, validated models, simulation, measurement, or other explicit evidence.
 
-An implementation may use a different foundry, material stack, simulator, packaging technology, or toolchain, provided that it satisfies the published contracts and interfaces.
+## What is the agentic conductor?
 
-The open repository therefore separates:
+The conductor coordinates a contract-governed engineering loop. It reads requirements and design context, checks completeness, runs inexpensive schema and reference-model tests, invokes implemented Lean4 checks, stops on failed gates, requests authorization before paid or consequential simulation, records tool versions and results, classifies evidence, and recommends the next experiment.
 
-- **architecture and contracts** — openly disclosed;
-- **technology interfaces** — openly specified;
-- **reference implementations** — openly reproducible where possible;
-- **controlled technology** — proprietary PDKs, process rules, models, credentials, and other material that EIS is not authorized to publish.
-
-The objective is not to create a black-box EIS chip.
-
-The objective is to create an **open physical-computation architecture that others can implement**.
-
-## GitHub versus the Research Article
-
-### Research Article
-
-The Research Article asks:
-
-> **What do we know, what did we demonstrate, and what remains a hypothesis?**
-
-It is evidence-led scientific communication.
-
-### This repository
-
-This repository asks:
-
-> **What would someone skilled in the art and science need in order to make an independent implementation?**
-
-It therefore emphasizes:
-
-- definitions;
-- contracts;
-- interfaces;
-- schemas;
-- implementation rules;
-- verification;
-- physical-design artifacts;
-- test vectors;
-- evidence manifests;
-- reproducibility.
-
-A repository artifact does not become experimentally demonstrated merely because it is published.
-
-## From physical principle to infrastructure
-
-The intended disclosure chain is:
-
-```text
-Physical principle
-      ↓
-Physical state
-      ↓
-Transformation
-      ↓
-RU contract
-      ↓
-Physical primitives
-      ↓
-Composition
-      ↓
-Technology mapping
-      ↓
-CRC
-      ↓
-Physics simulation
-      ↓
-PVR
- ├── PDR
- ├── PCT
- └── PTV
-      ↓
-OASIS
-      ↓
-Foundry review
-      ↓
-Fabrication
-      ↓
-BIST / State Boundary measurement
-      ↓
-Replication
-      ↓
-Useful computational service
-      ↓
-VLPI
-```
-
-The physical artifact is therefore part of the evidence chain, not merely a downstream drawing.
-
-## Why VLPI?
-
-EIS asks a system-level question:
-
-> **Can physical computation and physical information movement be co-designed as one scalable, verifiable photonic infrastructure?**
-
-The project is not simply about putting an optical bus around an otherwise electronic accelerator.
-
-EIS is investigating whether some computational state can remain within a photonic physical substrate while it is transformed, selected, routed, and communicated, thereby reducing unnecessary electronic state-boundary crossings.
-
-At larger scale, this makes the following first-class engineering concerns:
-
-- physical transformation;
-- optical information movement;
-- state preservation;
-- state boundaries;
-- replication;
-- thermal behavior;
-- electrical interfaces;
-- packaging;
-- fabrication;
-- verification;
-- measurement;
-- yield;
-- wafer-scale composition;
-- stacked-wafer composition.
-
-## Replicable Units
-
-An RU is **not merely a photonic standard cell**.
-
-An RU is defined by the physical transformation it performs, the state on which it operates, the contract that accepts that transformation, its realization, and the evidence supporting it.
-
-Conceptually:
-
-```text
-                 RU Definition
-       transformation + state + contract
-                       │
-                       ▼
-                  RU Instance
-            specific realization
-                       │
-                       ▼
-                 RU Composition
-                       │
-                       ▼
-                Wafer / Stack / VLPI
-```
-
-Geometry is an implementation property.
-
-The contract is the invariant.
-
-## Constraint Reduction Calculus
-
-**Constraint Reduction Calculus (CRC)** is used to reduce the physical search space before expensive physics simulation.
-
-The objective is not to replace physics simulation.
-
-It is to test whether unsuitable candidates can be rejected earlier:
-
-```text
-Design space
-     ↓
-CRC constraints
-     ├── reject impossible candidates
-     ├── reject contract-incompatible candidates
-     └── retain plausible candidates
-                  ↓
-               EM/FDTD
-                  ↓
-           physical evidence
-```
-
-A central metric is:
-
-[
-eta_{CRC}=1-rac{N_{FDTD,CRC}}{N_{FDTD,baseline}}
-]
-
-Solution-quality preservation is evaluated separately.
+MCP is a tool-integration mechanism, not a guarantee of correctness or authorization. The conductor must not turn missing evidence into a pass or present an unexecuted action as complete.
 
 ## Evidence discipline
 
-EIS distinguishes evidence states rather than treating all repository artifacts as equivalent.
-
-| State | Meaning |
+| Label | Meaning |
 |---|---|
-| `draft` | Incomplete or exploratory material |
-| `specified` | Behavior and acceptance conditions explicitly defined |
-| `formally-verified` | Logical property machine-checked under stated assumptions |
-| `computationally-demonstrated` | Supported by a documented computational experiment |
-| `experimentally-demonstrated` | Supported by physical experimental demonstration |
-| `measured` | Measurement record exists for the identified artifact and condition |
-| `proposed-hypothesis` | Research hypothesis or design target not yet demonstrated |
-| `derived-metric` | Metric/framework derived from defined inputs |
+| `FORMAL` | A completed machine-checked proof under stated assumptions |
+| `SIMULATED` | A result from a named computational or physical model |
+| `MEASURED` | A result from an identified physical artifact and measurement process |
+| `ASSUMED` | A provisional assumption not independently established |
+| `NOT-RUN` | The required check has not been executed |
 
-**Formal verification is not fabrication. Simulation is not measurement. A design target is not a result.**
+**Formal verification is not fabrication. Simulation is not measurement. A design target is not a result.** Claims should link to their contracts, assumptions, tool versions, inputs, results, and limitations.
 
-Failure is also useful disclosure when the input, assumptions, toolchain, result, and failure mode are recorded.
+## The first 512 × 512 milestone
 
-## Open / Controlled / Verified
+The initial target is a jointly defined, Lean4-formalized, PDK-bound, testable **design proposition** for a 512 × 512 PTC/VLPI system and its electronic I/O—not a claim that such a physical chip already exists. The team must first specify what “512 × 512” counts, define the reference transformation and error metric, agree interface and system-level acceptance criteria, and identify the PDK and parameter provenance.
 
-### Open
+## Repository principles
 
-Examples:
+- **Open:** contracts, schemas, reference algorithms, non-proprietary primitives, verification methods, reproducibility tooling, and publishable physical artifacts.
+- **Controlled:** NDA PDK contents, proprietary process rules and models, credentials, confidential packaging information, and other material EIS is not authorized to publish.
+- **Evidence-led:** a repository artifact does not become experimentally demonstrated merely because it is published.
+- **Implementation-neutral:** alternative technologies may be used if they satisfy the published contracts and interfaces.
 
-- schemas;
-- contracts;
-- architecture;
-- reference algorithms;
-- non-proprietary primitives;
-- verification methodology;
-- evidence schemas;
-- reproducibility tooling;
-- public physical artifacts.
+## Existing architecture
 
-### Controlled
+The repository's broader framework defines a Replicable Unit (RU) as a bounded physical transformation with an explicit state model, contract, physical realization, verification path, and replication evidence. Constraint Reduction Calculus (CRC) is intended to screen unsuitable candidates before expensive physics simulation; it does not replace physics simulation.
 
-Examples:
+See the existing [disclosure doctrine](docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md) and [independent review guide](docs/00-overview/INDEPENDENT_LLM_REVIEW_GUIDE.md) for the repository's governing interpretation and review workflow.
 
-- NDA foundry PDK contents;
-- proprietary process rules;
-- proprietary compact models;
-- credentials;
-- private simulation environments;
-- pre-release fabrication artifacts;
-- confidential packaging information.
+## Contributing
 
-The open repository describes the interface to controlled technology without reproducing controlled contents.
-
-### Verified
-
-Evidence produced by an identified verification or measurement process.
-
-A file existing in GitHub is not, by itself, physical verification.
-
-## Schema foundation
-
-The repository is schema-first.
-
-```text
-schema/
-├── ru/
-│   └── ru.schema.yaml
-├── contract/
-│   └── contract.schema.yaml
-├── evidence/
-│   └── evidence.schema.yaml
-└── design-context/
-    └── design-context.schema.yaml
-```
-
-**DesignContext** is the integration boundary for heterogeneous physical systems, including:
-
-- photonic PDK identity;
-- electronic PDK identity;
-- electro-photonic interface;
-- package/carrier context;
-- optical interfaces;
-- RF/electrical constraints;
-- thermal constraints;
-- verification context.
-
-## RU-001 and RU-002
-
-### RU-001
-
-RU-001 is the first reference physical transformation unit used to establish the EIS RU/contract/PVR/evidence architecture.
-
-Its implementation status must be read from its machine-readable contract and evidence artifacts rather than inferred from diagrams or prose.
-
-### RU-002
-
-RU-002 is the candidate heterogeneous optical-computation unit for the current EIS LLM architecture.
-
-The working transformation composition is:
-
-[
-T_{RU-002}
-=
-T_{attention}
-circ
-T_{select}
-circ
-T_{KKA-cache}
-]
-
-with a state progression conceptually represented as:
-
-[
-H_{QKV}
-ightarrow H_{similarity}
-ightarrow H_{selected}
-ightarrow H_{attention}.
-]
-
-A central research question is:
-
-> **Can optical similarity states be ranked, selected, and routed without first becoming electronic data?**
-
-This is a research hypothesis, not a claim that photonic top-k or fully optical attention has already been experimentally demonstrated by EIS.
-
-## Physical design and OASIS
-
-The intended realization path is:
-
-```text
-RU contract
-   ↓
-technology mapping
-   ↓
-physical layout
-   ↓
-PVR
-   ↓
-OASIS
-   ↓
-foundry review
-   ↓
-fabrication
-   ↓
-BIST
-```
-
-An image of a layout is explanatory.
-
-Where publication is permitted, the machine-readable OASIS artifact is the physical-design disclosure.
-
-## Independent implementation
-
-An independent implementation should be able to follow:
-
-```text
-1. Select an appropriate technology
-2. Instantiate an RU contract
-3. Select physical primitives
-4. Map primitives to the technology
-5. Apply CRC
-6. Run physics simulation
-7. Run PVR
-8. Generate a physical artifact
-9. Generate an evidence manifest
-10. Fabricate through the appropriate controlled process
-11. Measure / run BIST
-12. Compare evidence with the contract
-```
-
-Where proprietary tools or PDKs are required, the repository should identify the controlled boundary rather than pretending that proprietary material is open.
-
-## Repository structure
-
-The repository will grow toward:
-
-```text
-eis-open-vlpi-pdk/
-├── README.md
-├── LICENSE
-├── CONTRIBUTING.md
-├── SECURITY.md
-├── docs/
-│   ├── 00-overview/
-│   ├── 01-architecture/
-│   ├── 02-physical-transformations/
-│   ├── 03-replicable-units/
-│   ├── 04-crc/
-│   ├── 05-pvr/
-│   ├── 06-bist/
-│   ├── 07-packaging/
-│   ├── 08-vlpi/
-│   └── 09-reproduction/
-├── schema/
-│   ├── ru/
-│   ├── contract/
-│   ├── evidence/
-│   └── design-context/
-├── technology/
-│   ├── reference/
-│   └── adapters/
-├── primitives/
-├── ru/
-│   ├── RU-001/
-│   └── RU-002/
-├── verification/
-│   ├── PDR/
-│   ├── PCT/
-│   └── PTV/
-├── agents/
-├── examples/
-└── tests/
-```
-
-## Contribution standard
-
-A contribution is complete when another technically skilled person can understand:
-
-1. what was done;
-2. why it was done;
-3. what assumptions were made;
-4. what technology was used;
-5. what evidence exists;
-6. what remains unverified;
-7. how to reproduce or independently implement it.
-
-EIS does not seek a single universal verification tool.
-
-It seeks a formally explicit evidence chain in which domain-specific tools produce domain-specific evidence and higher-level contracts establish the logical relationship among those evidence records.
-
-## Independent LLM review
-
-The repository is intended to be independently reviewable by external LLMs and technical collaborators.
-
-For a review that starts from the current frozen GitHub2VLPI-002 evidence and EIS-SWARM-001-A disagreement analysis, use:
-
-[`docs/00-overview/INDEPENDENT_LLM_REVIEW_GUIDE.md`](docs/00-overview/INDEPENDENT_LLM_REVIEW_GUIDE.md)
-
-That guide provides the canonical review order, evidence boundary, questions, and non-claims. It deliberately does **not** provide an expected ontology or agent population.
-
-## Disclosure doctrine
-
-The repository's governing document is:
-
-[`docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md`](docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md)
-
-Read that document before treating repository contents as a complete implementation specification.
-
-## Status
-
-This is an evolving open technical disclosure.
-
-It should be read together with the evidence state attached to each artifact.
-
-**Do not infer fabrication, foundry acceptance, measured performance, or infrastructure-scale validation from an architecture diagram, schema, simulation, or design target.**
-
----
+A useful contribution explains what was done, why, assumptions, technology, evidence, unresolved questions, and how to reproduce the result. Keep planned artifacts distinct from implemented artifacts and mark every check with its actual status.
 
 **Earth ICT, SPC (EIS)**  
 *Open physical-computing infrastructure for an Earth-first ICT future.*
