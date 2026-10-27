@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://earthictspc.com/schemas/eis-ptc-netlist-v0.schema.json",
+  "title": "EIS PTC Logical Netlist v0",
+  "description": "Logical components and named-port connectivity; not a physical layout or foundry artifact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "source", "pdk_target", "note", "components", "connections"],
+  "properties": {
+    "format": { "const": "EIS-PTC-Netlist-v0" },
+    "source": { "type": "string", "minLength": 1 },
+    "pdk_target": { "type": "string", "minLength": 1 },
+    "note": { "type": "string", "minLength": 1 },
+    "components": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/component" }
+    },
+    "connections": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/connection" }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "phases"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$" },
+        "kind": { "enum": ["laser", "mmi1x2", "mmi2x2", "mzi", "bpd", "waveguide"] },
+        "phases": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "connection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "fromPort", "to", "toPort"],
+      "properties": {
+        "from": { "type": "string", "minLength": 1 },
+        "fromPort": { "type": "string", "minLength": 1 },
+        "to": { "type": "string", "minLength": 1 },
+        "toPort": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
