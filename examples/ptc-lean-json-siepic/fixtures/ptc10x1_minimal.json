@@ -1,0 +1,23 @@
+{
+  "format": "EIS-PTC-Netlist-v0",
+  "source": "minimal interface fixture; not asserted to match Tian SI Fig. S1",
+  "pdk_target": "SiEPIC_EBeam (declarative example only)",
+  "note": "Logical connectivity only; not CUMEC GDS and not a physical design",
+  "components": [
+    {"id": "laser_0", "kind": "laser", "phases": []},
+    {"id": "mmi_in_0", "kind": "mmi1x2", "phases": []},
+    {"id": "mzi_in_0", "kind": "mzi", "phases": ["theta1", "theta2", "theta3"]},
+    {"id": "mzi_w_0", "kind": "mzi", "phases": ["theta4", "theta5", "theta6"]},
+    {"id": "mmi_comb_0", "kind": "mmi2x2", "phases": []},
+    {"id": "bpd_0", "kind": "bpd", "phases": []}
+  ],
+  "connections": [
+    {"from": "laser_0", "fromPort": "out", "to": "mmi_in_0", "toPort": "in"},
+    {"from": "mmi_in_0", "fromPort": "out0", "to": "mzi_in_0", "toPort": "in"},
+    {"from": "mmi_in_0", "fromPort": "out1", "to": "mzi_w_0", "toPort": "in"},
+    {"from": "mzi_in_0", "fromPort": "out", "to": "mmi_comb_0", "toPort": "in0"},
+    {"from": "mzi_w_0", "fromPort": "out", "to": "mmi_comb_0", "toPort": "in1"},
+    {"from": "mmi_comb_0", "fromPort": "out0", "to": "bpd_0", "toPort": "inS"},
+    {"from": "mmi_comb_0", "fromPort": "out1", "to": "bpd_0", "toPort": "inM"}
+  ]
+}
