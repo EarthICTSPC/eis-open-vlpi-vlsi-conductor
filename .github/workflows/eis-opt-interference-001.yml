@@ -13,7 +13,12 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Install Lean and build project
+      - name: Install pinned Lean toolchain
         uses: leanprover/lean-action@v1
         with:
-          build: true
+          auto-config: false
+          build: false
+      - name: Resolve dependencies and build proofs
+        run: |
+          lake update
+          lake build
