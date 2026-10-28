@@ -1,0 +1,19 @@
+name: EIS-OPT-INTERFERENCE-001
+
+on:
+  push:
+    branches: [main, "feat/eis-opt-interference-001"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lean-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install Lean and build project
+        uses: leanprover/lean-action@v1
+        with:
+          build: true
