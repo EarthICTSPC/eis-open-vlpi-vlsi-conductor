@@ -14,10 +14,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Install pinned Lean toolchain
-        uses: leanprover/lean-action@v1
-        with:
-          auto-config: false
-          build: false
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain leanprover/lean4:v4.19.0
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: Resolve dependencies and build proofs
         run: |
           lake update
