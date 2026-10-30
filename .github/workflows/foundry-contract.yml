@@ -1,0 +1,35 @@
+name: EIS Foundry Acceptance Contract
+
+on:
+  push:
+    branches: ["main", "feat/eis-contract-fab-001"]
+    paths:
+      - "harness/foundry_contract.py"
+      - "harness/mock_foundry.py"
+      - "tests/foundry/**"
+      - "schema/foundry/**"
+      - "docs/07-packaging/EIS-CONTRACT-FAB-001.md"
+      - ".github/workflows/foundry-contract.yml"
+  pull_request:
+    paths:
+      - "harness/foundry_contract.py"
+      - "harness/mock_foundry.py"
+      - "tests/foundry/**"
+      - "schema/foundry/**"
+      - "docs/07-packaging/EIS-CONTRACT-FAB-001.md"
+      - ".github/workflows/foundry-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run foundry contract tests
+        run: python -m unittest discover -s tests/foundry -v
