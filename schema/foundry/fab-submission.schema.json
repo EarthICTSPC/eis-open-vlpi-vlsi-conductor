@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/schema/foundry/fab-submission.schema.json",
+  "title": "EIS Foundry Submission and Decision Contract",
+  "description": "Foundry-neutral manifest and response envelope for EIS-CONTRACT-FAB-001. Does not encode any foundry's proprietary rules.",
+  "type": "object",
+  "required": [
+    "contract_id",
+    "contract_version",
+    "submission",
+    "artifact",
+    "foundry",
+    "requested_stage"
+  ],
+  "properties": {
+    "contract_id": {
+      "const": "EIS-CONTRACT-FAB-001"
+    },
+    "contract_version": {
+      "type": "string",
+      "pattern": "^0\\.1\\.0$"
+    },
+    "submission": {
+      "type": "object",
+      "required": [
+        "submission_id",
+        "revision",
+        "created_at"
+      ],
+      "properties": {
+        "submission_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_commit": {
+          "type": "string"
+        },
+        "design_context_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "format",
+        "file_name",
+        "sha256",
+        "size_bytes"
+      ],
+      "properties": {
+        "format": {
+          "const": "OASIS"
+        },
+        "file_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "top_cell": {
+          "type": "string"
+        },
+        "dbu_um": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "foundry": {
+      "type": "object",
+      "required": [
+        "name",
+        "process"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "process": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pdk_identity": {
+          "type": "string"
+        },
+        "pdk_version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "requested_stage": {
+      "type": "string",
+      "enum": [
+        "technical-review",
+        "manufacturing-acceptance",
+        "mask-data-preparation"
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "status",
+        "authority",
+        "submission_id",
+        "artifact_sha256",
+        "decided_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "ACCEPTED",
+            "REJECTED",
+            "CONDITIONAL",
+            "INCONCLUSIVE"
+          ]
+        },
+        "authority": {
+          "const": "FOUNDRY"
+        },
+        "submission_id": {
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "decided_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "report_ref": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "finding_id",
+              "severity",
+              "message"
+            ],
+            "properties": {
+              "finding_id": {
+                "type": "string"
+              },
+              "rule_ref": {
+                "type": "string"
+              },
+              "severity": {
+                "enum": [
+                  "INFO",
+                  "WARNING",
+                  "ERROR",
+                  "FATAL"
+                ]
+              },
+              "message": {
+                "type": "string"
+              },
+              "location": {
+                "type": "object",
+                "properties": {
+                  "cell": {
+                    "type": "string"
+                  },
+                  "layer": {
+                    "type": "string"
+                  },
+                  "coordinates": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                },
+                "additionalProperties": false
+              },
+              "assigned_agent": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

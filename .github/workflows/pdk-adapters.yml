@@ -1,0 +1,28 @@
+name: EIS PDK adapter contract
+on:
+  pull_request:
+    paths:
+      - "harness/pdk_adapter.py"
+      - "harness/mock_pdk.py"
+      - "harness/siep_ic_adapter.py"
+      - "tests/foundry/test_pdk_adapters.py"
+      - "docs/08-vlpi/EIS-PDK-ADAPTER-001.md"
+      - ".github/workflows/pdk-adapters.yml"
+  push:
+    branches: [main]
+    paths:
+      - "harness/pdk_adapter.py"
+      - "harness/mock_pdk.py"
+      - "harness/siep_ic_adapter.py"
+      - "tests/foundry/test_pdk_adapters.py"
+      - "docs/08-vlpi/EIS-PDK-ADAPTER-001.md"
+      - ".github/workflows/pdk-adapters.yml"
+jobs:
+  pdk-adapter-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests/foundry -v
