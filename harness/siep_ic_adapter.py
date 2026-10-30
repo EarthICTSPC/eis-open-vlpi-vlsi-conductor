@@ -1,5 +1,6 @@
 """Conservative command boundary for operator-configured SiEPIC/KLayout checks.
 A zero exit code remains INCONCLUSIVE until a reviewed report parser exists.
+A nonzero process exit is also INCONCLUSIVE: tool failure is not a geometry finding.
 """
 import shlex, subprocess
 from pathlib import Path
@@ -26,11 +27,10 @@ class SiEPICAdapter:
             stdout_path.write_text(proc.stdout, encoding="utf-8")
             stderr_path.write_text(proc.stderr, encoding="utf-8")
             executed = ("tool-invocation",)
+            status = PDKStatus.INCONCLUSIVE
             if proc.returncode:
-                status = PDKStatus.FAIL
-                findings.append(PDKFinding("TOOL-EXIT-NONZERO", "ERROR", "Configured tool exited with status %d." % proc.returncode, "process", str(stderr_path)))
+                findings.append(PDKFinding("TOOL-EXIT-NONZERO", "ERROR", "Configured tool exited with status %d; design checks are not classified." % proc.returncode, "process", str(stderr_path)))
             else:
-                status = PDKStatus.INCONCLUSIVE
                 findings.append(PDKFinding("REPORT-PARSER-NOT-CONFIGURED", "INFO", "Process succeeded, but no reviewed report parser is configured.", "adapter", str(stdout_path)))
         except subprocess.TimeoutExpired as exc:
             stdout_path.write_text(str(exc.stdout or ""), encoding="utf-8")
@@ -43,4 +43,4 @@ class SiEPICAdapter:
             status = PDKStatus.INCONCLUSIVE
             findings.append(PDKFinding("TOOL-NOT-FOUND", "ERROR", "Configured executable not found.", "process", str(stderr_path)))
         reports = tuple(str(p) for p in (stdout_path, stderr_path) if p.exists())
-        return PDKRunResult(self.adapter_id, self.adapter_version, status, design_id, sha256_file(layout), self.pdk_name, self.pdk_version, requested, executed, not_run, tuple(findings), reports, ("Zero exit code is not a DRC/LVS/optical PASS without a reviewed parser.", "This adapter does not constitute foundry acceptance."), started_at=started, completed_at=utc_now())
+        return PDKRunResult(self.adapter_id, self.adapter_version, status, design_id, sha256_file(layout), self.pdk_name, self.pdk_version, requested, executed, not_run, tuple(findings), reports, ("Tool process status is not a DRC/LVS/optical verdict without a reviewed parser.", "This adapter does not constitute foundry acceptance."), started_at=started, completed_at=utc_now())
