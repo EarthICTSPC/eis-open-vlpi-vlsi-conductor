@@ -34,7 +34,7 @@ class FoundryAcceptanceTests(unittest.TestCase):
         self.assertTrue(conditional.conditions)
         self.assertNotEqual(rejected.artifact.sha256, revised.artifact.sha256)
         self.assertEqual(len(adapter.calls), 3)
-        self.assertEqual(len(conductor.ledger), 8)
+        self.assertEqual(len(conductor.ledger), 11)
 
     def test_decision_must_match_exact_artifact_hash(self):
         adapter = MockFoundryAdapter([DecisionStatus.ACCEPTED])
