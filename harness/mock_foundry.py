@@ -6,7 +6,7 @@ simulate any real foundry's process or acceptance behavior.
 from datetime import datetime, timezone
 from typing import Iterable
 
-from foundry_contract import (
+from .foundry_contract import (
     DecisionStatus, Finding, FoundryAdapter, FoundryDecision, Submission
 )
 
