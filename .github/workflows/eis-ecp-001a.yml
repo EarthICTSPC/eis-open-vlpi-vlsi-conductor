@@ -1,0 +1,25 @@
+name: EIS ECP-001A numerical contract
+
+on:
+  pull_request:
+    paths:
+      - "experiments/eis-ecp-001a/**"
+      - ".github/workflows/eis-ecp-001a.yml"
+  push:
+    branches: [main]
+    paths:
+      - "experiments/eis-ecp-001a/**"
+      - ".github/workflows/eis-ecp-001a.yml"
+
+jobs:
+  numerical-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip numpy
+      - run: python -m unittest discover -s experiments/eis-ecp-001a -p 'test_*.py' -v
+      - name: Validate frozen protocol JSON
+        run: python -m json.tool experiments/eis-ecp-001a/protocol-v1.json > /dev/null
