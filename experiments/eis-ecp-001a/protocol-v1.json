@@ -1,0 +1,51 @@
+{
+  "protocol_id": "EIS-ECP-001A",
+  "version": "1.0.0",
+  "status": "specified-not-yet-conformant",
+  "workload": {
+    "id": "KKA-linear-attention-T64-D64-v1",
+    "operator": "Y=(Q K^T)V; no softmax and no normalization",
+    "T": 64,
+    "D": 64,
+    "n_requests": 200,
+    "seed_rule": "request i uses NumPy default_rng(1000+i)",
+    "QK_domain": "each coordinate in [-1/sqrt(D), +1/sqrt(D)]",
+    "V_domain": "each coordinate in [-1,1]"
+  },
+  "bounds": {
+    "score_abs_bound": 1,
+    "output_abs_bound": "T",
+    "basis": [
+      "Cauchy-Schwarz for Q/K row norms <= 1",
+      "triangle inequality for T products with |score|<=1 and |V|<=1"
+    ]
+  },
+  "quantization": {
+    "full_scale_semantics": "maximum representable magnitude; count |x| > full_scale before clipping",
+    "default_score_full_scale": 1,
+    "default_output_full_scale": 64,
+    "calibration": "any empirical calibration requires a new protocol revision and frozen calibration set"
+  },
+  "noise_modes": {
+    "shared": "one noisy encoded operand per tensor element, reused across fan-out; correlated encoding error assumption",
+    "per_use": "independent encoding noise at every modeled product use; contrast assumption, not hardware characterization",
+    "detector_noise": "applied at declared modeled detection boundary; no calibrated device noise included"
+  },
+  "evidence": {
+    "cpu_latency_quality": "measured only for the recorded Python/NumPy implementation on the named host",
+    "noise_sweep": "numerical simulation conditional on assumptions",
+    "electromagnetic_simulation": "not performed by this artifact",
+    "lean_python_conformance": "NOT_ESTABLISHED",
+    "energy": "UNAVAILABLE; no E_useful",
+    "hardware": "NOT_AVAILABLE"
+  },
+  "non_claims": [
+    "No Tidy3D electromagnetic solver output",
+    "No characterized MZI/PDK transfer function",
+    "No Lean-to-Python conformance claim",
+    "No GPU benchmark",
+    "No hardware measurement",
+    "No energy break-even claim",
+    "Operation counts are not energy estimates"
+  ]
+}
