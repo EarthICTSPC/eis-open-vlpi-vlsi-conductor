@@ -27,6 +27,13 @@ structure Four where
   x2 : ℝ
   x3 : ℝ
 
+@[ext] theorem Four.ext {a b : Four}
+    (h0 : a.x0 = b.x0) (h1 : a.x1 = b.x1)
+    (h2 : a.x2 = b.x2) (h3 : a.x3 = b.x3) : a = b := by
+  cases a
+  cases b
+  simp_all
+
 def fourZero : Four := ⟨0, 0, 0, 0⟩
 
 def fourScale (k : ℝ) (x : Four) : Four :=
@@ -121,19 +128,19 @@ def differentialP1P3 (v : Four) : ℝ := v.x1 - v.x3
 
 theorem quadrature_cos_has_P0P2_differential :
     differentialP0P2 quadratureCosMode = 2 := by
-  rfl
+  norm_num [differentialP0P2, quadratureCosMode]
 
 theorem quadrature_cos_has_zero_P1P3_differential :
     differentialP1P3 quadratureCosMode = 0 := by
-  rfl
+  norm_num [differentialP1P3, quadratureCosMode]
 
 theorem quadrature_sin_has_zero_P0P2_differential :
     differentialP0P2 quadratureSinMode = 0 := by
-  rfl
+  norm_num [differentialP0P2, quadratureSinMode]
 
 theorem quadrature_sin_has_P1P3_differential :
     differentialP1P3 quadratureSinMode = 2 := by
-  rfl
+  norm_num [differentialP1P3, quadratureSinMode]
 
 /-- Whether the EO port is a DC phase setting or a periodic data waveform. -/
 inductive EOControlRegime where
