@@ -14,7 +14,6 @@ namespace EIS.OptInterference
 structure Field where
   re : ℝ
   im : ℝ
-  deriving Repr, DecidableEq
 
 /-- Ideal interference observable `2 Re(a * conjugate(b))`. -/
 def contract (a b : Field) : ℝ :=
@@ -38,6 +37,7 @@ theorem contract_symmetric (a b : Field) :
 theorem contract_self (a : Field) :
     contract a a = 2 * intensity a := by
   simp [contract, intensity]
+  ring
 
 /-- A zero first input gives zero interference. -/
 theorem contract_zero_left (b : Field) :
