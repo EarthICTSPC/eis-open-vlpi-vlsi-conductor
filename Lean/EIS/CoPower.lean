@@ -1,5 +1,7 @@
 import EIS.AdiaIO
 import EIS.MZI_EO
+import EIS.ResPwr
+
 
 /-!
 # EIS-COPOWER-001 — Integrated electrical/optical power-domain contract
@@ -34,6 +36,8 @@ structure SystemElectricalEnergyLedger where
   controllerPowerClockDistributionJ : ℝ
   modulatorGrossDrawJ : ℝ
   modulatorReturnedToSupplyJ : ℝ
+  resonantReservoirReplenishmentWallPlugJ : ℝ
+  resonantReservoirCoolingWallPlugJ : ℝ
   opticalSourceWallPlugJ : ℝ
   detectorAndReadoutJ : ℝ
   conversionAndDataMovementJ : ℝ
@@ -43,6 +47,8 @@ structure SystemElectricalEnergyLedger where
   modulator_gross_nonneg : 0 ≤ modulatorGrossDrawJ
   modulator_return_nonneg : 0 ≤ modulatorReturnedToSupplyJ
   modulator_return_le_gross : modulatorReturnedToSupplyJ ≤ modulatorGrossDrawJ
+  reservoir_replenishment_nonneg : 0 ≤ resonantReservoirReplenishmentWallPlugJ
+  reservoir_cooling_nonneg : 0 ≤ resonantReservoirCoolingWallPlugJ
   source_nonneg : 0 ≤ opticalSourceWallPlugJ
   detector_nonneg : 0 ≤ detectorAndReadoutJ
   conversion_nonneg : 0 ≤ conversionAndDataMovementJ
@@ -53,7 +59,8 @@ def netModulatorEnergyJ (e : SystemElectricalEnergyLedger) : ℝ :=
 def totalSystemElectricalEnergyJ (e : SystemElectricalEnergyLedger) : ℝ :=
   e.controllerLogicJ + e.controllerPowerClockGenerationJ +
   e.controllerPowerClockDistributionJ + netModulatorEnergyJ e +
-  e.opticalSourceWallPlugJ + e.detectorAndReadoutJ +
+  e.resonantReservoirReplenishmentWallPlugJ +
+  e.resonantReservoirCoolingWallPlugJ + e.opticalSourceWallPlugJ + e.detectorAndReadoutJ +
   e.conversionAndDataMovementJ
 
 theorem net_modulator_energy_nonneg (e : SystemElectricalEnergyLedger) :
@@ -82,6 +89,17 @@ structure CoPowerContract where
   no_unproven_recovery_credit :
     ¬ recoveryEligible modulator.kind modulator.returnTopology modulator.returnEvidence →
       modulatorFlow.returnedToSupplyJ = 0
+  resonantDomain : Option EIS.ResPwr.ResonantPowerDomainContract
+  resonant_replenishment_bound_to_ledger :
+    match resonantDomain with
+    | none => electricalLedger.resonantReservoirReplenishmentWallPlugJ = 0
+    | some d => electricalLedger.resonantReservoirReplenishmentWallPlugJ =
+        EIS.ResPwr.resonantDomainWallPlugEnergyJ d
+  resonant_cooling_bound_to_ledger :
+    match resonantDomain with
+    | none => electricalLedger.resonantReservoirCoolingWallPlugJ = 0
+    | some d => electricalLedger.resonantReservoirCoolingWallPlugJ =
+        EIS.ResPwr.resonantDomainCoolingEnergyJ d
 
 theorem coPower_net_energy_nonneg (c : CoPowerContract) :
     0 ≤ totalSystemElectricalEnergyJ c.electricalLedger :=
