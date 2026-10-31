@@ -16,9 +16,9 @@ The RISC-V ISA does not make a circuit adiabatic. A concrete controller must use
 
 Tian et al., *Photonic transformer chip: interference is all you need*, PhotoniX 6, 45 (2025), report a silicon photonic chip with TiN resistive thermo-optic heaters. The methods section says each phase-shifter heater has an individual drive trace and that ground connections for phase shifters in a column are shared and connected to one ground pad.
 
-This establishes a common electrical reference/current-return connection for the heater network. It does **not** establish regenerative energy recovery. In the reported heater implementation, electrical energy is intentionally dissipated as heat in the TiN resistor to change optical phase. A common ground conductor is not, by itself, a regenerative converter or a supply reservoir able to absorb returned charge.
+This establishes a shared common electrical reference/current-return connection for the heater network. It does **not** establish regenerative energy recovery. In the reported heater implementation, electrical energy is intentionally dissipated as heat in the TiN resistor to change optical phase. A common ground conductor is not, by itself, a regenerative converter or a supply reservoir able to absorb returned charge.
 
-The formal model therefore represents the reported connection as thermoOpticResistive plus sharedGroundReturn, and proves that this pair does not qualify for an electrical energy-recovery credit under the initial EIS contract.
+The formal model records ground-pad presence separately from the return-path properties not reported by the paper: closed-loop connection to a regenerative supply, bidirectional driver capability, a sink able to absorb energy, and an energy-balance verification. Those fields are UNKNOWN rather than silently marked true or false. The device is classified as thermo-optic resistive. This is a fail-closed evidence classification, not a claim that the paper proves the ground circuit physically cannot be connected to a regenerative supply.
 
 This is an evidence-bound reading of the reported implementation, not a claim that no future thermal-energy harvesting method could recover any fraction of heat. Such a method needs a separate thermal-energy model and measured evidence.
 
@@ -67,7 +67,7 @@ This is not yet a transistor-level reversible RISC-V implementation or proof tha
 - Define gross draw, returned-to-supply energy, dissipation, and retained energy with a balance equation.
 - Keep optical path energy separate from electrical driver energy.
 
-The first RC ramp model applies only where the declared lumped-capacitor/series-resistance equivalent circuit is valid.
+The first RC ramp model applies only where the declared lumped-capacitor/series-resistance equivalent circuit is valid. The initial integrated contract requires a measured-hardware energy-balance grade before assigning a nonzero energy-return credit to the system ledger. Analytic and circuit-simulation evidence can inform design but do not count as measured recovery.
 
 ### EIS-COPOWER-001
 
