@@ -80,7 +80,7 @@ structure CoPowerContract where
     modulatorFlow.returnedToSupplyJ
   modulator_energy_balance : modulatorFlow.energy_balance
   no_unproven_recovery_credit :
-    ¬ recoveryEligible modulator.kind modulator.returnEvidence →
+    ¬ recoveryEligible modulator.kind modulator.returnTopology modulator.returnEvidence →
       modulatorFlow.returnedToSupplyJ = 0
 
 theorem coPower_net_energy_nonneg (c : CoPowerContract) :
