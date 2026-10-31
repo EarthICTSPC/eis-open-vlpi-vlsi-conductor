@@ -79,6 +79,9 @@ structure CoPowerContract where
   ledger_matches_return : electricalLedger.modulatorReturnedToSupplyJ =
     modulatorFlow.returnedToSupplyJ
   modulator_energy_balance : modulatorFlow.energy_balance
+  no_unproven_recovery_credit :
+    ¬ recoveryEligible modulator.kind modulator.returnEvidence →
+      modulatorFlow.returnedToSupplyJ = 0
 
 theorem coPower_net_energy_nonneg (c : CoPowerContract) :
     0 ≤ totalSystemElectricalEnergyJ c.electricalLedger :=
