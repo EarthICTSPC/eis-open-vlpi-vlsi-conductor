@@ -32,7 +32,7 @@ For a lumped capacitive EO phase shifter, an electrical recovery claim requires 
 - timing/impedance compatibility with the modulator capacitance and series resistance;
 - an energy-flow balance: gross supply draw = returned-to-supply energy + dissipated energy + energy retained at cycle end.
 
-A ground/reference connection may be part of that loop, but the recovery element is the regenerative driver/supply topology—not the ground connection itself.
+A shared ground conductor may be part of that loop. The conductor can carry return current, but only a demonstrated bidirectional driver and energy-absorbing supply/reservoir make the path regenerative. The ground connection alone is not the recovery element.
 
 For an ideal lumped RC load under a linear voltage ramp:
 
