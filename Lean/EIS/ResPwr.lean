@@ -76,22 +76,33 @@ theorem resonant_angular_frequency_positive (r : LCResonantReservoir) :
     0 < resonantAngularFrequencyRadPerS r := by
   unfold resonantAngularFrequencyRadPerS
   apply Real.sqrt_pos.2
-  positivity
+  have hLC : 0 < r.inductanceH * r.capacitanceF :=
+    mul_pos r.inductance_pos r.capacitance_pos
+  exact div_pos (by norm_num) hLC
 
 theorem resonant_frequency_positive (r : LCResonantReservoir) :
     0 < resonantFrequencyHz r := by
   unfold resonantFrequencyHz
-  positivity
+  apply div_pos (resonant_angular_frequency_positive r)
+  exact mul_pos (by norm_num) Real.pi_pos
 
 theorem loaded_quality_factor_positive (r : LCResonantReservoir) :
     0 < loadedQualityFactor r := by
   unfold loadedQualityFactor
-  positivity
+  exact div_pos
+    (mul_pos (resonant_angular_frequency_positive r) r.inductance_pos)
+    r.loaded_resistance_pos
 
 theorem stored_energy_nonnegative (r : LCResonantReservoir) (s : ReservoirState) :
     0 ≤ storedEnergyJ r s := by
   unfold storedEnergyJ inductorStoredEnergyJ capacitorStoredEnergyJ
-  positivity
+  apply add_nonneg
+  · exact div_nonneg
+      (mul_nonneg (le_of_lt r.inductance_pos) (sq_nonneg s.inductorCurrentA))
+      (by norm_num)
+  · exact div_nonneg
+      (mul_nonneg (le_of_lt r.capacitance_pos) (sq_nonneg s.capacitorVoltageV))
+      (by norm_num)
 
 /-- Canonical four sinusoidal phase offsets in quadrature. -/
 def quadratureFourPhaseOffsetsRad : List ℝ :=
@@ -162,7 +173,13 @@ def totalDissipatedJ (l : ReservoirLossBreakdown) : ℝ :=
 theorem total_dissipated_nonnegative (l : ReservoirLossBreakdown) :
     0 ≤ totalDissipatedJ l := by
   unfold totalDissipatedJ
-  positivity
+  exact add_nonneg
+    (add_nonneg
+      (add_nonneg
+        (add_nonneg l.inductor_nonneg l.capacitor_nonneg)
+        l.driver_nonneg)
+      l.coupling_nonneg)
+    l.other_nonneg
 
 /-- External wall-plug energy is converted to replenishment energy at the reservoir. -/
 structure ExternalReplenishment where
