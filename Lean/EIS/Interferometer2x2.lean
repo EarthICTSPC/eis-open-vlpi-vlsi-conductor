@@ -11,6 +11,8 @@ reference model, not a foundry PDK model or a claim of physical conformance.
 
 namespace EIS.OptInterference
 
+noncomputable section
+
 /-- Port direction is part of the port's type. -/
 inductive Direction where
   | input
@@ -34,7 +36,6 @@ structure InterferometerNetlist where
 structure OutputBundle where
   sum : Field
   difference : Field
-  deriving Repr, DecidableEq
 
 /-- The denotation of the netlist: constructive sum and difference outputs. -/
 def denote (_netlist : InterferometerNetlist) (a b : Field) : OutputBundle :=
@@ -54,5 +55,7 @@ theorem netlist_semantics_satisfy_contract
     balancedObservable (denote netlist a b) = contract a b := by
   simp [balancedObservable, denote, intensity, contract]
   ring
+
+end
 
 end EIS.OptInterference
