@@ -39,15 +39,6 @@ inductive RecoveryEvidenceGrade where
   | measuredHardware
   deriving DecidableEq, Repr
 
-/-- Electrical topology label; ground presence is only a connection description. -/
-inductive ReturnTopology where
-  | groundReferenceOnly
-  | sharedGroundReturn
-  | dissipativeTermination
-  | regenerativeSupplyRail
-  | resonantRecoveryReservoir
-  deriving DecidableEq, Repr
-
 /-
 A ground pad is recorded independently from the properties needed to claim
 energy recovery. Option Bool preserves UNKNOWN rather than treating missing
