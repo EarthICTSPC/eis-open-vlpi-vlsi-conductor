@@ -178,8 +178,13 @@ structure ExternalReplenishment where
 
 theorem reservoir_replenishment_le_wallplug (p : ExternalReplenishment) :
     p.energyAtReservoirJ ≤ p.wallPlugEnergyJ := by
+  have hOneMinusEfficiency : 0 ≤ 1 - p.conversionEfficiency := by
+    linarith [p.efficiency_le_one]
+  have hLostWallplug : 0 ≤
+      p.wallPlugEnergyJ * (1 - p.conversionEfficiency) :=
+    mul_nonneg p.wallplug_nonneg hOneMinusEfficiency
   rw [p.replenishment_conversion]
-  nlinarith [p.wallplug_nonneg, p.efficiency_le_one]
+  nlinarith [hLostWallplug]
 
 /--
 One complete reservoir/load cycle. Energy returned from the load is returned
