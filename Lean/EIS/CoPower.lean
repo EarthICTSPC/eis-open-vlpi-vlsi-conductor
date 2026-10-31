@@ -71,7 +71,10 @@ theorem net_modulator_energy_nonneg (e : SystemElectricalEnergyLedger) :
 theorem total_system_electrical_energy_nonneg (e : SystemElectricalEnergyLedger) :
     0 ≤ totalSystemElectricalEnergyJ e := by
   unfold totalSystemElectricalEnergyJ
-  positivity
+  nlinarith [e.controller_nonneg, e.power_clock_gen_nonneg,
+    e.power_clock_dist_nonneg, net_modulator_energy_nonneg e,
+    e.reservoir_replenishment_nonneg, e.reservoir_cooling_nonneg,
+    e.source_nonneg, e.detector_nonneg, e.conversion_nonneg]
 
 /-- Cross-domain contract with linked driver flow and system energy ledger. -/
 structure CoPowerContract where
@@ -85,7 +88,6 @@ structure CoPowerContract where
     modulatorFlow.grossDrawFromSupplyJ
   ledger_matches_return : electricalLedger.modulatorReturnedToSupplyJ =
     modulatorFlow.returnedToSupplyJ
-  modulator_energy_balance : modulatorFlow.energy_balance
   no_unproven_recovery_credit :
     ¬ recoveryEligible modulator.kind modulator.returnTopology modulator.returnEvidence →
       modulatorFlow.returnedToSupplyJ = 0
