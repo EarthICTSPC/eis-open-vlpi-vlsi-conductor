@@ -34,7 +34,6 @@ structure InterferometerNetlist where
 structure OutputBundle where
   sum : Field
   difference : Field
-  deriving Repr, DecidableEq
 
 /-- The denotation of the netlist: constructive sum and difference outputs. -/
 def denote (_netlist : InterferometerNetlist) (a b : Field) : OutputBundle :=
