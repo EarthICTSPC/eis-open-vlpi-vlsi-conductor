@@ -2,9 +2,9 @@ name: EIS Co-Power Contracts
 
 on:
   push:
-    branches: ["feat/eis-copower-domains-001"]
+    branches: ["feat/eis-copower-domains-001", "feat/eis-4lc-coupled-001"]
   pull_request:
-    branches: ["main", "feat/eis-opt-interference-001"]
+    branches: ["main", "feat/eis-opt-interference-001", "feat/eis-copower-domains-001"]
   workflow_dispatch:
 
 jobs:
@@ -21,3 +21,10 @@ jobs:
         run: |
           lake update
           lake build
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run EIS-4LC-Coupled reference tests
+        run: |
+          python -m unittest discover -s experiments/eis-4lc-coupled-001 -p 'test_*.py' -v
