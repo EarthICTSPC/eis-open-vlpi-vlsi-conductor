@@ -33,29 +33,66 @@ inductive ReturnTopology where
   | resonantRecoveryReservoir
   deriving DecidableEq, Repr
 
-/-- Ground/reference and dissipative terminations are not regenerative sinks. -/
-def ReturnTopology.hasRegenerativeSink : ReturnTopology → Prop
-  | .groundReferenceOnly => False
-  | .sharedGroundReturn => False
-  | .dissipativeTermination => False
-  | .regenerativeSupplyRail => True
-  | .resonantRecoveryReservoir => True
+inductive RecoveryEvidenceGrade where
+  | analyticModel
+  | circuitSimulation
+  | measuredHardware
+  deriving DecidableEq, Repr
 
-theorem ground_reference_alone_is_not_regenerative :
-    ¬ ReturnTopology.hasRegenerativeSink .groundReferenceOnly := by
-  simp [ReturnTopology.hasRegenerativeSink]
+/-- Electrical topology label; ground presence is only a connection description. -/
+inductive ReturnTopology where
+  | groundReferenceOnly
+  | sharedGroundReturn
+  | dissipativeTermination
+  | regenerativeSupplyRail
+  | resonantRecoveryReservoir
+  deriving DecidableEq, Repr
 
-theorem shared_ground_is_not_regenerative_by_itself :
-    ¬ ReturnTopology.hasRegenerativeSink .sharedGroundReturn := by
-  simp [ReturnTopology.hasRegenerativeSink]
+/-
+A ground pad is recorded independently from the properties needed to claim
+energy recovery. Option Bool preserves UNKNOWN rather than treating missing
+schematic/measurement evidence as PASS or FAIL.
+-/
+structure ReturnPathEvidence where
+  groundReferencePresent : Bool
+  closedLoopToSupply : Option Bool
+  driverBidirectional : Option Bool
+  supplyCanAbsorbEnergy : Option Bool
+  energyBalanceVerified : Option Bool
+  energyBalanceGrade : Option RecoveryEvidenceGrade
+  deriving Repr
 
-/-- Only a lumped capacitive EO load with an explicit regenerative sink is eligible. -/
-def recoveryEligible (kind : PhaseShifterKind) (topology : ReturnTopology) : Prop :=
-  kind = .lumpedCapacitiveEO ∧ topology.hasRegenerativeSink
+def ReturnPathEvidence.recoveryPathProven (r : ReturnPathEvidence) : Prop :=
+  r.closedLoopToSupply = some true ∧
+  r.driverBidirectional = some true ∧
+  r.supplyCanAbsorbEnergy = some true ∧
+  r.energyBalanceVerified = some true ∧
+  r.energyBalanceGrade = some .measuredHardware
+
+/-- A measured return is eligible only for a lumped capacitive EO load. -/
+def recoveryEligible (kind : PhaseShifterKind) (returnEvidence : ReturnPathEvidence) : Prop :=
+  kind = .lumpedCapacitiveEO ∧ returnEvidence.recoveryPathProven
+
+theorem ground_reference_alone_does_not_establish_recovery
+    (r : ReturnPathEvidence)
+    (_hGround : r.groundReferencePresent = true)
+    (hUnknownLoop : r.closedLoopToSupply = none) :
+    ¬ r.recoveryPathProven := by
+  simp [ReturnPathEvidence.recoveryPathProven, hUnknownLoop]
+
+/-- Tian et al. report a shared ground pad; regenerative properties are unreported. -/
+def tianSharedGroundEvidence : ReturnPathEvidence :=
+  { groundReferencePresent := true
+    closedLoopToSupply := none
+    driverBidirectional := none
+    supplyCanAbsorbEnergy := none
+    energyBalanceVerified := none
+    energyBalanceGrade := none }
 
 theorem tian_shared_ground_heater_not_recovery_eligible :
-    ¬ recoveryEligible .thermoOpticResistive .sharedGroundReturn := by
-  simp [recoveryEligible, ReturnTopology.hasRegenerativeSink]
+    ¬ recoveryEligible .thermoOpticResistive tianSharedGroundEvidence := by
+  simp [recoveryEligible, tianSharedGroundEvidence,
+    ReturnPathEvidence.recoveryPathProven]
 
 /-- First-order resistive loss for one linear ramp of an ideal lumped capacitor. -/
 def linearRampDissipationJ (R C V T : ℝ) : ℝ :=
@@ -92,6 +129,7 @@ lumped capacitance and series resistance are a valid equivalent circuit.
 structure PhaseShifterProfile where
   kind : PhaseShifterKind
   returnTopology : ReturnTopology
+  returnEvidence : ReturnPathEvidence
   effectiveCapacitanceF : ℝ
   seriesResistanceOhm : ℝ
   voltageSwingV : ℝ
@@ -162,16 +200,8 @@ theorem net_supply_energy_nonneg (f : ElectricalEnergyFlow) :
 structure EnergyRecoveryEvidence where
   device : PhaseShifterProfile
   flow : ElectricalEnergyFlow
-  eligible : recoveryEligible device.kind device.returnTopology
+  eligible : recoveryEligible device.kind device.returnEvidence
   returned_positive : 0 < flow.returnedToSupplyJ
-
-def tianReportedHeaterKind : PhaseShifterKind := .thermoOpticResistive
-def tianReportedGroundTopology : ReturnTopology := .sharedGroundReturn
-
-theorem tian_reported_ground_does_not_prove_recovery :
-    ¬ recoveryEligible tianReportedHeaterKind tianReportedGroundTopology := by
-  simp [tianReportedHeaterKind, tianReportedGroundTopology, recoveryEligible,
-    ReturnTopology.hasRegenerativeSink]
 
 /-- Optical energy is tracked separately from electrical driver energy. -/
 structure OpticalPathBudget where
