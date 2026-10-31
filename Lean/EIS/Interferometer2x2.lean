@@ -11,6 +11,8 @@ reference model, not a foundry PDK model or a claim of physical conformance.
 
 namespace EIS.OptInterference
 
+noncomputable section
+
 /-- Port direction is part of the port's type. -/
 inductive Direction where
   | input
@@ -53,5 +55,7 @@ theorem netlist_semantics_satisfy_contract
     balancedObservable (denote netlist a b) = contract a b := by
   simp [balancedObservable, denote, intensity, contract]
   ring
+
+end
 
 end EIS.OptInterference
