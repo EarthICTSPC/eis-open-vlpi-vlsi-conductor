@@ -32,6 +32,9 @@ structure TrapezoidalPowerClock where
   rampDownS : ℝ
   lowHoldS : ℝ
   phaseRailCount : ℕ
+  segmentOrder : List PowerClockSegment
+  segment_order_is_trapezoid : segmentOrder =
+    [.rampUp, .evaluate, .highHold, .rampDown, .lowHold]
   low_nonneg : 0 ≤ vLowV
   low_lt_high : vLowV < vHighV
   ramp_up_pos : 0 < rampUpS
@@ -107,6 +110,7 @@ structure ReversibleController where
 
 /-- Ordered request/response handshake timestamps for one transaction. -/
 structure BusHandshake where
+  requestCode : Nat
   requestValidS : ℝ
   requestAcceptedS : ℝ
   responseValidS : ℝ
@@ -143,6 +147,8 @@ structure AdiabaticIOContract where
   switchTrace : List SwitchEvent
   controller : ReversibleController
   bus : BusHandshake
+  externalCommit : ExternalIOCommitBoundary
+  bus_request_matches_commit : bus.requestCode = externalCommit.requestCode
   switch_trace_safe : allEventsSafe switchTolerance switchTrace
 
 end EIS.AdiaIO
