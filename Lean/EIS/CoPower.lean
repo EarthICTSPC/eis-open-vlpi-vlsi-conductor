@@ -90,6 +90,10 @@ structure CoPowerContract where
     ¬ recoveryEligible modulator.kind modulator.returnTopology modulator.returnEvidence →
       modulatorFlow.returnedToSupplyJ = 0
   resonantDomain : Option EIS.ResPwr.ResonantPowerDomainContract
+  resonant_modulator_matches_system :
+    match resonantDomain with
+    | none => True
+    | some d => d.modulator = modulator
   resonant_replenishment_bound_to_ledger :
     match resonantDomain with
     | none => electricalLedger.resonantReservoirReplenishmentWallPlugJ = 0
