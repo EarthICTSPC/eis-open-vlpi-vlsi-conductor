@@ -19,6 +19,8 @@ model, not a foundry characterization.
 
 namespace EIS.MZI_EO
 
+noncomputable section
+
 inductive PhaseShifterKind where
   | lumpedCapacitiveEO
   | terminatedTravelingWaveEO
@@ -203,7 +205,7 @@ theorem net_supply_energy_equals_loss_plus_retained (f : ElectricalEnergyFlow) :
 theorem net_supply_energy_nonneg (f : ElectricalEnergyFlow) :
     0 ≤ netSupplyEnergyJ f := by
   rw [net_supply_energy_equals_loss_plus_retained]
-  positivity
+  exact add_nonneg f.dissipated_nonneg f.retained_nonneg
 
 /-- A recovery credit requires an eligible device/return path and positive returned energy. -/
 structure EnergyRecoveryEvidence where
@@ -247,5 +249,7 @@ theorem optical_detected_energy_nonneg (p : OpticalPathBudget) :
     0 ≤ opticalDetectedEnergyJ p := by
   unfold opticalDetectedEnergyJ opticalOutputEnergyJ
   exact mul_nonneg (mul_nonneg p.input_nonneg p.transmission_nonneg) p.detector_nonneg
+
+end
 
 end EIS.MZI_EO
