@@ -48,7 +48,7 @@ def periodS (p : TrapezoidalPowerClock) : ℝ :=
 
 theorem periodS_pos (p : TrapezoidalPowerClock) : 0 < periodS p := by
   unfold periodS
-  positivity
+  linarith [p.ramp_up_pos, p.evaluate_hold_pos, p.ramp_down_pos, p.low_hold_pos]
 
 inductive SwitchAction where
   | turnOn
@@ -59,7 +59,7 @@ structure SwitchEvent where
   action : SwitchAction
   voltageAcrossSwitchV : ℝ
   currentThroughSwitchA : ℝ
-  deriving Repr
+ 
 
 structure SwitchSafetyTolerance where
   turnOnVoltageToleranceV : ℝ
