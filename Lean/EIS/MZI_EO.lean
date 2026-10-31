@@ -33,6 +33,14 @@ inductive ReturnTopology where
   | resonantRecoveryReservoir
   deriving DecidableEq, Repr
 
+/-- A shared ground may be part of a regenerative loop if the other facts are proven. -/
+def ReturnTopology.maySupportRecovery : ReturnTopology → Prop
+  | .groundReferenceOnly => False
+  | .sharedGroundReturn => True
+  | .dissipativeTermination => False
+  | .regenerativeSupplyRail => True
+  | .resonantRecoveryReservoir => True
+
 inductive RecoveryEvidenceGrade where
   | analyticModel
   | circuitSimulation
@@ -61,8 +69,10 @@ def ReturnPathEvidence.recoveryPathProven (r : ReturnPathEvidence) : Prop :=
   r.energyBalanceGrade = some .measuredHardware
 
 /-- A measured return is eligible only for a lumped capacitive EO load. -/
-def recoveryEligible (kind : PhaseShifterKind) (returnEvidence : ReturnPathEvidence) : Prop :=
-  kind = .lumpedCapacitiveEO ∧ returnEvidence.recoveryPathProven
+def recoveryEligible (kind : PhaseShifterKind) (topology : ReturnTopology)
+    (returnEvidence : ReturnPathEvidence) : Prop :=
+  kind = .lumpedCapacitiveEO ∧ topology.maySupportRecovery ∧
+    returnEvidence.recoveryPathProven
 
 theorem ground_reference_alone_does_not_establish_recovery
     (r : ReturnPathEvidence)
@@ -70,6 +80,14 @@ theorem ground_reference_alone_does_not_establish_recovery
     (hUnknownLoop : r.closedLoopToSupply = none) :
     ¬ r.recoveryPathProven := by
   simp [ReturnPathEvidence.recoveryPathProven, hUnknownLoop]
+
+theorem shared_ground_without_supply_loop_cannot_earn_recovery_credit
+    (r : ReturnPathEvidence)
+    (_hGround : r.groundReferencePresent = true)
+    (hUnknownLoop : r.closedLoopToSupply = none) :
+    ¬ (r.recoveryPathProven ∧ ReturnTopology.maySupportRecovery .sharedGroundReturn) := by
+  simp [ReturnPathEvidence.recoveryPathProven, ReturnTopology.maySupportRecovery,
+    hUnknownLoop]
 
 /-- Tian et al. report a shared ground pad; regenerative properties are unreported. -/
 def tianSharedGroundEvidence : ReturnPathEvidence :=
@@ -81,9 +99,9 @@ def tianSharedGroundEvidence : ReturnPathEvidence :=
     energyBalanceGrade := none }
 
 theorem tian_shared_ground_heater_not_recovery_eligible :
-    ¬ recoveryEligible .thermoOpticResistive tianSharedGroundEvidence := by
+    ¬ recoveryEligible .thermoOpticResistive .sharedGroundReturn tianSharedGroundEvidence := by
   simp [recoveryEligible, tianSharedGroundEvidence,
-    ReturnPathEvidence.recoveryPathProven]
+    ReturnTopology.maySupportRecovery, ReturnPathEvidence.recoveryPathProven]
 
 /-- First-order resistive loss for one linear ramp of an ideal lumped capacitor. -/
 def linearRampDissipationJ (R C V T : ℝ) : ℝ :=
@@ -191,7 +209,7 @@ theorem net_supply_energy_nonneg (f : ElectricalEnergyFlow) :
 structure EnergyRecoveryEvidence where
   device : PhaseShifterProfile
   flow : ElectricalEnergyFlow
-  eligible : recoveryEligible device.kind device.returnEvidence
+  eligible : recoveryEligible device.kind device.returnTopology device.returnEvidence
   returned_positive : 0 < flow.returnedToSupplyJ
 
 /-- Optical energy is tracked separately from electrical driver energy. -/
