@@ -89,3 +89,51 @@ No hardware claim of adiabatic operation, zero-energy switching, or measured rec
 ## Source
 
 Tian, Y., Xiang, S., Guo, X. et al. “Photonic transformer chip: interference is all you need.” *PhotoniX* 6, 45 (2025). https://doi.org/10.1186/s43074-025-00182-7
+
+
+## 5. EIS-RES-PWR-001 — resonant reservoir, not just a return wire
+
+The resonant extension models the energy reservoir itself:
+
+- Lumped inductance, capacitance, effective loaded series resistance, ideal LC resonance frequency, and loaded series-model Q.
+- Reservoir state as inductor current and capacitor voltage, with the stored-energy model \(E=\frac12 LI^2+\frac12 CV^2\).
+- Explicit excitation waveform, frequency, amplitude, and phase offsets.
+- Canonical four-phase quadrature offsets (0°, 90°, 180°, 270°) as an available pattern, not a compulsory EIS architecture.
+- A separate excitation role: energy-only or energy-plus-logic-sequencing. Periodicity alone does not qualify the waveform as a logic clock; an explicit sequence-evidence obligation is required for the latter.
+- Reservoir-to-load energy, energy returned from the load into the reservoir, replenishment at the reservoir, and categorized losses.
+- External wall-plug replenishment energy versus energy actually delivered to the reservoir, with conversion efficiency.
+- Operating temperature and cooling wall-plug power, so a cryogenic technology cannot hide refrigeration energy outside the system boundary.
+
+### Periodic steady-state condition
+
+For a complete cycle, the reservoir balance is:
+
+\[
+E_{start}+E_{returned}+E_{topoff}
+=
+E_{end}+E_{delivered}+E_{loss}.
+\]
+
+At periodic steady state, \(E_{start}=E_{end}\), so:
+
+\[
+E_{topoff}
+=
+(E_{delivered}-E_{returned})+E_{loss}.
+\]
+
+This is the central EIS energy-recycling invariant. Energy returned from the modulator to the resonator is **internal circulation**, not necessarily energy returned to the external utility supply. The external supply replenishes the net exchange and losses.
+
+### Thermal-domain accounting
+
+The resonant supply may be room-temperature LC, a superconducting kinetic-inductor implementation, or another resonant technology. The contract does not presume that an HKI/4LC or AQFP implementation is suitable for room-temperature VLPI. Cooling wall-plug energy remains a separate term in the co-power ledger.
+
+### Co-power integration
+
+EIS-COPOWER-001 now has separate ledger entries for:
+- resonant reservoir external replenishment wall-plug energy;
+- resonant reservoir cooling wall-plug energy.
+
+An optional resonant domain is bound to those ledger values. When no resonant domain is declared, those entries must be zero. This avoids silently mixing internal reservoir circulation with external supply energy or omitting cryogenic cooling.
+
+The LC resonance and Q values are ideal lumped-model calculations. The cycle balance is a conservation contract, not a measured dynamics model. Coupling coefficients, distributed parasitics, nonlinearities, control/synchronization losses, startup transients, and actual loaded-Q measurements remain device-specific evidence requirements.
