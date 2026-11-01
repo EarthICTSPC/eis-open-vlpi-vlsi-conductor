@@ -1,0 +1,25 @@
+name: EIS KKA-001A Mathematical Conformance
+
+on:
+  push:
+    paths:
+      - "experiments/EIS-KKA-001/**"
+      - ".github/workflows/eis-kka-001a.yml"
+  pull_request:
+    paths:
+      - "experiments/EIS-KKA-001/**"
+      - ".github/workflows/eis-kka-001a.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mathematical-conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record Python version
+        run: python3 --version
+      - name: Run dependency-free KKA-001A tests
+        run: python3 -m unittest discover -s experiments/EIS-KKA-001 -p 'test_*.py' -v
