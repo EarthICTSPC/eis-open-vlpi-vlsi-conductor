@@ -5,7 +5,8 @@ from __future__ import annotations
 PhotonForge-independent: validates ideal interference and detector sign/scale;
 does not model the full KKA algorithm or a calibrated physical transfer law.
 """
-import numpy as np
+import math
+from typing import Sequence
 
 
 def real_cross_term_current(a: complex, b: complex, responsivity_a_per_w: float, *, power_scale_w: float = 1.0) -> float:
@@ -18,27 +19,28 @@ def real_cross_term_current(a: complex, b: complex, responsivity_a_per_w: float,
         raise ValueError("responsivity must be non-negative")
     if power_scale_w < 0:
         raise ValueError("power_scale_w must be non-negative")
-    e1 = (a + b) / np.sqrt(2.0)
-    e2 = (a - b) / np.sqrt(2.0)
+    root_two = math.sqrt(2.0)
+    e1 = (a + b) / root_two
+    e2 = (a - b) / root_two
     p_diff_w = power_scale_w * (abs(e1) ** 2 - abs(e2) ** 2)
     return float(responsivity_a_per_w * p_diff_w)
 
 
 def real_cross_term_current_direct(a: complex, b: complex, responsivity_a_per_w: float, *, power_scale_w: float = 1.0) -> float:
     """Equivalent closed-form expression used as an independent oracle."""
-    return float(2.0 * responsivity_a_per_w * power_scale_w * np.real(a * np.conjugate(b)))
+    return float(2.0 * responsivity_a_per_w * power_scale_w * (a * b.conjugate()).real)
 
 
-def integrate_current(time_s: np.ndarray, current_a: np.ndarray) -> tuple[float, float]:
+def integrate_current(time_s: Sequence[float], current_a: Sequence[float]) -> tuple[float, float]:
     """Return integrated charge in coulombs and average current in amperes."""
-    t = np.asarray(time_s, dtype=float)
-    i = np.asarray(current_a, dtype=float)
-    if t.ndim != 1 or i.ndim != 1 or t.size != i.size or t.size < 2:
-        raise ValueError("time and current must be 1-D arrays of equal length >= 2")
-    if not np.all(np.isfinite(t)) or not np.all(np.isfinite(i)):
+    t = [float(v) for v in time_s]
+    i = [float(v) for v in current_a]
+    if len(t) != len(i) or len(t) < 2:
+        raise ValueError("time and current must be equal-length sequences of size >= 2")
+    if not all(math.isfinite(v) for v in t + i):
         raise ValueError("time and current must be finite")
-    if np.any(np.diff(t) <= 0):
+    if any(t[k + 1] <= t[k] for k in range(len(t) - 1)):
         raise ValueError("time samples must be strictly increasing")
-    charge_c = float(np.trapezoid(i, x=t))
-    average_current_a = charge_c / float(t[-1] - t[0])
+    charge_c = sum((t[k + 1] - t[k]) * (i[k + 1] + i[k]) / 2.0 for k in range(len(t) - 1))
+    average_current_a = charge_c / (t[-1] - t[0])
     return charge_c, average_current_a
