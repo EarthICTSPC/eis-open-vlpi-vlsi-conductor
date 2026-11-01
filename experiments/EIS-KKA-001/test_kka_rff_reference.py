@@ -37,8 +37,8 @@ class KKA001ASI2RFF(unittest.TestCase):
         # silently turn a signed Monte-Carlo estimate into a positive kernel.
         with self.assertRaises(ArithmeticError):
             normalized_rff_attention(
-                [0.2], [[0.1], [-0.1]], [[1.0], [2.0]],
-                feature_count=1, seed=7
+                [0.0], [[2.0], [-2.0]], [[1.0], [2.0]],
+                feature_count=1, seed=0
             )
 
 
