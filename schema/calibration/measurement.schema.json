@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://earthictspc.com/schema/calibration/measurement.schema.json",
+  "title": "EIS Photonic Calibration Measurement",
+  "description": "Raw or processed measurement record with explicit provenance and evidence classification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "device",
+    "measurement",
+    "provenance",
+    "evidence_class"
+  ],
+  "properties": {
+    "schema_version": { "const": "eis.calibration.measurement.v0.1" },
+    "record_id": { "type": "string", "minLength": 1 },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device_id", "device_family"],
+      "properties": {
+        "device_id": { "type": "string", "minLength": 1 },
+        "device_family": { "enum": ["mzi", "waveguide", "mmi", "directional_coupler", "phase_shifter", "ring_resonator", "photodetector", "coupler_other"] },
+        "die_id": { "type": ["string", "null"] },
+        "wafer_id": { "type": ["string", "null"] },
+        "run_id": { "type": ["string", "null"] },
+        "layout_revision": { "type": ["string", "null"] },
+        "geometry_ref": { "type": ["string", "null"] }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quantity", "value", "unit", "conditions"],
+      "properties": {
+        "quantity": { "type": "string", "minLength": 1 },
+        "value": {
+          "oneOf": [
+            { "type": "number" },
+            { "type": "array", "items": { "type": "number" }, "minItems": 1 },
+            { "type": "string", "description": "Use only for nonnumeric instrument outputs; explain encoding in metadata." }
+          ]
+        },
+        "unit": { "type": "string", "minLength": 1 },
+        "conditions": {
+          "type": "object",
+          "description": "Include applicable wavelength, polarization, temperature, optical power, electrical bias, instrument range, and timestamp.",
+          "additionalProperties": true
+        },
+        "uncertainty": {
+          "type": ["object", "null"],
+          "additionalProperties": true
+        },
+        "raw_data_ref": { "type": ["string", "null"] }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "source_ref", "recorded_at"],
+      "properties": {
+        "source": { "enum": ["eis_measurement", "third_party_public_dataset", "supplier_measurement", "simulation", "derived"] },
+        "source_ref": { "type": "string", "minLength": 1 },
+        "source_sha256": { "type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$" },
+        "recorded_at": { "type": "string", "format": "date-time" },
+        "instrument": { "type": ["object", "null"], "additionalProperties": true },
+        "operator_or_process": { "type": ["string", "null"] }
+      }
+    },
+    "evidence_class": {
+      "enum": ["measured", "simulated", "fitted", "assumed", "derived"]
+    },
+    "notes": { "type": ["string", "null"] }
+  }
+}
