@@ -66,7 +66,6 @@ def transferredCrossTerm (ta a tb b : Field) : ℝ :=
   cases a
   cases b
   simp [crossTerm, conj]
-  ring
 
 @[simp] theorem crossTerm_zero_left (b : Field) :
     crossTerm ⟨0, 0⟩ b = 0 := by
@@ -90,16 +89,18 @@ square-root convention into the core operator contract.
 -/
 theorem crossTerm_sq_le (a b : Field) :
     crossTerm a b ^ 2 ≤ 4 * normSq a * normSq b := by
-  cases a
-  cases b
-  simp [crossTerm, normSq]
-  nlinarith [sq_nonneg (a_re * b_im - a_im * b_re)]
+  cases a with
+  | mk ar ai =>
+    cases b with
+    | mk br bi =>
+      simp [crossTerm, normSq]
+      nlinarith [sq_nonneg (ar * bi - ai * br)]
 
 /-- Complex transfer distributes over no assumed device model: it is simply multiplication. -/
 theorem transfer_coordinates (t a : Field) :
     (transfer t a).re = t.re * a.re - t.im * a.im ∧
     (transfer t a).im = t.re * a.im + t.im * a.re := by
-  rfl
+  constructor <;> rfl
 
 end Field
 
