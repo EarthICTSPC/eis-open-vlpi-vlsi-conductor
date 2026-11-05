@@ -37,9 +37,10 @@ jobs:
 
           # Geometry smoke: the published Cornerstone MZI layout has one heater.
           mzi = cells.mzi_heater_loop()
+          port_names = {port.name for port in mzi.ports}
           required_ports = {"o1", "o2", "o3", "e1", "e2"}
-          assert required_ports.issubset(set(mzi.ports))
-          print("MZI layout:", mzi.name, "ports:", sorted(mzi.ports))
+          assert required_ports.issubset(port_names)
+          print("MZI layout:", mzi.name, "ports:", sorted(port_names))
 
           # Compact-model smoke: evaluate, do not merely import, selected SAX models.
           model_results = {
