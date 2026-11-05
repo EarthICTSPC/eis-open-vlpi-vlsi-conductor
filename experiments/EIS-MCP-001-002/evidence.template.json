@@ -1,0 +1,25 @@
+{
+  "experiment_id": "EIS-MCP-001",
+  "run_id": "REPLACE_WITH_UNIQUE_RUN_ID",
+  "started_at": "REPLACE_WITH_ACTUAL_ISO8601_TIMESTAMP",
+  "ended_at": null,
+  "outcome": "INCOMPLETE",
+  "host": {
+    "name": "RECORD_ACTUAL_HOST",
+    "version": "RECORD_ACTUAL_VERSION",
+    "os": null,
+    "location_of_client_process": "unknown"
+  },
+  "target": null,
+  "integrations": [],
+  "sprite": null,
+  "steps": [],
+  "limitations": [
+    "Template only; no experiment has been executed by this record.",
+    "Replace all placeholders before schema validation.",
+    "Do not include credentials, tokens, API keys, or unredacted environment output."
+  ],
+  "reviewed_by_human": false,
+  "review_notes": null,
+  "artifact_sha256": []
+}

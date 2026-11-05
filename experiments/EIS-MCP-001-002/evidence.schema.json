@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://earthictspc.com/schemas/eis-mcp-001-002-evidence.schema.json",
+  "title": "EIS-MCP-001 / EIS-MCP-002 evidence record",
+  "type": "object",
+  "required": [
+    "experiment_id",
+    "run_id",
+    "started_at",
+    "outcome",
+    "host",
+    "integrations",
+    "steps",
+    "limitations"
+  ],
+  "properties": {
+    "experiment_id": {
+      "enum": ["EIS-MCP-001", "EIS-MCP-002"]
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "outcome": {
+      "enum": ["PASS", "FAIL", "BLOCKED", "INCOMPLETE", "PASS_LOCAL_MCP_SUBTEST"]
+    },
+    "host": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "os": { "type": ["string", "null"] },
+        "location_of_client_process": {
+          "enum": ["claude_code_host", "inside_sprite", "other", "unknown"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": ["string", "null"],
+      "description": "For EIS-MCP-002, identify remote endpoint target A or local-in-Sprite target B."
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["server_id", "server_type", "transport", "initialization", "tools_discovered"],
+        "properties": {
+          "server_id": { "type": "string" },
+          "server_type": {
+            "enum": ["fly_sprites", "flexcompute_remote", "tidy3d_local", "other", "unknown"]
+          },
+          "endpoint_or_command": {
+            "type": ["string", "null"],
+            "description": "Endpoint or command only; never include credentials."
+          },
+          "transport": {
+            "enum": ["streamable_http", "stdio", "other", "unknown"]
+          },
+          "authentication_method": {
+            "type": ["string", "null"],
+            "description": "Describe method category only, not token values."
+          },
+          "package_version": { "type": ["string", "null"] },
+          "initialization": {
+            "enum": ["success", "failure", "not_attempted", "unknown"]
+          },
+          "tools_discovered": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "harmless_call": {
+            "type": ["object", "null"],
+            "properties": {
+              "tool_name": { "type": "string" },
+              "result_summary": { "type": ["string", "null"] },
+              "status": {
+                "enum": ["success", "structured_error", "failure", "not_attempted"]
+              }
+            },
+            "required": ["tool_name", "status"],
+            "additionalProperties": false
+          },
+          "sanitized_error": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sprite": {
+      "type": ["object", "null"],
+      "properties": {
+        "sprite_id": { "type": ["string", "null"] },
+        "created_by_experiment": { "type": ["boolean", "null"] },
+        "runtime": { "type": ["string", "null"] },
+        "client_executed_inside_sprite": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "status"],
+        "properties": {
+          "step": { "type": "string" },
+          "status": {
+            "enum": ["pass", "fail", "blocked", "skipped", "unknown"]
+          },
+          "evidence_ref": { "type": ["string", "null"] },
+          "notes": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reviewed_by_human": { "type": ["boolean", "null"] },
+    "review_notes": { "type": ["string", "null"] },
+    "artifact_sha256": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact", "sha256"],
+        "properties": {
+          "artifact": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
