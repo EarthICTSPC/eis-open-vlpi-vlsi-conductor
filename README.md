@@ -433,6 +433,12 @@ EIS does not seek a single universal verification tool.
 
 It seeks a formally explicit evidence chain in which domain-specific tools produce domain-specific evidence and higher-level contracts establish the logical relationship among those evidence records.
 
+## Reading list
+
+The project maintains an annotated, evolving bibliography of relevant photonic-computing and AI research, including notes on evidence types, assumptions, and questions for EIS:
+
+[`docs/READING.md`](docs/READING.md)
+
 ## Independent LLM review
 
 The repository is intended to be independently reviewable by external LLMs and technical collaborators.
