@@ -1,0 +1,35 @@
+name: Cornerstone si220 clean-environment smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["eis-kka-lean4-formal-001"]
+    paths:
+      - "pdk/cornerstone-si220/manifest.yaml"
+      - ".github/workflows/cornerstone-si220-smoke.yml"
+
+jobs:
+  pdk-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install exact cspdk package
+        run: python -m pip install --disable-pip-version-check "cspdk==2.1.0"
+      - name: Verify installed package identity and si220 imports
+        run: |
+          python - <<'PY'
+          from importlib.metadata import version
+          import cspdk
+          import cspdk.si220
+          import cspdk.si220.cells
+          import cspdk.si220.models
+          print("cspdk distribution:", version("cspdk"))
+          print("cspdk package:", cspdk.__file__)
+          print("si220 package:", cspdk.si220.__file__)
+          print("si220 cells:", cspdk.si220.cells.__file__)
+          print("si220 models:", cspdk.si220.models.__file__)
+          assert version("cspdk") == "2.1.0"
+          PY
