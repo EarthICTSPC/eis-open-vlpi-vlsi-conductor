@@ -1,0 +1,70 @@
+Earth ICT, SPC (EIS) — NOTICE
+=============================
+
+Copyright © Earth ICT, SPC. All rights reserved except as expressly licensed.
+
+1. Project and license scope
+----------------------------
+Unless a file, directory, artifact, or accompanying notice states otherwise,
+software and source code in this repository are made available under the
+Apache License, Version 2.0. See the LICENSE file.
+
+The Apache License grant includes the patent-license provisions stated in
+that license, subject to its terms and conditions. This NOTICE is informational
+and does not modify the LICENSE.
+
+2. Attribution and redistribution
+---------------------------------
+When redistributing covered work, retain applicable copyright, patent,
+trademark, and attribution notices, include a copy of the applicable license,
+and reproduce applicable notices from this file as required by Apache License
+2.0, Section 4(d). Mark modified files with prominent notices stating that
+they have been changed.
+
+Project name: EIS Open VLPI PDK
+Project steward: Earth ICT, SPC (EIS)
+Repository: https://github.com/EarthICTSPC/eis-open-vlpi-pdk
+
+3. Separate artifacts and third-party materials
+-----------------------------------------------
+This repository may contain or refer to material that is not licensed under
+Apache License 2.0. The LICENSE file does not automatically relicense or
+override the terms governing:
+
+- foundry or vendor PDK files, process design rules, compact models, libraries,
+  technology files, credentials, or other controlled/confidential materials;
+- third-party software, datasets, documents, images, specifications, or code;
+- hardware-design artifacts, layout files, schematics, masks, or generated
+  manufacturing data where a separate license or permission applies;
+- documentation, specifications, and other non-code works that carry their
+  own license or explicit terms.
+
+Each such item remains subject to its applicable license, permission, contract,
+and access restrictions. Do not publish or redistribute controlled or
+confidential foundry material without authorization. Where appropriate, EIS
+may license documentation and other non-code artifacts separately, including
+under Creative Commons Attribution 4.0 International (CC BY 4.0) or CC0 1.0
+Universal. Such a separate license applies only where explicitly identified;
+it is not implied by this NOTICE.
+
+4. Third-party notices
+----------------------
+Third-party components and contributions may require additional notices or
+attribution. Those notices should be recorded with the relevant component or
+artifact and preserved when redistributing it, as required by its applicable
+license. No third-party endorsement is implied.
+
+5. Trademarks
+-------------
+“Earth ICT”, “Earth ICT, SPC”, “EIS”, and “VLPI” are used as project or
+organization identifiers. Except for the limited descriptive use permitted
+by applicable law or an explicit written permission, this NOTICE does not
+grant trademark rights.
+
+6. Evidence and performance claims
+----------------------------------
+Publication of source code, specifications, formal proofs, simulations, or
+design files does not by itself establish physical fabrication, foundry
+acceptance, measured performance, environmental benefit, or production
+readiness. Consult each artifact's stated evidence status and applicable
+license or notice.
