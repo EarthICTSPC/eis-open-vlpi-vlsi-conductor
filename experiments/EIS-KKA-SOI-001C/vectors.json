@@ -3,20 +3,196 @@
   "contract": "docs/02-architecture/EIS-KKA-SOI-001-SCALAR-CONTRACT-v1.md",
   "convention": "cross_term = 2 * Re(a * conjugate(b)); total_intensity = |a+b|^2",
   "dtype": "IEEE-754 binary64 Python complex/float",
-  "tolerance": {"absolute": 1e-12, "relative": 1e-12},
+  "tolerance": {
+    "absolute": 1e-12,
+    "relative": 1e-12
+  },
   "vectors": [
-    {"id": "KKA-V001-CONSTRUCTIVE", "a": [1, 0], "b": [2, 0], "cross": 4, "total": 9},
-    {"id": "KKA-V002-DESTRUCTIVE", "a": [1, 0], "b": [-2, 0], "cross": -4, "total": 1},
-    {"id": "KKA-V003-QUADRATURE", "a": [1, 0], "b": [0, 1], "cross": 0, "total": 2},
-    {"id": "KKA-V004-UNEQUAL-COMPLEX", "a": [2, 1], "b": [1, 2], "cross": 8, "total": 18},
-    {"id": "KKA-V005-ZERO-A", "a": [0, 0], "b": [3, -4], "cross": 0, "total": 25},
-    {"id": "KKA-V006-ZERO-B", "a": [-3, 4], "b": [0, 0], "cross": 0, "total": 25},
-    {"id": "KKA-V007-QUADRATURE-COMPLEX", "a": [1, 1], "b": [-1, 1], "cross": 0, "total": 4},
-    {"id": "KKA-V008-GENERAL-COMPLEX", "a": [0.25, -0.75], "b": [-0.5, 0.125], "cross": -0.4375, "total": 0.453125}
+    {
+      "id": "KKA-V001-CONSTRUCTIVE",
+      "a": [
+        1,
+        0
+      ],
+      "b": [
+        2,
+        0
+      ],
+      "cross": 4,
+      "total": 9,
+      "lean_theorems": [
+        "constructive_cross",
+        "constructive_total"
+      ]
+    },
+    {
+      "id": "KKA-V002-DESTRUCTIVE",
+      "a": [
+        1,
+        0
+      ],
+      "b": [
+        -2,
+        0
+      ],
+      "cross": -4,
+      "total": 1,
+      "lean_theorems": [
+        "destructive_cross"
+      ]
+    },
+    {
+      "id": "KKA-V003-QUADRATURE",
+      "a": [
+        1,
+        0
+      ],
+      "b": [
+        0,
+        1
+      ],
+      "cross": 0,
+      "total": 2,
+      "lean_theorems": [
+        "quadrature_cross"
+      ]
+    },
+    {
+      "id": "KKA-V004-UNEQUAL-COMPLEX",
+      "a": [
+        2,
+        1
+      ],
+      "b": [
+        1,
+        2
+      ],
+      "cross": 8,
+      "total": 18,
+      "lean_theorems": [
+        "unequal_complex_cross"
+      ]
+    },
+    {
+      "id": "KKA-V005-ZERO-A",
+      "a": [
+        0,
+        0
+      ],
+      "b": [
+        3,
+        -4
+      ],
+      "cross": 0,
+      "total": 25,
+      "lean_theorems": [
+        "zero_operand_cross"
+      ]
+    },
+    {
+      "id": "KKA-V006-ZERO-B",
+      "a": [
+        -3,
+        4
+      ],
+      "b": [
+        0,
+        0
+      ],
+      "cross": 0,
+      "total": 25,
+      "lean_theorems": [
+        "zero_right_operand_cross"
+      ]
+    },
+    {
+      "id": "KKA-V007-QUADRATURE-COMPLEX",
+      "a": [
+        1,
+        1
+      ],
+      "b": [
+        -1,
+        1
+      ],
+      "cross": 0,
+      "total": 4,
+      "lean_theorems": [
+        "complex_quadrature_cross"
+      ]
+    },
+    {
+      "id": "KKA-V008-GENERAL-COMPLEX",
+      "a": [
+        0.25,
+        -0.75
+      ],
+      "b": [
+        -0.5,
+        0.125
+      ],
+      "cross": -0.4375,
+      "total": 0.453125,
+      "lean_theorems": [
+        "general_complex_cross",
+        "general_complex_total"
+      ]
+    }
   ],
   "transfer_vectors": [
-    {"id": "KKA-T001-IDENTITY", "field": [1, 2], "transfer": [1, 0], "output": [1, 2]},
-    {"id": "KKA-T002-LOSS-AND-PHASE", "field": [1, 0], "transfer": [0, 0.5], "output": [0, 0.5]},
-    {"id": "KKA-T003-ZERO-TRANSFER", "field": [2, -1], "transfer": [0, 0], "output": [0, 0]}
+    {
+      "id": "KKA-T001-IDENTITY",
+      "field": [
+        1,
+        2
+      ],
+      "transfer": [
+        1,
+        0
+      ],
+      "output": [
+        1,
+        2
+      ],
+      "lean_theorems": [
+        "transfer_identity"
+      ]
+    },
+    {
+      "id": "KKA-T002-LOSS-AND-PHASE",
+      "field": [
+        1,
+        0
+      ],
+      "transfer": [
+        0,
+        0.5
+      ],
+      "output": [
+        0,
+        0.5
+      ],
+      "lean_theorems": [
+        "transfer_phase_loss"
+      ]
+    },
+    {
+      "id": "KKA-T003-ZERO-TRANSFER",
+      "field": [
+        2,
+        -1
+      ],
+      "transfer": [
+        0,
+        0
+      ],
+      "output": [
+        0,
+        0
+      ],
+      "lean_theorems": [
+        "transfer_zero"
+      ]
+    }
   ]
 }
