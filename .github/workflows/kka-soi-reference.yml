@@ -1,0 +1,25 @@
+name: KKA SOI scalar reference
+
+on:
+  push:
+    branches: ["main", "eis-kka-soi-001a-001c"]
+    paths:
+      - "experiments/EIS-KKA-SOI-001C/**"
+      - ".github/workflows/kka-soi-reference.yml"
+  pull_request:
+    paths:
+      - "experiments/EIS-KKA-SOI-001C/**"
+      - ".github/workflows/kka-soi-reference.yml"
+
+jobs:
+  reference-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check pytest
+      - name: Run deterministic KKA scalar reference tests
+        working-directory: experiments/EIS-KKA-SOI-001C
+        run: python -m pytest -q

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "contract": "docs/02-architecture/EIS-KKA-SOI-001-SCALAR-CONTRACT-v1.md",
+  "convention": "cross_term = 2 * Re(a * conjugate(b)); total_intensity = |a+b|^2",
+  "dtype": "IEEE-754 binary64 Python complex/float",
+  "tolerance": {"absolute": 1e-12, "relative": 1e-12},
+  "vectors": [
+    {"id": "KKA-V001-CONSTRUCTIVE", "a": [1, 0], "b": [2, 0], "cross": 4, "total": 9},
+    {"id": "KKA-V002-DESTRUCTIVE", "a": [1, 0], "b": [-2, 0], "cross": -4, "total": 1},
+    {"id": "KKA-V003-QUADRATURE", "a": [1, 0], "b": [0, 1], "cross": 0, "total": 2},
+    {"id": "KKA-V004-UNEQUAL-COMPLEX", "a": [2, 1], "b": [1, 2], "cross": 8, "total": 18},
+    {"id": "KKA-V005-ZERO-A", "a": [0, 0], "b": [3, -4], "cross": 0, "total": 25},
+    {"id": "KKA-V006-ZERO-B", "a": [-3, 4], "b": [0, 0], "cross": 0, "total": 25},
+    {"id": "KKA-V007-QUADRATURE-COMPLEX", "a": [1, 1], "b": [-1, 1], "cross": 0, "total": 4},
+    {"id": "KKA-V008-GENERAL-COMPLEX", "a": [0.25, -0.75], "b": [-0.5, 0.125], "cross": -0.4375, "total": 0.453125}
+  ],
+  "transfer_vectors": [
+    {"id": "KKA-T001-IDENTITY", "field": [1, 2], "transfer": [1, 0], "output": [1, 2]},
+    {"id": "KKA-T002-LOSS-AND-PHASE", "field": [1, 0], "transfer": [0, 0.5], "output": [0, 0.5]},
+    {"id": "KKA-T003-ZERO-TRANSFER", "field": [2, -1], "transfer": [0, 0], "output": [0, 0]}
+  ]
+}
