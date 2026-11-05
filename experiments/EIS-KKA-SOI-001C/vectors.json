@@ -11,8 +11,8 @@
     {"id": "KKA-V004-UNEQUAL-COMPLEX", "a": [2, 1], "b": [1, 2], "cross": 8, "total": 18},
     {"id": "KKA-V005-ZERO-A", "a": [0, 0], "b": [3, -4], "cross": 0, "total": 25},
     {"id": "KKA-V006-ZERO-B", "a": [-3, 4], "b": [0, 0], "cross": 0, "total": 25},
-    {"id": "KKA-V007-NEGATIVE-SIGNED-CROSS", "a": [1, 1], "b": [-1, 1], "cross": -4, "total": 4},
-    {"id": "KKA-V008-GENERAL-COMPLEX", "a": [0.25, -0.75], "b": [-0.5, 0.125], "cross": -0.3125, "total": 0.890625}
+    {"id": "KKA-V007-QUADRATURE-COMPLEX", "a": [1, 1], "b": [-1, 1], "cross": 0, "total": 4},
+    {"id": "KKA-V008-GENERAL-COMPLEX", "a": [0.25, -0.75], "b": [-0.5, 0.125], "cross": -0.4375, "total": 0.453125}
   ],
   "transfer_vectors": [
     {"id": "KKA-T001-IDENTITY", "field": [1, 2], "transfer": [1, 0], "output": [1, 2]},
