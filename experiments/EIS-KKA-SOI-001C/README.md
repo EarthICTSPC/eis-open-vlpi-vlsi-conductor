@@ -1,4 +1,4 @@
-# EIS-KKA-SOI-001C — scalar Python reference
+# EIS-KKA-SOI-001C — Lean-anchored Python scalar reference
 
 This directory implements EIS-KKA-SOI-001 Scalar Field and Interference
 Contract v1.0 in
@@ -8,33 +8,44 @@ docs/02-architecture/EIS-KKA-SOI-001-SCALAR-CONTRACT-v1.md:
 - cross_term(a, b) = 2 Re(a · conjugate(b))
 - propagate(E, T) = T · E
 
-The signed cross term is not clipped. Field transfer functions are supplied as
-complex values and are deliberately separate from the ideal operator. No
-Kramers–Kronig coefficient, SOI TPA, Kerr effect, or foundry-specific response
-is assumed.
+The formal authority is the pinned Lean project:
+- `lean-toolchain`: Lean 4.35.0
+- `lakefile.lean` and `lake-manifest.json`: Mathlib pinned to commit
+  `56a005855ea17e0b0958f73ec801ae140b0a1679`
+- `EISKKA/Scalar.lean`: scalar field algebra, interference operator,
+  independent complex transfers, polar form and proved identities/bounds
+- `EISKKA/ConformanceVectors.lean`: exact rational/integer theorem anchors
+  for the JSON/Python conformance cases
 
-## Important formal-status boundary
+Each vector in `vectors.json` names the Lean theorem(s) that prove its exact
+mathematical result. The Python test suite verifies that every declared theorem
+anchor exists in the formal source and checks the corresponding binary64
+implementation result against the vector. This is a reviewed cross-language
+conformance mapping, not automatic code generation from Lean.
 
-The repository HEAD inspected for this work contains no .lean source file,
-lean-toolchain, or lakefile.lean. Contract v1.0 freezes the written scalar
-mathematics but is not formally verified. Therefore this Python reference is a
-software mirror of the written contract, not a claim that it was generated
-from or proved equivalent to a Lean 4 specification. Issue #58 must add and
-compile the Lean source, pin its toolchain, and cross-reference each
-definition/theorem. Only then can #59 be upgraded to Lean-derived conformance.
+The Python implementation uses IEEE-754 binary64 complex/float arithmetic.
+Its 1e-12 absolute/relative tolerance is a software conformance tolerance,
+not a physical device acceptance threshold or uncertainty budget. Lean's
+mathematical reals do not represent IEEE-754 NaN or infinity; Python finite
+input/output checks remain a runtime boundary.
 
-## Run
+The signed cross term is not clipped. Field transfer functions are supplied
+complex values and are separate from the ideal operator. No Kramers–Kronig
+coefficient, SOI TPA, Kerr effect, heater calibration or foundry-specific
+response is assumed.
 
-From this directory, in a Python 3.12 environment with pytest installed:
+## Reproduce
 
-    python -m pytest -q
+From the repository root:
 
-No optical simulator, PDK, foundry data, or cloud service is required. A passing
-test suite is E2 software evidence only; it is not E3 simulation or E4
-measurement.
+    lake build --wfail
+    python -m pytest -q experiments/EIS-KKA-SOI-001C
 
-## Vectors
+The Lean GitHub Actions workflow also runs the axiom audit. The reviewed
+allowlist is `propext`, `Classical.choice`, and `Quot.sound`; no `sorry`
+or custom axiom declaration is permitted in the EIS formal source.
 
-vectors.json records the factor-of-two convention, binary64 tolerance,
-hand-computable cases and transfer examples. Tolerance is for software
-conformance only, not physical-device acceptance.
+A passing Python suite is E2 software evidence. A Lean build and axiom audit
+are formal-verification evidence for this scalar contract. Neither is an
+optical simulation, physical measurement, detector qualification, full
+tensor-attention proof, or energy/CO₂e result.
