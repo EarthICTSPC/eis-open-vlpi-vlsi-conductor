@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EarthICTSPC/eis-open-vlpi-pdk/blob/main/experiments/EIS-FLY-TEST-001/evidence.schema.json",
+  "title": "EIS-FLY-TEST-001 evidence",
+  "description": "Evidence for whether a named FlexCompute/FlexAgent session used the official Fly.io Sprites MCP interface to execute a bounded test in a Sprite. No credentials belong in this record.",
+  "type": "object",
+  "required": [
+    "test_id",
+    "outcome",
+    "agent",
+    "endpoint",
+    "connection",
+    "sprite",
+    "workload",
+    "review"
+  ],
+  "properties": {
+    "test_id": {
+      "const": "EIS-FLY-TEST-001"
+    },
+    "outcome": {
+      "enum": ["PASS", "FAIL", "INCOMPLETE"]
+    },
+    "agent": {
+      "type": "object",
+      "required": ["provider", "agent_name", "session_reference"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "agent_name": {"type": "string", "minLength": 1},
+        "session_reference": {"type": "string", "minLength": 1},
+        "operator_notes": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "endpoint": {
+      "const": "https://sprites.dev/mcp"
+    },
+    "connection": {
+      "type": "object",
+      "required": ["transport", "oauth_completed", "list_sprites_succeeded", "tool_evidence"],
+      "properties": {
+        "transport": {"type": "string"},
+        "oauth_completed": {"type": "boolean"},
+        "list_sprites_succeeded": {"type": "boolean"},
+        "tool_evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["tool", "succeeded", "redacted_result_summary"],
+            "properties": {
+              "tool": {"type": "string"},
+              "succeeded": {"type": "boolean"},
+              "redacted_result_summary": {"type": "string"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "failure_detail": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "sprite": {
+      "type": "object",
+      "required": ["name", "created_by_this_test", "command_tool_succeeded"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^eis-fly-test-001-"},
+        "created_by_this_test": {"type": "boolean"},
+        "command_tool_succeeded": {"type": "boolean"},
+        "cleanup": {
+          "enum": ["not_attempted", "completed_with_authorization", "failed", "not_applicable"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "workload": {
+      "type": "object",
+      "required": ["repository_head", "test_script_sha256", "exit_code", "smoke_test_status", "all_checks_passed", "output_artifact"],
+      "properties": {
+        "repository_head": {"type": ["string", "null"]},
+        "test_script_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "exit_code": {"type": ["integer", "null"]},
+        "smoke_test_status": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+        "all_checks_passed": {"type": ["boolean", "null"]},
+        "output_artifact": {"type": "string"},
+        "stderr_summary": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "required": ["reviewer", "reviewed_at_utc", "limitations_acknowledged", "notes"],
+      "properties": {
+        "reviewer": {"type": "string", "minLength": 1},
+        "reviewed_at_utc": {"type": "string", "format": "date-time"},
+        "limitations_acknowledged": {"const": true},
+        "notes": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
