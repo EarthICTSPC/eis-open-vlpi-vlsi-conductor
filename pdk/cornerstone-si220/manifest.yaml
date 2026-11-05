@@ -1,0 +1,78 @@
+schema_version: 1
+identity:
+  provider: "gdsfactory/cspdk"
+  package: "cspdk"
+  version: "2.1.0"
+  process_variant: "cspdk.si220"
+  platform: "SOI 220 nm"
+  bands: ["C-band", "O-band"]
+  release_date: "2026-10-16"
+  source_repository: "https://github.com/gdsfactory/cspdk"
+  release_url: "https://github.com/gdsfactory/cspdk/releases/tag/v2.1.0"
+  source_tag: "v2.1.0"
+  source_commit: "09ca1a1e23c3a00f4f51e89ef2fa83b3f352ccbb"
+  source_commit_signature: "GitHub API reports verified=true"
+  release_immutable: false
+artifacts:
+  pypi_project: "https://pypi.org/project/cspdk/2.1.0/"
+  wheel:
+    filename: "cspdk-2.1.0-py3-none-any.whl"
+    sha256: "eea56e49535ab5aa61b189dd94bd4d6f7f284afd035b851b21dd2a35ef13febf"
+    provenance_attestation: "not supplied by PyPI for this release"
+  sdist:
+    filename: "cspdk-2.1.0.tar.gz"
+    sha256: "2e04e792168caae6e255fb8b7086170fa83fd8f44b4e8f9c10750b65a1696991"
+    provenance_attestation: "not supplied by PyPI for this release"
+licensing:
+  package_repository_license: "MIT"
+  package_license_url: "https://github.com/gdsfactory/cspdk/blob/v2.1.0/LICENSE"
+  package_license_scope: "The cspdk software repository/package; preserve its copyright and license notice."
+  foundry_process_rights: "NOT ESTABLISHED BY THE MIT PACKAGE LICENSE"
+  fabrication_or_MPW_access: "Requires separate confirmation/acceptance under current CORNERSTONE foundry terms."
+  separate_model_license: "No separate model-specific license statement was identified in the inspected package metadata."
+  upstream_foundry_data_repository: "https://github.com/cornerstone-uos/cornerstone-pdk"
+  upstream_foundry_data_license: "No root LICENSE file found at inspection time; do not vendor or redistribute that repository's contents absent written clarification."
+  redistribution_policy: "Use the MIT-licensed cspdk package as a pinned dependency for internal engineering evaluation; do not republish foundry data, GDS, model data, or derived process collateral until scope is confirmed."
+python:
+  requires_python: ">=3.12,<3.15"
+  contributor_recommendation: "Python 3.12"
+  note: "README installation text says 3.11-3.13, but pyproject.toml and PyPI metadata require >=3.12,<3.15; follow machine-readable package metadata."
+declared_runtime_dependencies:
+  - "gdsfactory~=9.51.0"
+  - "gdsfactoryplus"
+  - "gplugins[sax,femwell,tidy3d]~=2.1.0"
+  - "circulax>=0.2.3"
+  - "klujax>=0.5.1"
+dependency_lock:
+  upstream_lockfile: "https://github.com/gdsfactory/cspdk/blob/v2.1.0/uv.lock"
+  lockfile_blob_sha: "7c1d0464e8c1b81e42ea7b1e6487888dda74f38e"
+  status: "Upstream contributor lock only; not yet validated as EIS's consumer environment."
+  consumer_lock_status: "NOT FROZEN; clean install/import/DRC/model smoke tests required before pinning."
+device_model_inventory:
+  available:
+    - "SAX models for optical cells; si220 model module exposes waveguides, couplers, MMIs, crossings, gratings, heaters and MZI models."
+    - "si220 straight_heater_metal and straight_heater_meander model interfaces."
+    - "si220 mmi1x2, mmi2x2, and mzi_heater_loop model interfaces."
+    - "ThermalPhaseShifter / circulax model is noted in v2.1.0 release notes; phase convention exp(+1j*phi)."
+  important_limits:
+    - "The generic heater cell is a layout/electrical geometry primitive; pyproject explicitly lists heater among cells for which no model is expected."
+    - "The model interface is not a characterized three-independent-heater Tian PTC/KKA macro."
+    - "No integrated balanced photodetector model is established by this inventory."
+    - "Do not infer thermal crosstalk matrix, heater power-to-phase calibration, or KKA transfer from the presence of a cell/model."
+  relevant_release_notes:
+    - "v2.1.0: si220 circulax ThermalPhaseShifter uses exp(+1j*phi); model defaults aligned with SAX straight_heater_metal."
+    - "v2.0.0: si220 Run 50 library cells/models include foundry-derived measured losses; heater geometry was redrawn to Run 50."
+evidence:
+  status: "PROVENANCE_IDENTIFIED; TOOLCHAIN_NOT_YET_REPRODUCED"
+  inspected:
+    - "gdsfactory/cspdk v2.1.0 release metadata"
+    - "tag ref resolves to immutable commit SHA above"
+    - "pyproject.toml and LICENSE at v2.1.0"
+    - "PyPI 2.1.0 files and SHA-256 checksums"
+    - "si220 model API source"
+  not_done:
+    - "No package installed in a clean EIS environment."
+    - "No dependency resolver/lockfile generated for EIS."
+    - "No PDK activation, component generation, model evaluation, DRC, or foundry submission checker executed."
+    - "No legal opinion or foundry written confirmation obtained."
+  decision: "PIN SOURCE IDENTITY FOR EVALUATION; BLOCK REDISTRIBUTION AND FOUNDRY SUBMISSION PENDING RIGHTS/ACCESS CONFIRMATION AND TOOLCHAIN SMOKE TEST."
