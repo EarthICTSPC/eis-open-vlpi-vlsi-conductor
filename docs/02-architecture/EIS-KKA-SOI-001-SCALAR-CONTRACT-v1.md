@@ -1,6 +1,6 @@
 # EIS-KKA-SOI-001 — Scalar Field and Interference Contract v1.0
 
-**Status:** Scalar mathematical convention frozen for software conformance; Lean proof pending  
+**Status:** Scalar mathematical convention frozen; Lean 4 proof and axiom audit passed on PR head `7aa5645809478dd45639ac24415dad198e951531`  
 **Applies to:** Scalar coherent-field primitive only  
 **Does not define:** Full tensor KKA attention, a material response, a foundry macro, or a physical detector
 
@@ -70,4 +70,17 @@ Full KKA attention requires a separate tensor-level contract. Device response re
 
 ## 7. Formal status
 
-This document freezes the scalar mathematical convention as EIS-KKA-SOI-001 v1.0. Lean 4 definitions and proofs are required to establish formal evidence. Until the Lean source is added, pinned, built and reviewed, this document is a normative written specification but is **not formally verified**. The Python implementation is a software mirror, not a proof-producing translation.
+This document freezes the scalar mathematical convention as EIS-KKA-SOI-001 v1.0.
+
+**Formal evidence recorded on PR branch head** `7aa5645809478dd45639ac24415dad198e951531`:
+- Lean 4.35.0 stable toolchain, pinned in `lean-toolchain`.
+- Mathlib pinned to commit `56a005855ea17e0b0958f73ec801ae140b0a1679` in `lakefile.lean` and `lake-manifest.json`.
+- `lake build --wfail` passed.
+- Axiom audit examined 44 declarations under `EISKKA`; all were within the reviewed allowlist `propext`, `Classical.choice`, `Quot.sound`.
+- Formal source check found no `sorry` or custom axiom declarations.
+- Proved results include the intensity expansion, signed cross-term symmetry, conjugation invariance, zero-operand cases, squared and absolute Cauchy–Schwarz bounds, equivalence to twice the real part of the complex product, polar phase-difference form, and transfer coordinate semantics.
+- Exact integer/rational conformance examples are proved in `EISKKA/ConformanceVectors.lean`.
+
+This formal verification applies to the scalar mathematical model only. It does not establish physical transfer curves, device behavior, KKA full attention equivalence, detector realization, energy, latency, or environmental performance. The Python implementation remains a separate binary64 executable reference; the JSON vectors cross-reference Lean theorem names and the Python suite checks those anchors exist and checks the numerical results. This is a reviewed cross-language conformance mapping, not automatic code generation from Lean.
+
+The evidence is on the draft PR branch; it becomes the repository's merged formal baseline only when the PR is reviewed and merged.
