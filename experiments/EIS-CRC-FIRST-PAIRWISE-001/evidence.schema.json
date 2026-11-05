@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://earthictspc.com/schemas/eis-crc-first-pairwise-001-evidence.schema.json",
+  "title": "EIS CRC-FIRST Pairwise Comparator Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experiment_id",
+    "status",
+    "timestamp_utc",
+    "source_revision",
+    "candidate_id",
+    "selection_domain",
+    "model_status",
+    "parameter_records",
+    "acceptance_criteria",
+    "results",
+    "physical_validation",
+    "limitations"
+  ],
+  "properties": {
+    "experiment_id": { "const": "EIS-CRC-FIRST-PAIRWISE-001" },
+    "status": { "enum": ["PASS", "FAIL", "BLOCKED", "INCOMPLETE", "SPECIFIED_NOT_PREREGISTERED"] },
+    "timestamp_utc": { "type": "string", "format": "date-time" },
+    "source_revision": {
+      "type": "object",
+      "required": ["repository", "commit"],
+      "properties": {
+        "repository": { "type": "string" },
+        "commit": { "type": "string", "minLength": 7 },
+        "working_tree_clean": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "candidate_id": { "type": "string", "minLength": 1 },
+    "selection_domain": { "enum": ["optical", "analog_optoelectronic", "electronic", "not_established"] },
+    "model_status": {
+      "enum": ["behavioral_only", "paper_reported_unvalidated", "simulated_unvalidated", "validated_against_measurements", "physical_measurement"]
+    },
+    "parameter_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "value", "unit", "provenance", "source_or_rationale"],
+        "properties": {
+          "name": { "type": "string" },
+          "value": {},
+          "unit": { "type": "string" },
+          "provenance": { "enum": ["MEASURED", "PAPER_REPORTED", "SIMULATED", "MOCKED_FOR_EXPLORATION", "UNKNOWN"] },
+          "source_or_rationale": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "acceptance_criteria": {
+      "type": "object",
+      "required": ["preregistered", "version_or_hash", "criteria"],
+      "properties": {
+        "preregistered": { "type": "boolean" },
+        "version_or_hash": { "type": ["string", "null"] },
+        "criteria": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "object",
+      "required": ["tests_run", "a_wins", "b_wins", "indeterminate", "faults", "false_winners"],
+      "properties": {
+        "tests_run": { "type": "integer", "minimum": 0 },
+        "a_wins": { "type": "integer", "minimum": 0 },
+        "b_wins": { "type": "integer", "minimum": 0 },
+        "indeterminate": { "type": "integer", "minimum": 0 },
+        "faults": { "type": "integer", "minimum": 0 },
+        "false_winners": { "type": ["integer", "null"], "minimum": 0 },
+        "raw_results_uri": { "type": ["string", "null"] },
+        "metrics": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "physical_validation": {
+      "type": "object",
+      "required": ["state", "artifact_identity", "measurement_evidence"],
+      "properties": {
+        "state": { "enum": ["NOT_RUN", "NOT_APPLICABLE", "NOT_ESTABLISHED", "SIMULATION_ONLY", "MEASURED"] },
+        "artifact_identity": { "type": ["string", "null"] },
+        "measurement_evidence": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unresolved_ambiguities": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+name: EIS CRC-FIRST Pairwise Comparator 001
+
+on:
+  pull_request:
+    paths:
+      - "experiments/EIS-CRC-FIRST-PAIRWISE-001/**"
+      - ".github/workflows/eis-crc-first-pairwise-001.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "experiments/EIS-CRC-FIRST-PAIRWISE-001/**"
+      - ".github/workflows/eis-crc-first-pairwise-001.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  behavioral-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate evidence schema JSON syntax
+        run: python -m json.tool experiments/EIS-CRC-FIRST-PAIRWISE-001/evidence.schema.json > /dev/null
+
+      - name: Run behavioral reference unit tests
+        run: python -m unittest discover -s experiments/EIS-CRC-FIRST-PAIRWISE-001 -p 'test_*.py' -v
