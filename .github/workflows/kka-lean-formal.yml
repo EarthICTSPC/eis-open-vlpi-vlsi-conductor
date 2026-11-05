@@ -1,0 +1,30 @@
+name: KKA Lean formal specification
+
+on:
+  pull_request:
+    paths:
+      - "lean-toolchain"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "EISKKA.lean"
+      - "EISKKA/**"
+      - ".github/workflows/kka-lean-formal.yml"
+
+jobs:
+  lean-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          build-args: "--wfail"
+          axiom-audit: true
+          axiom-audit-allow: "propext,Classical.choice,Quot.sound"
+      - name: Confirm no sorry or custom axiom declarations
+        shell: bash
+        run: |
+          if grep -R -n -E '\bsorry\b|^[[:space:]]*axiom[[:space:]]' EISKKA; then
+            echo "Unreviewed sorry/custom axiom declaration found in formal source"
+            exit 1
+          fi

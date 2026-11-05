@@ -63,7 +63,7 @@ device_model_inventory:
     - "v2.1.0: si220 circulax ThermalPhaseShifter uses exp(+1j*phi); model defaults aligned with SAX straight_heater_metal."
     - "v2.0.0: si220 Run 50 library cells/models include foundry-derived measured losses; heater geometry was redrawn to Run 50."
 evidence:
-  status: "PROVENANCE_IDENTIFIED; TOOLCHAIN_NOT_YET_REPRODUCED"
+  status: "PROVENANCE_AND_PYTHON_3.12_MODEL_API_SMOKE_PASSED"
   inspected:
     - "gdsfactory/cspdk v2.1.0 release metadata"
     - "tag ref resolves to immutable commit SHA above"
@@ -71,8 +71,10 @@ evidence:
     - "PyPI 2.1.0 files and SHA-256 checksums"
     - "si220 model API source"
   not_done:
-    - "No package installed in a clean EIS environment."
-    - "No dependency resolver/lockfile generated for EIS."
-    - "No PDK activation, component generation, model evaluation, DRC, or foundry submission checker executed."
+    - "Clean GitHub Actions runner installed PyPI cspdk==2.1.0 successfully under Python 3.12.16."
+    - "Package and cspdk.si220 imports succeeded; cspdk.si220.cells.mzi_heater_loop() instantiated and exposed optical ports o1/o2/o3 plus electrical ports e1/e2."
+    - "SAX compact-model calls succeeded for mmi1x2, mmi2x2, straight_heater_metal at 0 V and Vpi, and mzi_heater_loop at 0 V and Vpi; all returned finite S-parameters."
+    - "The idealized straight_heater_metal model produced the expected pi phase inversion at V=Vpi in its own model; this is model self-consistency, not measured device calibration."
+    - "One default cspdk.si220 MZI geometry was instantiated and selected SAX compact models were evaluated; no custom three-heater layout, DRC, LVS, thermal-crosstalk simulation, or foundry submission checker executed."
     - "No legal opinion or foundry written confirmation obtained."
-  decision: "PIN SOURCE IDENTITY FOR EVALUATION; BLOCK REDISTRIBUTION AND FOUNDRY SUBMISSION PENDING RIGHTS/ACCESS CONFIRMATION AND TOOLCHAIN SMOKE TEST."
+  decision: "SOURCE IDENTITY, PACKAGE INSTALL, DEFAULT MZI GEOMETRY AND SELECTED COMPACT-MODEL SMOKES PASS FOR INTERNAL EVALUATION. FREEZE A CONSUMER LOCK AND BUILD THE THREE-PHASE-SHIFTER COMPOSITION NEXT. BLOCK REDISTRIBUTION AND FOUNDRY SUBMISSION PENDING RIGHTS/ACCESS CONFIRMATION."

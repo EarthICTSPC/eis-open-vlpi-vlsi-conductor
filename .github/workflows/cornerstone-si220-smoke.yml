@@ -1,0 +1,65 @@
+name: Cornerstone si220 clean-environment smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["eis-kka-lean4-formal-001"]
+    paths:
+      - "pdk/cornerstone-si220/manifest.yaml"
+      - ".github/workflows/cornerstone-si220-smoke.yml"
+
+jobs:
+  pdk-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download and verify exact PyPI wheel
+        run: |
+          python -m pip download --disable-pip-version-check --no-deps --only-binary=:all: --dest dist "cspdk==2.1.0"
+          echo "eea56e49535ab5aa61b189dd94bd4d6f7f284afd035b851b21dd2a35ef13febf  dist/cspdk-2.1.0-py3-none-any.whl" | sha256sum --check
+      - name: Install exact cspdk package and dependencies
+        run: python -m pip install --disable-pip-version-check "cspdk==2.1.0"
+      - name: Verify installed package, cells and compact-model calls
+        run: |
+          python - <<'PY'
+          from importlib.metadata import version
+          import numpy as np
+          import cspdk
+          import cspdk.si220
+          from cspdk.si220 import cells, models
+
+          assert version("cspdk") == "2.1.0"
+          print("cspdk distribution:", version("cspdk"))
+          print("cspdk package:", cspdk.__file__)
+
+          # Geometry smoke: the published Cornerstone MZI layout has one heater.
+          mzi = cells.mzi_heater_loop()
+          port_names = {port.name for port in mzi.ports}
+          required_ports = {"o1", "o2", "o3", "e1", "e2"}
+          assert required_ports.issubset(port_names)
+          print("MZI layout:", mzi.name, "ports:", sorted(port_names))
+
+          # Compact-model smoke: evaluate, do not merely import, selected SAX models.
+          model_results = {
+              "mmi1x2": models.mmi1x2(wl=1.55),
+              "mmi2x2": models.mmi2x2(wl=1.55),
+              "straight_heater_metal_v0": models.straight_heater_metal(wl=1.55, voltage=0.0),
+              "straight_heater_metal_vpi": models.straight_heater_metal(wl=1.55, voltage=1.0, vpi=1.0),
+              "mzi_heater_loop_v0": models.mzi_heater_loop(wl=1.55, voltage=0.0),
+              "mzi_heater_loop_vpi": models.mzi_heater_loop(wl=1.55, voltage=1.0, vpi=1.0),
+          }
+          for name, result in model_results.items():
+              assert result, f"{name} returned no S-parameters"
+              for ports, value in result.items():
+                  assert np.isfinite(np.asarray(value)).all(), (name, ports, value)
+              print(name, "ports:", sorted(map(str, result.keys())))
+
+          # The package's idealized heater compact model applies pi phase at V=Vpi.
+          s0 = model_results["straight_heater_metal_v0"][("o1", "o2")]
+          spi = model_results["straight_heater_metal_vpi"][("o1", "o2")]
+          assert np.allclose(np.asarray(spi), -np.asarray(s0), rtol=1e-7, atol=1e-9)
+          print("Ideal compact-model Vpi phase relation: PASS")
+          PY
