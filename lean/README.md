@@ -22,6 +22,10 @@ This scalar specification does not prove KKA attention equivalence, a device
 transfer curve, SOI TPA/Kerr behavior, a detector implementation, energy,
 latency, or physical conformity.
 
+## Verified CI baseline
+
+On PR branch head `7aa5645809478dd45639ac24415dad198e951531`, `lake build --wfail` passed and the axiom audit examined 44 declarations under `EISKKA`, all within the allowlist `propext`, `Classical.choice`, `Quot.sound`. The no-sorry/custom-axiom source scan passed. This is scalar formal evidence only and remains on the draft PR branch until merged.
+
 ## Reproduce
 
 Install elan/Lake for the exact version in `lean-toolchain`, then run:
