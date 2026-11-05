@@ -451,6 +451,12 @@ The repository's governing document is:
 
 Read that document before treating repository contents as a complete implementation specification.
 
+## Lean 4 formalization
+
+The machine-checkable formal model is maintained as a dedicated Lean 4 / Lake project at [`formal/lean4/`](formal/lean4/). This keeps formal definitions and proofs separate from the Python execution harness while enabling independent CI checks. The initial project proves a synthetic 228 ps serial-latency example exceeds a 200 ps budget; it is a formal arithmetic baseline, not measured physical performance or yet a cross-language orchestrator regression.
+
+See [`formal/lean4/README.md`](formal/lean4/README.md) for setup and scope. GitHub Actions builds the project when its files change.
+
 ## Status
 
 This is an evolving open technical disclosure.

@@ -1,0 +1,38 @@
+name: Lean 4 formal checks
+
+on:
+  push:
+    paths:
+      - 'formal/lean4/**'
+      - '.github/workflows/lean4.yml'
+  pull_request:
+    paths:
+      - 'formal/lean4/**'
+      - '.github/workflows/lean4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean-build:
+    name: Build and check EIS VLPI formalization
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: formal/lean4
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install pinned Lean toolchain
+        shell: bash
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain leanprover/lean4:v4.19.0
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version
+          "$HOME/.elan/bin/lake" --version
+      - name: Resolve Lake package metadata
+        run: lake update
+      - name: Build formal project
+        run: lake build

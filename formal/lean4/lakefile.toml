@@ -1,0 +1,7 @@
+name = "eisVlpiFormal"
+version = "0.1.0"
+defaultTargets = ["EISVLPI"]
+
+[[lean_lib]]
+name = "EISVLPI"
+srcDir = "."
