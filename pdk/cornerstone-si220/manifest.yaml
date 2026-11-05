@@ -63,7 +63,7 @@ device_model_inventory:
     - "v2.1.0: si220 circulax ThermalPhaseShifter uses exp(+1j*phi); model defaults aligned with SAX straight_heater_metal."
     - "v2.0.0: si220 Run 50 library cells/models include foundry-derived measured losses; heater geometry was redrawn to Run 50."
 evidence:
-  status: "PROVENANCE_IDENTIFIED; TOOLCHAIN_NOT_YET_REPRODUCED"
+  status: "PROVENANCE_IDENTIFIED; PYTHON_3.12_INSTALL_AND_IMPORT_SMOKE_PASSED"
   inspected:
     - "gdsfactory/cspdk v2.1.0 release metadata"
     - "tag ref resolves to immutable commit SHA above"
@@ -71,8 +71,8 @@ evidence:
     - "PyPI 2.1.0 files and SHA-256 checksums"
     - "si220 model API source"
   not_done:
-    - "No package installed in a clean EIS environment."
-    - "No dependency resolver/lockfile generated for EIS."
+    - "Clean GitHub Actions runner installed PyPI cspdk==2.1.0 successfully under Python 3.12.16."
+    - "Package and cspdk.si220, cspdk.si220.cells, cspdk.si220.models imports succeeded; this was a smoke test, not a frozen consumer lockfile."
     - "No PDK activation, component generation, model evaluation, DRC, or foundry submission checker executed."
     - "No legal opinion or foundry written confirmation obtained."
-  decision: "PIN SOURCE IDENTITY FOR EVALUATION; BLOCK REDISTRIBUTION AND FOUNDRY SUBMISSION PENDING RIGHTS/ACCESS CONFIRMATION AND TOOLCHAIN SMOKE TEST."
+  decision: "SOURCE IDENTITY AND PYTHON PACKAGE SMOKE TEST PASS FOR INTERNAL EVALUATION; FREEZE A CONSUMER LOCK AND RUN COMPONENT/MODEL/DRC TESTS NEXT. BLOCK REDISTRIBUTION AND FOUNDRY SUBMISSION PENDING RIGHTS/ACCESS CONFIRMATION."
