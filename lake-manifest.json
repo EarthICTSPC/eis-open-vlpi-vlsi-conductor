@@ -111,7 +111,7 @@
       "configFile": "lakefile.toml"
     }
   ],
-  "name": "eis-kka",
+  "name": "eisKka",
   "lakeDir": ".lake",
   "fixedToolchain": true
 }
