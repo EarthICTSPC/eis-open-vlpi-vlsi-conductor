@@ -1,0 +1,143 @@
+schema_version: "1.0"
+workstream: "EIS-KKA-64-001"
+status: "discovery-baseline; not a foundry selection"
+updated: "2026-11-05"
+
+evidence_states:
+  PUBLIC_DOCUMENTED: "Claim appears in a public vendor or project source; independently verify exact revision."
+  PUBLIC_PDK: "Publicly downloadable PDK/code; does not imply fabrication rights."
+  CATALOG_LISTED: "Listed in a third-party design-kit catalog; does not prove EIS entitlement or direct foundry support."
+  NDA_CONFIRMATION_REQUIRED: "Requires written GF confirmation under EIS's executed NDA."
+  UNKNOWN: "Not established from public information reviewed."
+
+platforms:
+  - id: gf_45spclo
+    owner: "GlobalFoundries"
+    family: "SOI silicon photonics"
+    role_hypothesis: ["KKA computation candidate", "active photonics", "electronic-photonic integration"]
+    public_sources:
+      - "https://gf.com/technologies/silicon-photonics/"
+      - "https://gf.com/design-support/process-design-kits/"
+    public_status: PUBLIC_DOCUMENTED
+    pdk_access_for_eis: NDA_CONFIRMATION_REQUIRED
+    pdk_release_for_eis: UNKNOWN
+    tool_flow: ["Luceda/IPKISS (public partnership announcement)", "Keysight ADS Photonic Designer (public support announcement; exact kit/access to confirm)"]
+    known_public_capabilities: "GF markets multiple silicon-photonics generations and design enablement. Exact device data, PDK release and process rules are not copied into this public manifest."
+    kka_relevant_unknowns:
+      - "three independently controlled phase sections in one MZI"
+      - "complex amplitude/phase transfer versus wavelength, bias, temperature and optical power"
+      - "thermal interaction and static control power"
+      - "detector and balanced-detection options"
+      - "customer die/reticle allocation and MPW route"
+      - "process-corner/statistical model availability"
+    evidence_notes: "Marketing bandwidth or transceiver capability is not evidence of KKA compute capability."
+
+  - id: amf_soi
+    owner: "Advanced Micro Foundry / GlobalFoundries Singapore"
+    family: "SOI silicon photonics"
+    role_hypothesis: ["KKA computation candidate"]
+    public_sources:
+      - "https://gf.com/wp-content/uploads/2026/02/AMF-Brochure.pdf"
+      - "https://gf.com/wp-content/uploads/2026/02/AMF-MPW-brochure_2026.pdf"
+      - "https://www.lucedaphotonics.com/luceda-design-kits"
+    public_status: PUBLIC_DOCUMENTED
+    pdk_access_for_eis: NDA_CONFIRMATION_REQUIRED
+    pdk_release_for_eis: UNKNOWN
+    catalog_note: "AMFSiP 5.0.luceda3 was listed in the Luceda design-kit catalog in July 2026; this is a catalog listing, not proof of EIS access, foundry qualification scope or entitlement."
+    tool_flow: ["Luceda/IPKISS (catalog listing; access and exact supported release to confirm)"]
+    kka_relevant_unknowns:
+      - "exact SOI process variant and layer stack"
+      - "three-phase-shifter MZI implementation and model"
+      - "phase efficiency, insertion loss, bias and static power"
+      - "thermal matrix and drift"
+      - "Ge detector models and readout options"
+      - "die/reticle allocation, MPW availability and design rules"
+
+  - id: amf_pecvd_sin_on_soi
+    owner: "Advanced Micro Foundry / GlobalFoundries Singapore"
+    family: "PECVD SiN-on-SOI"
+    role_hypothesis: ["optical distribution candidate", "interconnect candidate"]
+    public_sources:
+      - "https://gf.com/wp-content/uploads/2026/02/AMF-Brochure.pdf"
+      - "https://www.lucedaphotonics.com/luceda-design-kits"
+    public_status: PUBLIC_DOCUMENTED
+    pdk_access_for_eis: NDA_CONFIRMATION_REQUIRED
+    pdk_release_for_eis: UNKNOWN
+    kka_relevant_unknowns:
+      - "propagation loss by wavelength and geometry"
+      - "bend/crossing/coupler loss and density"
+      - "SOI-to-SiN transition availability and loss"
+      - "whether this is a separate process option or qualified co-integrated stack"
+
+  - id: amf_lpcvd_sin_on_soi
+    owner: "Advanced Micro Foundry / GlobalFoundries Singapore"
+    family: "LPCVD SiN-on-SOI"
+    role_hypothesis: ["low-loss distribution candidate", "interconnect candidate"]
+    public_sources:
+      - "https://gf.com/wp-content/uploads/2026/02/AMF-Brochure.pdf"
+      - "https://www.lucedaphotonics.com/luceda-design-kits"
+    public_status: PUBLIC_DOCUMENTED
+    pdk_access_for_eis: NDA_CONFIRMATION_REQUIRED
+    pdk_release_for_eis: UNKNOWN
+    kka_relevant_unknowns:
+      - "measured propagation loss and bend loss"
+      - "routing density and crossing loss"
+      - "SOI-to-SiN transition and co-integration qualification"
+      - "whether active devices and heaters are available in the same flow"
+
+  - id: cornerstone
+    owner: "Cornerstone / University of Southampton ecosystem"
+    family: "Open SOI and SiN reference PDKs"
+    role_hypothesis: ["open backend", "geometry/model exploration", "interface conformance"]
+    public_sources:
+      - "https://gdsfactory.github.io/cspdk/"
+      - "https://github.com/gdsfactory/cspdk"
+    public_status: PUBLIC_PDK
+    pdk_release_for_eis: "cspdk 2.1.0 was pinned in the existing repository smoke workflow; verify exact wheel hash/lock there."
+    pdk_access_for_eis: "public package; fabrication and process rights remain separately governed"
+    kka_relevant_unknowns:
+      - "three-heater Tian-equivalent cell"
+      - "measured KKA amplitude-phase transfer"
+      - "foundry process access and MPW terms"
+
+  - id: siepic_ebeam
+    owner: "SiEPIC ecosystem"
+    family: "Open e-beam SOI reference PDK"
+    role_hypothesis: ["open backend", "KLayout and verification experimentation"]
+    public_sources:
+      - "https://github.com/SiEPIC/SiEPIC_EBeam_PDK"
+    public_status: PUBLIC_PDK
+    pdk_access_for_eis: "public source; fabrication access and terms depend on the specific service"
+    kka_relevant_unknowns:
+      - "port/model compatibility with EIS KKA interface"
+      - "thermal phase-control implementation and measured transfer"
+      - "process-specific fabrication access and current run terms"
+
+  - id: vtt
+    owner: "VTT Technical Research Centre of Finland"
+    family: "Open silicon photonics PDK ecosystem"
+    role_hypothesis: ["additional open reference backend"]
+    public_sources:
+      - "https://github.com/VTT-PIC"
+    public_status: PUBLIC_PDK
+    pdk_access_for_eis: "verify repository, license and process-specific terms per selected project"
+    kka_relevant_unknowns:
+      - "current supported PDK and simulator versions"
+      - "KKA-relevant phase-control and detector models"
+
+integration_hypotheses:
+  - id: soi_compute_sin_distribution
+    status: NOT_ESTABLISHED
+    statement: "SOI computation with SiN optical distribution may be attractive, but only if GF confirms a qualified integrated process or a viable package-level interface."
+    required_evidence:
+      - "cross-section/process integration statement"
+      - "transition component and measured loss"
+      - "thermal/electrical interaction assessment"
+      - "PDK support and MPW/fabrication route"
+
+nda_and_ip_rules:
+  - "Do not infer that EIS's GF NDA automatically grants access to AMF PDKs; request written confirmation."
+  - "Do not place restricted PDK files, models, layer maps, credentials or confidential process data in this public repository."
+  - "Public kit catalog entries do not prove EIS entitlement, release compatibility or foundry qualification."
+  - "Record source URL, source date, exact claim and reviewer for every matrix update."
+  - "Open adapter schemas and synthetic reference models must not reproduce confidential foundry IP."

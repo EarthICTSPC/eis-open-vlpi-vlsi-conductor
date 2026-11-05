@@ -1,0 +1,139 @@
+schema_version: "1.0"
+workstream: "EIS-KKA-64-001"
+status: "proposed acceptance gates; thresholds pending G0 workload freeze"
+
+primary_metric:
+  name: energy_per_accepted_attention_block
+  expression: "total_system_energy_joule / accepted_useful_attention_blocks"
+  unit: "J/accepted_block"
+  acceptance: "strictly lower than matched electronic baseline at equal quality and latency constraints"
+  baseline_matching:
+    - same model/checkpoint and attention operation
+    - same Q/K tensors, batch/context and head dimension
+    - same precision or documented equivalent numerical quality
+    - same output-quality acceptance
+    - same throughput and p50/p95 latency target
+    - same system boundary and duty cycle
+
+evidence_states:
+  - SPECIFIED
+  - PDK_ACCESS_CONFIRMED
+  - BACKEND_CONFORMANT
+  - COMPUTATIONALLY_DEMONSTRATED
+  - SIMULATED
+  - PHYSICAL_IMPLEMENTATION_READY
+  - MEASURED
+  - KKA_CONFORMANT
+  - MVP_ENERGY_GO
+
+gates:
+  - id: G0
+    name: SPECIFIED
+    required:
+      - "logical 64×64 semantics and tensor dimensions frozen"
+      - "MVP workload/model and prefill/decode scope selected"
+      - "KKA computation boundary and electronic residual operations enumerated"
+      - "numerical and downstream quality tolerances predeclared"
+      - "throughput and p50/p95 latency targets predeclared"
+      - "electronic baseline and full system energy boundary defined"
+    pass_rule: "all required items versioned and reviewed; TBD values remain blockers"
+
+  - id: G1
+    name: PDK_ACCESS_CONFIRMED
+    required:
+      - "GF confirms in writing whether executed NDA covers AMF PDKs"
+      - "exact GF/AMF PDK names, releases, process options and permitted tool versions recorded"
+      - "support scope, MPW route, die/reticle constraints and redistribution restrictions recorded"
+      - "no confidential material copied to public repository"
+    pass_rule: "written access and version confirmation exists for selected backend"
+
+  - id: G2
+    name: BACKEND_CONFORMANT
+    required:
+      - "technology-independent component schema reviewed"
+      - "ports, units, reference planes and complex transfer conventions tested"
+      - "at least one public backend passes adapter contract tests"
+      - "restricted backend adapter boundary and data-handling policy documented"
+    pass_rule: "reproducible tests pass without conflating process-specific design rules"
+
+  - id: G3
+    name: COMPUTATIONALLY_DEMONSTRATED
+    required:
+      - "deterministic KKA reference and scale-up model pass tests"
+      - "logical-to-physical primitive mapping explicit"
+      - "area, device, detector, control and routing counts generated from model"
+      - "uncertainty and sensitivity reported"
+    pass_rule: "all outputs reproducible; no assumed value presented as measured"
+
+  - id: G4
+    name: SIMULATED
+    required:
+      - "named/versioned circuit, electro-thermal and/or EM simulator actually executed"
+      - "model provenance, input deck, settings, raw outputs and run cost retained"
+      - "corner and variation coverage documented"
+    pass_rule: "simulation evidence supports specified operating envelope; simulation is not measurement"
+
+  - id: G5
+    name: PHYSICAL_IMPLEMENTATION_READY
+    required:
+      - "selected foundry design review complete"
+      - "layout and extracted connectivity reviewed"
+      - "applicable DRC/LVS and optical/electrical budget checks complete"
+      - "test structures and calibration plan accepted"
+      - "costed fabrication and characterization plan approved by EIS"
+    pass_rule: "written foundry feedback and internal EIS authorization recorded"
+
+  - id: G6
+    name: MEASURED_KKA_CONFORMANT
+    required:
+      - "raw instrument data and calibration records retained"
+      - "device identity, process lot, temperature, wavelength and operating conditions recorded"
+      - "uncertainty, repeatability, drift and crosstalk measured"
+      - "complex transfer and interference meet G0 numerical contract"
+      - "downstream attention quality and latency acceptance met"
+    pass_rule: "predeclared thresholds pass on identified fabricated hardware"
+
+  - id: G7
+    name: MVP_ENERGY_GO
+    required:
+      - "wall-plug laser and electrical energy measured"
+      - "control, calibration, detector/conversion, memory/KV-cache, communication, packaging and cooling included"
+      - "idle, active and reconfiguration duty cycle included"
+      - "matched electronic baseline measured or equivalently characterized at same boundary"
+      - "energy per accepted useful block is lower at equal quality and latency"
+    pass_rule: "measured system-level advantage with uncertainty bounds; otherwise NO-GO or further experiment"
+
+required_energy_categories:
+  - laser_wall_plug
+  - optical_coupling_and_distribution
+  - optical_modulation_and_phase_control
+  - thermal_control_and_calibration
+  - photodetection
+  - adc_dac_and_electronic_control
+  - memory_and_kv_cache
+  - interconnect_and_host
+  - packaging_and_cooling
+  - idle_and_reconfiguration
+
+report_metrics:
+  - energy_per_accepted_attention_block_j
+  - energy_per_useful_transformation_j
+  - energy_per_generated_token_j_when_applicable
+  - throughput_blocks_per_second
+  - latency_p50_ms
+  - latency_p95_ms
+  - attention_score_error
+  - downstream_quality_metric
+  - optical_insertion_loss_db
+  - phase_error_rad
+  - detector_snr
+  - calibration_time_s
+  - static_control_power_w
+  - total_wall_plug_power_w
+
+authorization:
+  paid_em_fdtd: "requires explicit EIS approval and costed plan"
+  external_compute: "requires explicit EIS approval and costed plan"
+  mpw_booking: "requires explicit EIS approval and costed plan"
+  fabrication: "requires explicit EIS approval and costed plan"
+  laboratory_measurement: "requires explicit EIS approval and costed plan"
