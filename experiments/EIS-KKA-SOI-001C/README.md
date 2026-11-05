@@ -8,7 +8,9 @@ docs/02-architecture/EIS-KKA-SOI-001-SCALAR-CONTRACT-v1.md:
 - cross_term(a, b) = 2 Re(a · conjugate(b))
 - propagate(E, T) = T · E
 
-The formal authority is the pinned Lean project:
+The formal authority is the pinned Lean project. The formal build and axiom audit passed on PR head `7aa5645809478dd45639ac24415dad198e951531` (Lean 4.35.0, Mathlib commit `56a005855ea17e0b0958f73ec801ae140b0a1679`); 44 declarations were audited under the allowlist `propext`, `Classical.choice`, `Quot.sound`. The Python CI passed 22 tests on that same head. These are PR-branch results pending review/merge.
+
+The project files are:
 - `lean-toolchain`: Lean 4.35.0
 - `lakefile.lean` and `lake-manifest.json`: Mathlib pinned to commit
   `56a005855ea17e0b0958f73ec801ae140b0a1679`
