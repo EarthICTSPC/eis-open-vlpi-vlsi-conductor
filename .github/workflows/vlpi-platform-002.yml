@@ -1,0 +1,31 @@
+name: VLPI-PLATFORM-002
+
+on:
+  push:
+    branches: [main, vlpi-platform-002]
+    paths:
+      - "schema/vlpi-ir/**"
+      - "examples/vlpi-platform-002/**"
+      - "tests/vlpi-platform-002/**"
+      - "docs/architecture/VLPI-PLATFORM-002.md"
+      - "ru/RU-001/**"
+  pull_request:
+    paths:
+      - "schema/vlpi-ir/**"
+      - "examples/vlpi-platform-002/**"
+      - "tests/vlpi-platform-002/**"
+      - "docs/architecture/VLPI-PLATFORM-002.md"
+      - "ru/RU-001/**"
+
+jobs:
+  cold-start:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install pyyaml jsonschema
+      - name: Run VLPI-PLATFORM-002
+        run: python tests/vlpi-platform-002/test_cold_start.py

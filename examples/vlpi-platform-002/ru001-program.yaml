@@ -1,0 +1,75 @@
+vlpiIR:
+  identity:
+    name: "VLPI-IR RU-001 cold-start example"
+    version: "0.1.0"
+    status: "specified"
+    description: "Minimal technology-independent program describing one RU-001 physical field transformation."
+    sourceProgram: "ru001-cold-start"
+  stateSpaces:
+    - id: "H_input"
+      space: "H"
+      representation: "encoded optical fields"
+      domain: "optical"
+      encoding: "two optical input fields mapped to RU-001 in_a and in_b"
+      retainedStateAllowed: false
+    - id: "H_residual"
+      space: "H"
+      representation: "residual optical field"
+      domain: "optical"
+      encoding: "RU-001 out_residual"
+      retainedStateAllowed: false
+  transformations:
+    - id: "T_RU001"
+      ruRef: "ru/RU-001/ru.yaml"
+      contractRef: "ru/RU-001/contract.yaml"
+      inputs: ["H_input"]
+      outputs: ["H_residual"]
+      mapping: "F(a,b) = residual field produced by the configured 2x2 MZI interference transformation."
+      physicalMechanism: "coherent optical interference in RU-001"
+      stateBoundaryRef: "ru/RU-001/contract.yaml#contract.stateBoundary"
+      regenerationRef: "ru/RU-001/contract.yaml#contract.regeneration"
+  graph:
+    entryStates: ["H_input"]
+    executionOrder: ["T_RU001"]
+    exitStates: ["H_residual"]
+    edges: []
+  boundaries:
+    - id: "B_RU001"
+      afterTransformation: "T_RU001"
+      state: "H_residual"
+      contractRef: "ru/RU-001/contract.yaml"
+      actions: ["accept", "measure", "regenerate", "route", "schedule"]
+      trigger: "declared state-boundary measurement/verification event"
+  requirements:
+    preserveStateWhen:
+      nextTransformationAccepts: "H_optical"
+    resources:
+      opticalState: true
+    timing:
+      status: "target-only"
+    topology:
+      status: "reference-only"
+    thermal:
+      status: "target-only"
+  technology:
+    designContextRef: "ru/RU-001/design-context.yaml"
+    pdkIdentityRef: "LIGENTEC_AN800_TFLN"
+    proprietaryContentAllowed: false
+  evidence:
+    contractRefs: ["ru/RU-001/contract.yaml"]
+    evidenceRefs: ["ru/RU-001/evidence.yaml"]
+    minimumStatus: "specified"
+    physicalValidationRequired: true
+    prohibitedPromotions:
+      - "fabricated"
+      - "measured"
+      - "PVR PASS"
+      - "PDR/PCT/PTV PASS"
+      - "BIST PASS"
+      - "foundry accepted"
+  provenance:
+    createdBy: "Earth ICT, SPC"
+    createdAt: "2026-10-05"
+    repository: "EarthICTSPC/eis-open-vlpi-pdk"
+    sourceCommit: "VLPI-PLATFORM-002"
+    generatedBy: "Earth ICT, SPC"

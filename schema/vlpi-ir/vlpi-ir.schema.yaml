@@ -1,0 +1,179 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://github.com/EarthICTSPC/eis-open-vlpi-pdk/schema/vlpi-ir/vlpi-ir.schema.yaml"
+title: "EIS-VLPI Intermediate Representation Schema"
+description: >-
+  Machine-readable intermediate representation for technology-independent
+  physical-computation programs. VLPI-IR connects computational intent to
+  contract-governed Replicable Units without embedding proprietary PDK content.
+type: object
+additionalProperties: false
+required: [vlpiIR]
+properties:
+  vlpiIR:
+    type: object
+    additionalProperties: false
+    required: [identity, stateSpaces, transformations, graph, technology, evidence, provenance]
+    properties:
+      identity:
+        type: object
+        additionalProperties: false
+        required: [name, version, status, description]
+        properties:
+          name: {type: string}
+          version: {type: string}
+          status:
+            type: string
+            enum: [draft, specified, formally-verified, computationally-demonstrated, experimentally-demonstrated, measured, proposed-hypothesis, derived-metric]
+          description: {type: string}
+          sourceProgram: {type: string}
+      stateSpaces:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          additionalProperties: false
+          required: [id, space, representation, domain]
+          properties:
+            id: {type: string}
+            space: {type: string}
+            representation: {type: string}
+            domain:
+              type: string
+              enum: [optical, electrical, electronic, hybrid, physical, digital]
+            encoding: {type: string}
+            retainedStateAllowed: {type: boolean}
+            parameters:
+              type: object
+              additionalProperties: true
+      transformations:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          additionalProperties: false
+          required: [id, ruRef, contractRef, inputs, outputs, mapping]
+          properties:
+            id: {type: string}
+            ruRef: {type: string}
+            contractRef: {type: string}
+            inputs:
+              type: array
+              minItems: 1
+              items: {type: string}
+            outputs:
+              type: array
+              minItems: 1
+              items: {type: string}
+            mapping: {type: string}
+            physicalMechanism: {type: string}
+            stateBoundaryRef: {type: string}
+            regenerationRef: {type: string}
+            requirements:
+              type: object
+              additionalProperties: true
+      graph:
+        type: object
+        additionalProperties: false
+        required: [entryStates, executionOrder, exitStates]
+        properties:
+          entryStates:
+            type: array
+            minItems: 1
+            items: {type: string}
+          executionOrder:
+            type: array
+            minItems: 1
+            items: {type: string}
+          exitStates:
+            type: array
+            minItems: 1
+            items: {type: string}
+          edges:
+            type: array
+            items:
+              type: object
+              additionalProperties: false
+              required: [from, to]
+              properties:
+                from: {type: string}
+                to: {type: string}
+                condition: {type: string}
+      boundaries:
+        type: array
+        items:
+          type: object
+          additionalProperties: false
+          required: [id, afterTransformation, state, contractRef]
+          properties:
+            id: {type: string}
+            afterTransformation: {type: string}
+            state: {type: string}
+            contractRef: {type: string}
+            actions:
+              type: array
+              items:
+                type: string
+                enum: [accept, measure, regenerate, checkpoint, route, schedule, convert]
+            trigger: {type: string}
+      requirements:
+        type: object
+        additionalProperties: false
+        properties:
+          preserveStateWhen:
+            type: object
+            additionalProperties: false
+            properties:
+              nextTransformationAccepts: {type: string}
+          resources:
+            type: object
+            additionalProperties: true
+          timing:
+            type: object
+            additionalProperties: true
+          topology:
+            type: object
+            additionalProperties: true
+          thermal:
+            type: object
+            additionalProperties: true
+      technology:
+        type: object
+        additionalProperties: false
+        required: [designContextRef]
+        properties:
+          designContextRef: {type: string}
+          pdkIdentityRef: {type: string}
+          proprietaryContentAllowed:
+            type: boolean
+            const: false
+      evidence:
+        type: object
+        additionalProperties: false
+        required: [contractRefs, evidenceRefs, minimumStatus]
+        properties:
+          contractRefs:
+            type: array
+            minItems: 1
+            items: {type: string}
+          evidenceRefs:
+            type: array
+            items: {type: string}
+          minimumStatus:
+            type: string
+            enum: [draft, specified, formally-verified, computationally-demonstrated, experimentally-demonstrated, measured, proposed-hypothesis, derived-metric]
+          physicalValidationRequired:
+            type: boolean
+          prohibitedPromotions:
+            type: array
+            items: {type: string}
+      provenance:
+        type: object
+        additionalProperties: false
+        required: [createdBy, createdAt, repository]
+        properties:
+          createdBy: {type: string}
+          createdAt: {type: string}
+          modifiedAt: {type: string}
+          repository: {type: string}
+          sourceCommit: {type: string}
+          generatedBy: {type: string}
