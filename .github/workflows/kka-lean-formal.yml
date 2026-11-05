@@ -24,13 +24,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
+      - name: Install pinned Lean toolchain
+        uses: leanprover/lean-action@v1
         with:
-          use-mathlib-cache: true
-          build-args: "--wfail"
-      - name: Confirm no sorry tokens in formal source
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: false
+      - name: Resolve pinned Lake dependencies
+        run: lake update
+      - name: Download Mathlib cache
+        run: lake exe cache get
+      - name: Build formal library
+        run: lake build --wfail
+      - name: Confirm no sorry or custom axiom declarations
+        shell: bash
         run: |
-          if grep -R -n -E '\\bsorry\\b|\\baxiom\\b' EISKKA; then
-            echo "Unreviewed sorry/axiom token found in formal source"
+          if grep -R -n -E '\bsorry\b|^[[:space:]]*axiom[[:space:]]' EISKKA; then
+            echo "Unreviewed sorry/custom axiom declaration found in formal source"
             exit 1
           fi
