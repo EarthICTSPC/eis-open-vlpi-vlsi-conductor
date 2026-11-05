@@ -21,7 +21,7 @@ ATOL = VECTORS["tolerance"]["absolute"]
 RTOL = VECTORS["tolerance"]["relative"]
 LEAN_VECTOR_SOURCE = HERE.parents[1] / "EISKKA" / "ConformanceVectors.lean"
 LEAN_VECTOR_TEXT = LEAN_VECTOR_SOURCE.read_text(encoding="utf-8")
-LEAN_THEOREMS = set(re.findall(r"\\btheorem\\s+([A-Za-z0-9_]+)", LEAN_VECTOR_TEXT))
+LEAN_THEOREMS = set(re.findall(r"\btheorem\s+([A-Za-z0-9_]+)", LEAN_VECTOR_TEXT))
 
 
 def test_each_json_vector_has_a_matching_lean_theorem_anchor():
