@@ -18,7 +18,6 @@ namespace EISKKA
 structure Field where
   re : ℝ
   im : ℝ
-  deriving DecidableEq, Repr
 
 namespace Field
 
