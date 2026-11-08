@@ -1,6 +1,6 @@
 # EIS-BORN-KKA-001 — Born Attention and KKA Computational Contract
 
-This directory contains the executable scalar reference and parameterized energy ledger for the bounded investigation. The normative scope, equations, work packages, gates and claim boundaries are in [the experiment charter](../../../docs/experiments/EIS-BORN-KKA-001.md).
+This directory contains the executable scalar reference and parameterized energy ledger for the bounded investigation. The normative scope, equations, work packages, gates and claim boundaries are in [the experiment charter](../../docs/experiments/EIS-BORN-KKA-001.md).
 
 ## Files
 
