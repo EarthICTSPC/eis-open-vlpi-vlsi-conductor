@@ -1,0 +1,137 @@
+{
+  "schema_version": "eis.ptc.topology.v0.1",
+  "design_id": "EIS-PTC-10x1-RECONSTRUCTION-001",
+  "source": {
+    "citation": "Tian et al., PhotoniX 6, 45 (2025)",
+    "doi": "10.1186/s43074-025-00182-7",
+    "supplement_sections": [
+      "SI-1 Fig. S1",
+      "SI-1 Eqs. S2-S4",
+      "SI-3",
+      "SI-4"
+    ],
+    "source_artifact": "published article and 38-page Supporting Information"
+  },
+  "target": {
+    "kind": "functional_reconstruction",
+    "scale": "10x1",
+    "mask_identical_to_original": false,
+    "output_channel_count": 10
+  },
+  "mzi_inventory": {
+    "input_side_A": {
+      "count": 10,
+      "index_range": [
+        1,
+        10
+      ],
+      "role": "one independently programmed input field per output channel"
+    },
+    "shared_weight_side_B": {
+      "count": 1,
+      "role": "one programmed weight field broadcast to all output channels"
+    },
+    "total_count": 11,
+    "phase_shifters_per_mzi": {
+      "external": 1,
+      "internal": 2,
+      "total": 3
+    },
+    "total_phase_shifters": 33
+  },
+  "optical_topology": {
+    "laser_input_count": 1,
+    "initial_split": {
+      "outputs": [
+        "A_branch",
+        "B_branch"
+      ],
+      "component": "MMI",
+      "split_ratio": "not numerically specified in the public source",
+      "geometry_status": "not published in machine-readable form"
+    },
+    "A_branch": {
+      "fanout_outputs": 10,
+      "fanout_component": "1xN splitter tree",
+      "mzi_instances": "A1..A10"
+    },
+    "B_branch": {
+      "mzi_instances": [
+        "B_shared"
+      ],
+      "fanout_outputs": 10,
+      "fanout_component": "broadcast splitter tree"
+    },
+    "per_output_channel": {
+      "combine_inputs": [
+        "Ai_output",
+        "B_shared_fanout"
+      ],
+      "combiner": "MMI",
+      "balanced_detection": {
+        "method_in_published_passive_prototype": "paired grating-coupler outputs measured by two optical power meters",
+        "on_chip_balanced_photodiode": false,
+        "detector_pair_count": 10,
+        "grating_coupler_output_count": 20
+      }
+    }
+  },
+  "mzi_internal_optics": {
+    "input_coupler": "1x2 MMI",
+    "arm_phase_controls": [
+      "internalA",
+      "internalB"
+    ],
+    "output_coupler": "2x2 MMI",
+    "external_phase_control_location": "input path before the MZI splitter",
+    "source_geometry": "not fully specified in the public article/SI"
+  },
+  "published_process_facts": {
+    "platform": "SOI",
+    "original_fab": "CUMEC CSiP-180AL",
+    "waveguide_cross_section_nm": [
+      450,
+      220
+    ],
+    "heater": {
+      "material": "TiN",
+      "length_um": 200,
+      "width_um": 2,
+      "thickness_nm": 120,
+      "sheet_resistance_ohm_per_square": 12,
+      "measured_resistance_description": "around 1 kOhm",
+      "typical_phase_shift_efficiency_mW": 20
+    },
+    "electrical_trace_width_um": 15,
+    "operating_temperature_celsius": 25,
+    "temperature_stability_celsius": 0.2
+  },
+  "technology_mapping": {
+    "eis_backend": "unselected",
+    "candidate_reference_backend": "Cornerstone cspdk si220, internal evaluation only",
+    "foundry_rights_confirmed": false,
+    "layer_map_pinned": false,
+    "three_heater_mzi_macro_verified": false,
+    "integrated_bpd_model_verified": false
+  },
+  "evidence": {
+    "source_extracted": true,
+    "ideal_transfer_formalization": "branch_ci_pending",
+    "topology_schema_validation": "pending",
+    "pdk_mapping": "blocked",
+    "layout_generation": "not_started",
+    "drc": "not_run",
+    "lvs": "not_run",
+    "oasis": "not_generated",
+    "simulation": "not_run",
+    "fabrication": "not_performed",
+    "measurement": "not_performed"
+  },
+  "non_claims": [
+    "This topology file is not a mask layout.",
+    "The ideal Lean equations do not characterize a physical device.",
+    "A generic SOI MZI is not automatically Tian-equivalent.",
+    "The original CUMEC process is not selected or authorized for EIS.",
+    "No DRC, LVS, OASIS export, fabrication, measurement, or energy advantage is claimed."
+  ]
+}
