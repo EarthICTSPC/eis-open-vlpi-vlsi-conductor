@@ -111,7 +111,7 @@ def idealParameters : DeviceModelParameters :=
 theorem correctedControls_ideal (c : MZIControls) :
     correctedControls c idealParameters = c := by
   cases c
-  rfl
+  simp [correctedControls, idealParameters]
 
 theorem modeledFieldAmplitude_ideal (x : ℝ) (c : MZIControls) :
     modeledFieldAmplitude x c idealParameters = mziFieldAmplitude x c := by
