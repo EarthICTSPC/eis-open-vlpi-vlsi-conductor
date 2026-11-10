@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://earthictspc.com/schema/riscv-vlpi/command-envelope.schema.json",
+  "title": "EIS RISC-V VLPI Command Envelope",
+  "description": "Transport-neutral command descriptor for EIS-RISCV-VLPI-001 v0.1. Physical transport mappings must preserve these semantics.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "tile_id",
+    "tile_contract_id",
+    "transaction_id",
+    "sequence_number",
+    "opcode",
+    "payload",
+    "buffers",
+    "calibration_epoch",
+    "provenance_ref"
+  ],
+  "properties": {
+    "protocol_version": {
+      "type": "string",
+      "pattern": "^0\\.1(\\.\\d+)?$"
+    },
+    "tile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tile_contract_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "transaction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence_number": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "opcode": {
+      "enum": [
+        "DISCOVER_CAPABILITIES",
+        "LOAD_INPUT",
+        "BIND_BUFFERS",
+        "EXECUTE",
+        "READ_RESULT",
+        "CALIBRATE",
+        "READ_TELEMETRY",
+        "CANCEL",
+        "QUIESCE",
+        "RESUME",
+        "RESET"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "buffers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "buffer_ref",
+          "length_bytes",
+          "alignment_bytes",
+          "access",
+          "memory_domain",
+          "ownership"
+        ],
+        "properties": {
+          "buffer_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "length_bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "alignment_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "access": {
+            "enum": [
+              "READ",
+              "WRITE",
+              "READ_WRITE"
+            ]
+          },
+          "memory_domain": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ownership": {
+            "enum": [
+              "PRODUCER",
+              "TILE",
+              "CONSUMER"
+            ]
+          }
+        }
+      }
+    },
+    "deadline": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "calibration_epoch": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result_flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "RESULT_DATA",
+          "TIMING",
+          "TELEMETRY",
+          "ENERGY_LEDGER",
+          "PROVENANCE"
+        ]
+      }
+    },
+    "provenance_ref": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
