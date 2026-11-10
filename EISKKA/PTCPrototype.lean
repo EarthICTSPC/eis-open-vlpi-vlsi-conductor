@@ -19,6 +19,8 @@ remain separate evidence obligations.
 
 namespace EISKKA.PTC
 
+open EISKKA
+
 /-- Three independently controlled phase shifters in one Tian-style MZI. -/
 structure MZIControls where
   external : ℝ
