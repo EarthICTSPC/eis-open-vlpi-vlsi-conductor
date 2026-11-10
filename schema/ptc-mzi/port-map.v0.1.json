@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "cell_id": "EIS-PTC-MZI-001",
+  "optical_ports": [
+    {"name": "opt_in", "role": "input", "direction": "input", "wavelength_nm": 1550.0, "mode": "TE0", "polarization": "TE", "cross_section_ref": null, "reference_plane": "cell_boundary"},
+    {"name": "opt_out_bar", "role": "output_bar", "direction": "output", "wavelength_nm": 1550.0, "mode": "TE0", "polarization": "TE", "cross_section_ref": null, "reference_plane": "cell_boundary"},
+    {"name": "opt_out_cross", "role": "output_cross", "direction": "output", "wavelength_nm": 1550.0, "mode": "TE0", "polarization": "TE", "cross_section_ref": null, "reference_plane": "cell_boundary"}
+  ],
+  "electrical_ports": [
+    {"name": "h_ext_p", "role": "heater_external_positive", "direction": "input", "unit": "V", "current_limit_a": null, "return_topology": "independent_pair"},
+    {"name": "h_ext_n", "role": "heater_external_negative", "direction": "input", "unit": "V", "current_limit_a": null, "return_topology": "independent_pair"},
+    {"name": "h_a_p", "role": "heater_internal_a_positive", "direction": "input", "unit": "V", "current_limit_a": null, "return_topology": "independent_pair"},
+    {"name": "h_a_n", "role": "heater_internal_a_negative", "direction": "input", "unit": "V", "current_limit_a": null, "return_topology": "independent_pair"},
+    {"name": "h_b_p", "role": "heater_internal_b_positive", "direction": "input", "unit": "V", "current_limit_a": null, "return_topology": "independent_pair"},
+    {"name": "h_b_n", "role": "heater_internal_b_negative", "direction": "input", "unit": "V", "current_limit_a": null, "return_topology": "independent_pair"}
+  ],
+  "constraints": {
+    "heater_circuit_count": 3,
+    "detector_included": false,
+    "geometry_backend": "NOT_SELECTED",
+    "layer_map": null
+  }
+}
