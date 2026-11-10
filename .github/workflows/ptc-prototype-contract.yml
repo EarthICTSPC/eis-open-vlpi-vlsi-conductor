@@ -1,0 +1,26 @@
+name: PTC prototype topology conformance
+
+on:
+  pull_request:
+    paths:
+      - "architecture/ptc10x1/**"
+      - "experiments/EIS-PTC-10x1/**"
+      - ".github/workflows/ptc-prototype-contract.yml"
+  push:
+    branches: ["eis-ptc-10x1-reconstruction-001"]
+    paths:
+      - "architecture/ptc10x1/**"
+      - "experiments/EIS-PTC-10x1/**"
+      - ".github/workflows/ptc-prototype-contract.yml"
+
+jobs:
+  topology-conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check pytest
+      - name: Validate source-derived 10x1 topology invariants
+        run: python -m pytest -q experiments/EIS-PTC-10x1/test_topology.py
