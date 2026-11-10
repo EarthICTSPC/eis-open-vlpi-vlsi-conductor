@@ -1,6 +1,15 @@
 name: KKA Lean formal specification
 
 on:
+  push:
+    branches: ["eis-ptc-10x1-reconstruction-001"]
+    paths:
+      - "lean-toolchain"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "EISKKA.lean"
+      - "EISKKA/**"
+      - ".github/workflows/kka-lean-formal.yml"
   pull_request:
     paths:
       - "lean-toolchain"
