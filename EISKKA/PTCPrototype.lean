@@ -1,5 +1,6 @@
 module
 
+import Mathlib
 import EISKKA.Scalar
 
 /-!
@@ -56,22 +57,22 @@ noncomputable def bpdOutput
           - (b.internalA + b.internalB) / 2)
 
 /-- The published 10×1 prototype has ten A-side MZIs. -/
-def outputChannelCount : ℕ := 10
+def outputChannelCount : Nat := 10
 
 /-- One shared B-side MZI is broadcast to all ten output channels. -/
-def sharedWeightMziCount : ℕ := 1
+def sharedWeightMziCount : Nat := 1
 
 /-- One A-side MZI is associated with each output channel. -/
-def inputMziCount : ℕ := outputChannelCount
+def inputMziCount : Nat := outputChannelCount
 
 /-- Total MZI count in the published prototype. -/
-def totalMziCount : ℕ := inputMziCount + sharedWeightMziCount
+def totalMziCount : Nat := inputMziCount + sharedWeightMziCount
 
 /-- Each MZI has one external and two internal phase shifters. -/
-def phaseShiftersPerMzi : ℕ := 3
+def phaseShiftersPerMzi : Nat := 3
 
 /-- Total thermal phase-shifter count. -/
-def totalPhaseShifterCount : ℕ := totalMziCount * phaseShiftersPerMzi
+def totalPhaseShifterCount : Nat := totalMziCount * phaseShiftersPerMzi
 
 theorem output_channel_count_is_ten : outputChannelCount = 10 := by decide
 
