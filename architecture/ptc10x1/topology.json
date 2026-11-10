@@ -47,7 +47,7 @@
         "B_branch"
       ],
       "component": "MMI",
-      "split_ratio": "50:50",
+      "split_ratio": "not numerically specified in the public source",
       "geometry_status": "not published in machine-readable form"
     },
     "A_branch": {
