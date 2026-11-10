@@ -84,4 +84,50 @@ theorem phase_shifters_per_mzi_is_three : phaseShiftersPerMzi = 3 := by decide
 theorem total_phase_shifter_count_is_thirty_three :
     totalPhaseShifterCount = 33 := by decide
 
+
+/-- Zero incident amplitude produces a zero ideal MZI output amplitude. -/
+theorem mziFieldAmplitude_zero (c : MZIControls) :
+    mziFieldAmplitude 0 c = 0 := by
+  simp [mziFieldAmplitude]
+
+/-- The ideal MZI field-amplitude transfer is linear in incident amplitude. -/
+theorem mziFieldAmplitude_scale (r inputAmplitude : ℝ) (c : MZIControls) :
+    mziFieldAmplitude (r * inputAmplitude) c =
+      r * mziFieldAmplitude inputAmplitude c := by
+  simp [mziFieldAmplitude]
+  ring
+
+/-- Adding a phase increment to the external shifter adds that increment to output phase. -/
+theorem mziFieldPhase_external_shift (c : MZIControls) (delta : ℝ) :
+    mziFieldPhase { c with external := c.external + delta } =
+      mziFieldPhase c + delta := by
+  simp [mziFieldPhase]
+  ring
+
+/-- Balanced output is zero when the incident A-side field is zero. -/
+theorem bpdOutput_zero_A (inputB : ℝ) (a b : MZIControls) :
+    bpdOutput 0 inputB a b = 0 := by
+  simp [bpdOutput, mziFieldAmplitude]
+
+/-- Balanced output is zero when the incident B-side field is zero. -/
+theorem bpdOutput_zero_B (inputA : ℝ) (a b : MZIControls) :
+    bpdOutput inputA 0 a b = 0 := by
+  simp [bpdOutput, mziFieldAmplitude]
+
+/-- Swapping the two coherent operands reverses the signed BPD output. -/
+theorem bpdOutput_swap_neg (inputA inputB : ℝ) (a b : MZIControls) :
+    bpdOutput inputA inputB a b =
+      - bpdOutput inputB inputA b a := by
+  simp only [bpdOutput]
+  have hdelta :
+      b.external - a.external
+        + (b.internalA + b.internalB) / 2
+        - (a.internalA + a.internalB) / 2 =
+      -(a.external - b.external
+        + (a.internalA + a.internalB) / 2
+        - (b.internalA + b.internalB) / 2) := by
+    ring
+  rw [hdelta, Real.sin_neg]
+  ring
+
 end EISKKA.PTC
