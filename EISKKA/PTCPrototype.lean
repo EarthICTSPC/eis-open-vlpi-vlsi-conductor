@@ -23,13 +23,12 @@ structure MZIControls where
   external : ℝ
   internalA : ℝ
   internalB : ℝ
-  deriving Repr
 
 /--
 Signed field-amplitude transfer for the MZI, from SI-1 Eq. (S2)/(S3).
 The signed cosine is retained; it is not replaced by an absolute value.
 -/
-def mziFieldAmplitude (inputAmplitude : ℝ) (c : MZIControls) : ℝ :=
+noncomputable def mziFieldAmplitude (inputAmplitude : ℝ) (c : MZIControls) : ℝ :=
   inputAmplitude / Real.sqrt 2 *
     Real.cos ((c.internalB - c.internalA) / 2 + Real.pi / 4)
 
@@ -46,7 +45,7 @@ Ideal balanced-detection observable for the paired input/weight MZIs,
 transcribed from SI-1 Eq. (S4). Inputs are the real incident field amplitudes
 before their respective MZI transfer functions.
 -/
-def bpdOutput
+noncomputable def bpdOutput
     (inputAmplitudeA inputAmplitudeB : ℝ)
     (a b : MZIControls) : ℝ :=
   2 * mziFieldAmplitude inputAmplitudeA a *
