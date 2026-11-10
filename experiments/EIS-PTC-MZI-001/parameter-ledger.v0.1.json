@@ -1,0 +1,29 @@
+{
+  "ledger_id": "EIS-PTC-MZI-001-PARAMETERS",
+  "version": "0.1.0",
+  "evidence_policy": "Every numerical device value is either source-reported, simulated, fitted, measured, assumed, or unknown. Synthetic regression fixtures are never device evidence.",
+  "parameters": [
+    {"name":"wavelength_m","value":null,"unit":"m","provenance":"EIS reference wavelength is a nominal interface value only; process-specific operating band not selected","evidence_class":"ASSUMED","uncertainty":"not characterized","status":"candidate reference"},
+    {"name":"effective_index","value":null,"unit":"1","provenance":"requires process- and wavelength-specific mode solution or measurement","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"propagation_loss_db_per_m","value":null,"unit":"dB/m","provenance":"requires waveguide characterization or validated compact model","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"interaction_length_m","value":null,"unit":"m","provenance":"logical cell geometry not yet selected","evidence_class":"UNKNOWN","uncertainty":"not defined","status":"geometry approval blocked"},
+    {"name":"coupler1_split_ratio","value":null,"unit":"1","provenance":"requires process-specific coupler model or measurement","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"coupler2_split_ratio","value":null,"unit":"1","provenance":"requires process-specific coupler model or measurement","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"coupler_excess_loss_db","value":null,"unit":"dB","provenance":"requires process-specific coupler model or measurement","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"heater_resistance_ohm","value":null,"unit":"ohm","provenance":"requires selected heater geometry/material and electrical characterization","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"heater_tempco_per_K","value":null,"unit":"1/K","provenance":"requires heater resistance versus temperature measurement or qualified model","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"phase_efficiency_rad_per_W","value":null,"unit":"rad/W","provenance":"requires phase-versus-electrical-power calibration for each heater","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"thermal_coupling_3x3","value":null,"unit":"dimensionless model coefficients","provenance":"requires multi-heater thermal characterization or validated thermal simulation","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"thermal_time_constant_s","value":null,"unit":"s","provenance":"requires dynamic heater step-response characterization","evidence_class":"UNKNOWN","uncertainty":"not characterized","status":"not run"},
+    {"name":"ideal_mzi_amplitude_transfer","value":"input/sqrt(2) * cos((internalB-internalA)/2 + pi/4)","unit":"field amplitude","provenance":"Tian et al. (2025), SI-1 Eq. (S2)/(S3), transcribed in EISKKA/PTCPrototype.lean","evidence_class":"SOURCE_REPORTED","uncertainty":"ideal analytical equation; physical deviations not included","status":"formal transcription pending CI"},
+    {"name":"ideal_mzi_output_phase","value":"external + (internalA+internalB)/2 + pi/4","unit":"rad","provenance":"Tian et al. (2025), SI-1 Eq. (S2)/(S3), transcribed in EISKKA/PTCPrototype.lean","evidence_class":"SOURCE_REPORTED","uncertainty":"ideal analytical equation; physical deviations not included","status":"formal transcription pending CI"},
+    {"name":"synthetic_regression_parameters","value":"defined in test_mzi_model.py","unit":"mixed","provenance":"generated solely for deterministic software tests","evidence_class":"SYNTHETIC_TEST_FIXTURE","uncertainty":"not physical evidence","status":"test-only"}
+  ],
+  "unresolved_model_gaps": [
+    "Complete two-output scattering/transfer matrix and proof of its normalization/energy relation under explicit coupler convention.",
+    "Measured or validated phase-versus-voltage/power response for each of the three heaters.",
+    "Measured 3x3 thermal coupling matrix and dynamic time constants.",
+    "Process-specific waveguide/coupler geometry and compact models.",
+    "Technology adapter, mask geometry, DRC/LVS and physical port extraction."
+  ]
+}
