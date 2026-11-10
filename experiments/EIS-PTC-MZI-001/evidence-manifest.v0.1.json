@@ -37,12 +37,14 @@
       "outcome": "not-run",
       "summary": "Implementation package drafted; CI and local clean-environment execution are required before any pass claim.",
       "limitations": [
+        "Two-output scattering matrix and normalization/energy theorem remain an explicit model gap in v0.1.",
         "No physical geometry, foundry layer map, DRC, LVS, EM/FDTD, fabrication, or measurement.",
         "No device-specific heater resistance, phase efficiency, thermal matrix, or coupler characterization is asserted.",
         "The non-ideal model is a replaceable engineering abstraction, not a validated compact model."
       ]
     },
     "artifacts": [
+      {"path": "experiments/EIS-PTC-MZI-001/parameter-ledger.v0.1.json", "type": "parameter-evidence-ledger"},
       {"path": "EISKKA/PTCMZI.lean", "type": "formal-specification"},
       {"path": "experiments/EIS-PTC-MZI-001/mzi_model.py", "type": "executable-model"},
       {"path": "experiments/EIS-PTC-MZI-001/test_mzi_model.py", "type": "tests"},
