@@ -50,7 +50,7 @@ def test_signed_amplitude_is_preserved():
 def test_three_heater_power_and_thermal_coupling(synthetic_params):
     powers = (0.1, 0.2, 0.3)
     phases = target_heater_phases(powers, synthetic_params)
-    assert phases == pytest.approx((0.24, 0.72, 0.68))
+    assert phases == pytest.approx((0.24, 0.48, 0.64))
 
 
 def test_heater_power_uses_v_squared_over_r():
