@@ -126,6 +126,8 @@ def advance_thermal_state(
 ) -> ThermalState:
     if dt_s < 0:
         raise ValueError("dt_s must be non-negative")
+    if dt_s == 0:
+        return state
     if len(target_phase_rad) != 3:
         raise ValueError("exactly three target phases are required")
     updated = tuple(
