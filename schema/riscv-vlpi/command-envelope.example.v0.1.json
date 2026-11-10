@@ -1,6 +1,6 @@
 {
   "protocol_version": "0.1.0",
-  "tile_id": "k ka-tile-0001",
+  "tile_id": "kka-tile-0001",
   "tile_contract_id": "EIS-PTC-MZI-001@0.1.0",
   "transaction_id": "txn-example-000001",
   "sequence_number": 1,
