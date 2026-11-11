@@ -36,12 +36,12 @@ noncomputable def mziFieldAmplitude (inputAmplitude : ℝ) (c : MZIControls) : �
     Real.cos ((c.internalB - c.internalA) / 2 + Real.pi / 4)
 
 /-- Output phase of the MZI, from SI-1 Eq. (S2)/(S3). -/
-def mziFieldPhase (c : MZIControls) : ℝ :=
+noncomputable def mziFieldPhase (c : MZIControls) : ℝ :=
   c.external + (c.internalA + c.internalB) / 2 + Real.pi / 4
 
 /-- Complex-envelope representation of the ideal MZI output field. -/
-noncomputable def mziField (inputAmplitude : ℝ) (c : MZIControls) : Field :=
-  Field.polar (mziFieldAmplitude inputAmplitude c) (mziFieldPhase c)
+noncomputable def mziField (inputAmplitude : ℝ) (c : MZIControls) : EISKKA.Field :=
+  EISKKA.Field.polar (mziFieldAmplitude inputAmplitude c) (mziFieldPhase c)
 
 /--
 Ideal balanced-detection observable for the paired input/weight MZIs,
