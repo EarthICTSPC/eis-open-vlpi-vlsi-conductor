@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/schema/ptc-mzi/port-map.schema.json",
+  "title": "EIS PTC MZI Typed Port Map",
+  "type": "object",
+  "required": ["schema_version", "cell_id", "optical_ports", "electrical_ports", "constraints"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "0.1.0"},
+    "cell_id": {"type": "string", "const": "EIS-PTC-MZI-001"},
+    "optical_ports": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["name", "role", "direction", "wavelength_nm", "mode", "reference_plane"],
+        "properties": {
+          "name": {"type": "string"},
+          "role": {"enum": ["input", "output_bar", "output_cross", "monitor"]},
+          "direction": {"enum": ["input", "output", "inout"]},
+          "wavelength_nm": {"type": "number", "exclusiveMinimum": 0},
+          "mode": {"type": "string"},
+          "polarization": {"type": ["string", "null"]},
+          "cross_section_ref": {"type": ["string", "null"]},
+          "reference_plane": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "electrical_ports": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["name", "role", "direction", "unit"],
+        "properties": {
+          "name": {"type": "string"},
+          "role": {"enum": ["heater_external_positive", "heater_external_negative", "heater_internal_a_positive", "heater_internal_a_negative", "heater_internal_b_positive", "heater_internal_b_negative", "shared_return"]},
+          "direction": {"enum": ["input", "output", "inout"]},
+          "unit": {"type": "string", "const": "V"},
+          "current_limit_a": {"type": ["number", "null"], "minimum": 0},
+          "return_topology": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "required": ["heater_circuit_count", "detector_included", "geometry_backend"],
+      "properties": {
+        "heater_circuit_count": {"type": "integer", "const": 3},
+        "detector_included": {"type": "boolean", "const": false},
+        "geometry_backend": {"type": "string", "const": "NOT_SELECTED"},
+        "layer_map": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

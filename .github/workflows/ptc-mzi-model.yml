@@ -1,0 +1,50 @@
+name: EIS three-heater MZI model contract
+
+on:
+  pull_request:
+    paths:
+      - "EISKKA/PTCMZI.lean"
+      - "EISKKA/PTCPrototype.lean"
+      - "experiments/EIS-PTC-MZI-001/**"
+      - "schema/ptc-mzi/**"
+      - ".github/workflows/ptc-mzi-model.yml"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+  push:
+    branches: ["eis-ptc-mzi-cell-001"]
+    paths:
+      - "EISKKA/PTCMZI.lean"
+      - "EISKKA/PTCPrototype.lean"
+      - "experiments/EIS-PTC-MZI-001/**"
+      - "schema/ptc-mzi/**"
+      - ".github/workflows/ptc-mzi-model.yml"
+
+jobs:
+  python-model:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check pytest
+      - run: python -m pytest -q experiments/EIS-PTC-MZI-001
+
+  lean-formal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          build-args: "--wfail"
+          axiom-audit: true
+          axiom-audit-allow: "propext,Classical.choice,Quot.sound"
+      - name: Reject sorry and custom axioms
+        shell: bash
+        run: |
+          if grep -R -n -E '\bsorry\b|^[[:space:]]*axiom[[:space:]]' EISKKA; then
+            echo "Unreviewed sorry/custom axiom declaration found"
+            exit 1
+          fi

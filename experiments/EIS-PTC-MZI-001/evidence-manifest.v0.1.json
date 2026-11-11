@@ -1,0 +1,61 @@
+{
+  "evidence": {
+    "identity": {
+      "id": "EIS-PTC-MZI-001",
+      "version": "0.1.0",
+      "title": "Technology-independent three-heater MZI model package",
+      "description": "Ideal Tian SI-1 transfer, parameterized non-ideal engineering model, typed ports, and explicit evidence boundaries."
+    },
+    "status": "specified",
+    "subject": {
+      "artifactType": "model-qualified-design-candidate",
+      "artifactRef": "experiments/EIS-PTC-MZI-001/",
+      "contractRef": "EISKKA/PTCMZI.lean"
+    },
+    "provenance": {
+      "source": "Tian et al. (2025), Photonic Transformer Chip: Interference Is All You Need, SI-1; EIS source transcription in EISKKA/PTCPrototype.lean",
+      "toolchain": [
+        {"name": "Lean", "version": "4.35.0", "invocation": "lake build --wfail"},
+        {"name": "Python", "version": "3.12", "invocation": "python -m pytest -q experiments/EIS-PTC-MZI-001"}
+      ],
+      "pdkIdentity": "NONE — technology-independent; no foundry PDK selected",
+      "generatedAt": "2026-11-10",
+      "operator": "Earth ICT, SPC"
+    },
+    "assumptions": [
+      "Ideal equations use the Tian SI-1 phase and normalization convention.",
+      "Non-ideal model uses a simplified two-coupler visibility factor and scalar propagation loss.",
+      "Heater phase response is linear in thermally coupled electrical power in this first-order model.",
+      "Thermal dynamics are represented by three first-order states.",
+      "Test fixture parameters are synthetic and are not device measurements."
+    ],
+    "inputs": [
+      {"name": "Ideal Lean transfer", "ref": "EISKKA/PTCPrototype.lean", "role": "source-transcribed mathematical baseline"},
+      {"name": "Typed port map", "ref": "schema/ptc-mzi/port-map.v0.1.json", "role": "logical interface"}
+    ],
+    "result": {
+      "outcome": "not-run",
+      "summary": "Implementation package drafted; CI and local clean-environment execution are required before any pass claim.",
+      "limitations": [
+        "Two-output scattering matrix and normalization/energy theorem remain an explicit model gap in v0.1.",
+        "No physical geometry, foundry layer map, DRC, LVS, EM/FDTD, fabrication, or measurement.",
+        "No device-specific heater resistance, phase efficiency, thermal matrix, or coupler characterization is asserted.",
+        "The non-ideal model is a replaceable engineering abstraction, not a validated compact model."
+      ]
+    },
+    "artifacts": [
+      {"path": "experiments/EIS-PTC-MZI-001/parameter-ledger.v0.1.json", "type": "parameter-evidence-ledger"},
+      {"path": "EISKKA/PTCMZI.lean", "type": "formal-specification"},
+      {"path": "experiments/EIS-PTC-MZI-001/mzi_model.py", "type": "executable-model"},
+      {"path": "experiments/EIS-PTC-MZI-001/test_mzi_model.py", "type": "tests"},
+      {"path": "schema/ptc-mzi/port-map.schema.json", "type": "json-schema"},
+      {"path": "schema/ptc-mzi/port-map.v0.1.json", "type": "port-instance"},
+      {"path": "experiments/EIS-PTC-MZI-001/evidence-manifest.v0.1.json", "type": "evidence-manifest"}
+    ],
+    "verification": {
+      "method": "Lean theorem checks plus independent Python tests; CI pending",
+      "verifier": "Lean/Mathlib and pytest",
+      "humanReviewRequired": true
+    }
+  }
+}
