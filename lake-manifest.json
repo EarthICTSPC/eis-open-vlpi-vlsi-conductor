@@ -116,7 +116,7 @@
       "subDir": null,
       "scope": "",
       "rev": "be0a9eef7dac78da524bfbde91c812340b194610",
-      "name": "physlib",
+      "name": "Physlib",
       "manifestFile": "lake-manifest.json",
       "inputRev": "be0a9eef7dac78da524bfbde91c812340b194610",
       "inherited": false,
