@@ -1,0 +1,30 @@
+name: EIS KKA Physlib formal contract
+
+on:
+  push:
+    branches:
+      - eis-kka-physlean-formal-001
+  pull_request:
+    paths:
+      - "EISKKA/**"
+      - "EISKKA.lean"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - ".github/workflows/eis-kka-physlean-formal.yml"
+
+jobs:
+  lean-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+      - name: Build with warnings as errors
+        run: lake build --wfail
+      - name: Reject unfinished proof placeholders
+        shell: bash
+        run: |
+          if grep -R -n -E '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)' EISKKA EISKKA.lean; then
+            echo "Unfinished proof placeholder found."
+            exit 1
+          fi
