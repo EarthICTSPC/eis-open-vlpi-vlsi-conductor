@@ -6,7 +6,7 @@
 
 ## Purpose
 
-Provide a platform-independent executable reference for complex field transfer, analytical KKA activation, balanced two-port interference and deterministic known-answer tests.
+Provide a platform-independent executable reference for complex field transfer, analytical KKA activation, ideal scalar interference operators, balanced two-port detection and deterministic known-answer tests.
 
 This package is a mathematical/software reference. It is not a foundry PDK, calibrated instrument model, or evidence that an EIS SOI device realizes the modeled response.
 
@@ -50,7 +50,7 @@ Run from the repository root:
 
 Coverage includes transfer round-trips, activation identity and nonzero phase, singular normalization rejection, constructive/destructive/quadrature interference, unequal amplitudes, zero-arm behavior, a deterministic phase sweep, and detector gain/offset handling.
 
-The ideal cross-term convention is **2 Re(a b*)**. Total coherent intensity **|a+b|^2** remains distinct and is not returned by the balanced detector model.
+The package exposes separate total-intensity **|a+b|^2** and signed-cross-term **2 Re(a b*)** functions. The factor-of-two convention is tested explicitly. The balanced detector returns the latter after responsivity and branch nonidealities.
 
 ## Evidence boundary and next work
 
