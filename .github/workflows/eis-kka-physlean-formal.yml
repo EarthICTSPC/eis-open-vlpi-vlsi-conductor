@@ -24,7 +24,7 @@ jobs:
       - name: Reject unfinished proof placeholders
         shell: bash
         run: |
-          if grep -R -n -E '\\b(sorry|admit)\\b' EISKKA EISKKA.lean; then
+          if grep -R -n -E '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)' EISKKA EISKKA.lean; then
             echo "Unfinished proof placeholder found."
             exit 1
           fi
