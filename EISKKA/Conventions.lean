@@ -69,7 +69,7 @@ theorem kappaI_eq_half_kappaA
     simpa using (hasDerivAt_id' (2 * x)).div_const (2 : ℝ)
   have hcomp :
       HasDerivAt (phaseLogIntensity phaseLogA) (k / 2) (2 * x) := by
-    simpa [phaseLogIntensity] using hphase.comp (2 * x) hlin
+    simpa [phaseLogIntensity] using hphase.comp_of_eq (2 * x) hlin (by ring)
   calc
     kappaI phaseLogA x = k / 2 := by
       exact hcomp.deriv
