@@ -67,14 +67,16 @@ theorem kappaI_eq_half_kappaA
     kappaI phaseLogA x = kappaA phaseLogA x / 2 := by
   have hlin : HasDerivAt (fun y : ℝ => y / 2) (1 / 2) (2 * x) := by
     simpa using (hasDerivAt_id' (2 * x)).div_const (2 : ℝ)
-  have hcomp :
-      HasDerivAt (phaseLogIntensity phaseLogA) (k / 2) (2 * x) := by
-    simpa [phaseLogIntensity] using hphase.comp_of_eq (2 * x) hlin (by ring)
+  have hcomp := deriv_comp_of_eq (2 * x) hphase.differentiableAt
+    hlin.differentiableAt (by ring)
   calc
-    kappaI phaseLogA x = k / 2 := by
-      exact hcomp.deriv
+    kappaI phaseLogA x =
+        deriv phaseLogA x * deriv (fun y : ℝ => y / 2) (2 * x) := by
+          simpa [kappaI, phaseLogIntensity] using hcomp
     _ = kappaA phaseLogA x / 2 := by
-      simp [kappaA, hphase.deriv]
+      rw [hlin.deriv]
+      simp [kappaA]
+      ring
 
 /-- A point is mathematically admissible for κ_A when the phase derivative exists. -/
 def KappaAAdmissible (phaseLogA : LogAmplitudePhase) (x : ℝ) : Prop :=
