@@ -10,7 +10,7 @@ require mathlib from git
 
 -- Physlib (formerly PhysLean / Lean-QuantumInfo), pinned to an immutable commit.
 -- This gives EIS the community-maintained unitary-group and phase-shift infrastructure.
-require physlib from git
+require Physlib from git
   "https://github.com/leanprover-community/physlib" @ "be0a9eef7dac78da524bfbde91c812340b194610"
 
 @[default_target]
