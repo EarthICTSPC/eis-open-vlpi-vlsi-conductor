@@ -89,4 +89,15 @@ theorem kappaA_admissible_has_derivative
   rcases h with ⟨k, hk⟩
   exact hk.differentiableAt
 
+/-- κ_A is admissible only at points inside the declared operating interval. -/
+def KappaAAdmissibleOnRange
+    (phaseLogA : LogAmplitudePhase) (r : OperatingRange) (x : ℝ) : Prop :=
+  r.Contains x ∧ KappaAAdmissible phaseLogA x
+
+theorem kappaA_admissible_on_range_mem
+    (phaseLogA : LogAmplitudePhase) (r : OperatingRange) (x : ℝ)
+    (h : KappaAAdmissibleOnRange phaseLogA r x) :
+    r.Contains x :=
+  h.1
+
 end EISKKA
