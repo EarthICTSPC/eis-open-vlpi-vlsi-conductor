@@ -2,6 +2,23 @@ import cmath
 import math
 import unittest
 from eis_kka_ref import BalancedDetector, ComplexTransfer, apply_complex_transfer, complex_transfer, kka_activation
+from eis_kka_ref.interference import balanced_cross_term, total_intensity
+
+class InterferenceOperatorTests(unittest.TestCase):
+    def test_total_intensity_and_cross_term_are_distinct(self):
+        a, b = 2+0j, 0.5+0j
+        self.assertAlmostEqual(total_intensity(a, b), 6.25)
+        self.assertAlmostEqual(balanced_cross_term(a, b), 2.0)
+
+    def test_signed_cross_term_is_not_clipped(self):
+        self.assertAlmostEqual(balanced_cross_term(1+0j, -1+0j), -2.0)
+
+    def test_quadrature_cross_term(self):
+        self.assertAlmostEqual(balanced_cross_term(1+0j, 1j), 0.0, places=14)
+
+    def test_zero_arm(self):
+        self.assertEqual(total_intensity(0j, 0j), 0.0)
+        self.assertEqual(balanced_cross_term(0j, 1+2j), 0.0)
 
 class ComplexTransferTests(unittest.TestCase):
     def test_polar_transfer_and_apply(self):
