@@ -30,7 +30,7 @@ Every candidate model must declare:
 architecture:
   data_encoding: EPS | pre_modulator | other
   data_drive_variable: <physical variable and unit>
-  EPS_location: integrated | external
+  EPS_location: integrated | external | not_applicable
   EPS_function: high_speed_data_modulation
   IPS_1_function: quasi_static_operating_point
   IPS_2_function: quasi_static_operating_point
@@ -43,7 +43,7 @@ architecture:
   reference_planes: <all input/output planes>
 ~~~
 
-Do not begin Pareto optimization until data_encoding, data_drive_variable, EPS_location, mzi_topology, phase_shifter_placement, output_port and phase_reference are declared for the candidate.
+For a candidate with no EPS, set EPS_location to not_applicable and identify its actual data-bearing modulator/drive. Do not begin Pareto optimization until data_encoding, data_drive_variable, EPS_location, mzi_topology (or an explicit not-applicable rationale), phase_shifter_placement (or an explicit not-applicable rationale), output_port and phase_reference are declared for the candidate.
 
 For the primary PTC-style hypothesis, use EPS as the data-bearing drive and hold IPS-1 and IPS-2 at specified operating points during the data sweep. Sweep IPS-1 and IPS-2 separately for calibration and operating-point maps. Do not collapse EPS, IPS-1 and IPS-2 into one abstract phase variable.
 
