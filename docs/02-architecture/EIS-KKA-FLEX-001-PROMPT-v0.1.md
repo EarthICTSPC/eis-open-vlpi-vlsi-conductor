@@ -5,9 +5,9 @@
 
 ## Context for the agent
 
-You are assisting Earth ICT, SPC (EIS) with a bounded design-space study for a Kramers–Kronig-coupling-based optical nonlinear activation (KKA) computational primitive. The KKA primitive is the complex transfer function of a modulator–interferometer cascade whose control inputs are explicitly identified. Your job is to compare candidate device architectures on a Pareto front, not to produce a single winner, and to populate an evidence-provenance record for every parameter you return.
+You are assisting Earth ICT, SPC (EIS) with a bounded design-space study for a Kramers–Kronig-coupling-based optical nonlinear activation (KKA) computational primitive. The KKA primitive is not a material-level chirped modulator in the Tian et al. sense; it is the complex transfer function of a modulator–interferometer cascade whose control inputs are explicitly identified. Your job is to compare candidate device architectures on a Pareto front, not to produce a single winner, and to populate an evidence-provenance record for every parameter you return.
 
-This assignment is scoped to models and candidate parameters, not to foundry-qualified PDK data. Do not invent foundry-specific geometry, doping, or process parameters. Every numerical value you report must carry one of the tags `measured`, `fitted`, `simulated`, `assumed`, or `foundry-confidential`; the last tag must never appear in any public artifact.
+This assignment is scoped to models and candidate parameters, not to foundry-qualified PDK data. Do not invent foundry-specific geometry, doping, or process parameters. Every numerical value you report must carry one of the tags **measured**, **fitted**, **simulated**, **assumed**, or **foundry-confidential**, and the last tag must never appear in any public artifact.
 
 ## Candidate implementations
 
@@ -18,7 +18,7 @@ This assignment is scoped to models and candidate parameters, not to foundry-qua
 
 ## Technology inputs (generic, not foundry-qualified)
 
-Use the following starting assumptions. Every value must be tagged `assumed` unless and until EIS supplies a measured or fitted replacement. Do not promote these to `measured` or to a named foundry process.
+Use the following starting assumptions. Every value must be tagged **assumed** unless and until EIS supplies a measured or fitted replacement. Do not promote these to **measured** or to a named foundry process.
 
 ### SOI primary stack
 
@@ -33,7 +33,7 @@ Use the following starting assumptions. Every value must be tagged `assumed` unl
 | RF / routing metal | Al, σ ≈ 38 S/µm, 2.0 µm thick | assumed |
 | Phase-shifter type | thermo-optic in one arm (EPS) + two internal (IPS-1, IPS-2) | assumed |
 
-Required in the model: the SOI MZI cell must expose three separate control ports — `EPS` (high-speed data), `IPS_1`, `IPS_2` (quasi-static weight/operating point). Do not collapse them into a single phase parameter.
+Required in the model: the SOI MZI cell must expose three separate control ports — EPS (high-speed data), IPS-1, IPS-2 (quasi-static weight/operating point). Do not collapse them into a single phase parameter.
 
 ### SiN–TFLN comparison stack
 
@@ -49,12 +49,12 @@ The SiN–TFLN stack is a controlled comparison. Its purpose is to test whether 
 
 ## Required model outputs
 
-For every candidate, produce a complex field transfer (H(V,λ,T,P,t)=A(V,λ,T,P,t)e^{jφ(V,λ,T,P,t)}), and report:
+For every candidate, produce a complex field transfer \(H(V,\lambda,T,P,t)=A(V,\lambda,T,P,t)e^{j\phi(V,\lambda,T,P,t)}\), and report:
 
 1. Complex field transfer, with amplitude and phase separated.
-2. Amplitude response (A).
-3. Phase response (φ), referenced to the input optical field phase at the cell input port.
-4. Amplitude–phase coupling (κ_A ≡ ∂φ/∂ln A), with convention stated.
+2. Amplitude response \(A\).
+3. Phase response \(\phi\), referenced to the input optical field phase at the cell input port.
+4. Amplitude–phase coupling \(\kappa_A\equiv\partial\phi/\partial\ln A\), with convention stated.
 5. Optical insertion loss.
 6. Optical bandwidth and electrical modulation bandwidth.
 7. Electrical drive requirements (voltage, energy per modulation event).
@@ -64,27 +64,27 @@ For every candidate, produce a complex field transfer (H(V,λ,T,P,t)=A(V,λ,T,P,
 11. Device parameter sensitivity and uncertainty.
 12. Missing-data list identifying parameters needed to replace assumptions with measurements.
 
-All amplitudes use the (e^{+iωt}) phasor convention. Balanced-detection output is (Y=2R,Re(AB^*)) under the 1/√2 coupler convention; if a different splitter normalization is used, report the constant explicitly as `detector_normalization`.
+All amplitudes use the \(e^{+i\omega t}\) phasor convention. Balanced-detection output is \(Y=2R\,\operatorname{Re}(AB^*)\) under the 1/√2 coupler convention; if a different splitter normalization is used, report the constant explicitly as detector_normalization.
 
 ## Objectives — Pareto front, not scalar ranking
 
 Report a Pareto front over:
 
-1. Useful amplitude–phase coupling across the stated operating range (mean and variance of (κ_A)).
+1. Useful amplitude–phase coupling across the stated operating range (mean and variance of \(\kappa_A\)).
 2. Optical signal retention (equivalently, 1/insertion loss).
 3. Energy per modulation event (fJ/event).
-4. Device-to-device reproducibility (define a (σ_κ) metric).
+4. Device-to-device reproducibility (define a \(\sigma_\kappa\) metric).
 5. Area and scalability (µm² per cell; projected loss and power for a 64×64 array).
 
 ## Acceptance constraints
 
-- Convention: (κ_A=∂φ/∂ln A), with (A) field amplitude, and (κ_I=κ_A/2).
-- Separation: report `kappa_A_mod`, `kappa_A_cell`, and `kappa_A_cascade` separately.
+- Convention: \(\kappa_A=\partial\phi/\partial\ln A\), with \(A\) field amplitude, and \(\kappa_I=\kappa_A/2\).
+- Separation: report kappa_A_mod, kappa_A_cell, and kappa_A_cascade separately.
 - Phase reference: all complex amplitudes are referenced to the input-port phase; detector output is invariant under a common phase rotation applied to both arms.
 - Polarity: distinguish optical-arm exchange (cross-term unchanged) from electrical polarity reversal (reported sign flipped).
 - Operating range: state the interval on which the derivative exists.
-- Activation monotonicity: if reporting an activation, use the condition (κ_A(A)>-cot(φ(A)+φ_bias)).
-- Detector normalization: report `2R` or `4R` explicitly.
+- Activation monotonicity: if reporting an activation, use the condition \(\kappa_A(A)>-\cot(\phi(A)+\phi_{bias})\).
+- Detector normalization: report 2R or 4R explicitly.
 
 ## What not to do
 
@@ -93,8 +93,8 @@ Report a Pareto front over:
 - Do not treat the Physlib CKM three-mode phase-shift formalization as an optical MZI.
 - Do not collapse EPS, IPS-1, and IPS-2 into one control port.
 - Do not report a single best device.
-- Do not mix (κ_A) and (κ_I) conventions without explicit conversion.
-- Do not transfer a `foundry-confidential` value into a public artifact.
+- Do not mix \(\kappa_A\) and \(\kappa_I\) conventions without explicit conversion.
+- Do not transfer a foundry-confidential value into a public artifact.
 
 ## Deliverables
 
@@ -113,15 +113,15 @@ Identify the architecture that maximizes useful, stable, reproducible KKA comput
 
 ## Handoff
 
-Outputs are candidate parameter sets, not qualified data. EIS will run them through the Python reference implementation and Lean4 contract differential tests before promotion. The Lean4 contract is the normative oracle for conventions and composition rules; outputs must be expressed in a form that can be checked against it.
+Outputs are candidate parameter sets, not qualified data. EIS will run them through the Python reference implementation and Lean4 contract differential tests before promotion. The Lean4 contract is the normative oracle only for properties actually formalized and validated.
 
 ## Study-group convergence checklist
 
-| # | Check | Status in v0.1 |
+| # | Check | Status |
 |---|---|---|
-| 1 | (κ_A=∂φ/∂ln A), field amplitude; (κ_I=κ_A/2) | Review required |
+| 1 | \(\kappa_A=\partial\phi/\partial\ln A\), field amplitude; \(\kappa_I=\kappa_A/2\) | Review required |
 | 2 | Separate modulator, cell and cascade coupling | Review required |
-| 3 | (e^{+iωt}) phasor convention | Included |
+| 3 | \(e^{+i\omega t}\) phasor convention | Included |
 | 4 | Detector polarity and normalization | Review required |
 | 5 | SOI primary; SiN–TFLN comparison; EAM reference | Included |
 | 6 | Three distinct control ports | Included, EPS implementation unresolved |
