@@ -4,18 +4,67 @@
   "title": "EIS-KKA-FLEX-001 FlexAgent Results",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "assignment_id", "run_metadata", "architecture_declarations", "reference_operating_point", "candidates", "pareto_summary", "missing_data", "release"],
+  "required": [
+    "schema_version",
+    "assignment_id",
+    "run_metadata",
+    "architecture_declarations",
+    "reference_operating_point",
+    "candidates",
+    "pareto_summary",
+    "missing_data",
+    "release"
+  ],
   "properties": {
-    "schema_version": {"const": "0.2"},
-    "assignment_id": {"const": "EIS-KKA-FLEX-001"},
+    "schema_version": {
+      "const": "0.2"
+    },
+    "assignment_id": {
+      "const": "EIS-KKA-FLEX-001"
+    },
     "run_metadata": {
       "type": "object",
-      "required": ["run_id", "date", "agent", "tools"],
+      "required": [
+        "run_id",
+        "date",
+        "agent",
+        "tools"
+      ],
       "properties": {
-        "run_id": {"type": "string"},
-        "date": {"type": "string", "format": "date"},
-        "agent": {"type": "string"},
-        "tools": {"type": "array", "items": {"type": "object", "required": ["name", "version"], "properties": {"name": {"type": "string"}, "version": {"type": "string"}, "configuration": {"type": ["string", "object"]}}}}
+        "run_id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "agent": {
+          "type": "string"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "version"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "configuration": {
+                "type": [
+                  "string",
+                  "object"
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "architecture_declarations": {
@@ -23,95 +72,677 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["candidate_id", "data_encoding", "data_drive_variable", "eps_location", "mzi_topology", "phase_shifter_placement", "output_port", "phase_reference", "reference_planes", "computational_kappa"],
+        "required": [
+          "candidate_id",
+          "data_encoding",
+          "data_drive_variable",
+          "eps_location",
+          "mzi_topology",
+          "phase_shifter_placement",
+          "output_port",
+          "phase_reference",
+          "reference_planes",
+          "computational_kappa"
+        ],
         "properties": {
-          "candidate_id": {"type": "string"},
-          "data_encoding": {"enum": ["EPS", "pre_modulator", "other"]},
-          "data_drive_variable": {"type": "object", "required": ["name", "unit"], "properties": {"name": {"type": "string"}, "unit": {"type": "string"}}},
-          "eps_location": {"enum": ["integrated", "external", "not_applicable"]},
-          "mzi_topology": {"type": ["string", "null"]},
-          "phase_shifter_placement": {"type": ["string", "null"]},
-          "output_port": {"type": "string"},
-          "phase_reference": {"type": "string"},
-          "reference_planes": {"type": "array", "items": {"type": "string"}},
-          "computational_kappa": {"enum": ["kappa_A_mod", "kappa_A_cell", "kappa_A_cascade"]}
+          "candidate_id": {
+            "type": "string"
+          },
+          "data_encoding": {
+            "enum": [
+              "EPS",
+              "pre_modulator",
+              "other"
+            ]
+          },
+          "data_drive_variable": {
+            "type": "object",
+            "required": [
+              "name",
+              "unit"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            }
+          },
+          "eps_location": {
+            "enum": [
+              "integrated",
+              "external",
+              "not_applicable"
+            ]
+          },
+          "mzi_topology": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phase_shifter_placement": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "output_port": {
+            "type": "string"
+          },
+          "phase_reference": {
+            "type": "string"
+          },
+          "reference_planes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "computational_kappa": {
+            "enum": [
+              "kappa_A_mod",
+              "kappa_A_cell",
+              "kappa_A_cascade"
+            ]
+          }
         }
       }
     },
     "reference_operating_point": {
       "type": "object",
-      "required": ["wavelength_nm", "temperature_C", "optical_input_power_dBm", "symbol_rate_Hz", "waveform", "status"],
+      "required": [
+        "wavelength_nm",
+        "temperature_C",
+        "optical_input_power_dBm",
+        "symbol_rate_Hz",
+        "waveform",
+        "status"
+      ],
       "properties": {
-        "wavelength_nm": {"type": ["number", "null"]},
-        "temperature_C": {"type": ["number", "null"]},
-        "optical_input_power_dBm": {"type": ["number", "null"]},
-        "symbol_rate_Hz": {"type": ["number", "null"]},
-        "waveform": {"type": ["string", "null"]},
-        "status": {"enum": ["confirmed_by_EIS", "provisional", "incomplete"]}
+        "wavelength_nm": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "temperature_C": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "optical_input_power_dBm": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "symbol_rate_Hz": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "waveform": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "confirmed_by_EIS",
+            "provisional",
+            "incomplete"
+          ]
+        }
       }
     },
     "candidates": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["candidate_id", "transfer_model", "couplings", "operating_ranges", "energy", "detector", "process_variation", "parameters"],
+        "required": [
+          "candidate_id",
+          "transfer_model",
+          "couplings",
+          "operating_ranges",
+          "energy",
+          "detector",
+          "process_variation",
+          "parameters"
+        ],
         "properties": {
-          "candidate_id": {"type": "string"},
-          "transfer_model": {"type": "object", "required": ["equation_or_model_id", "input_port", "output_port", "phase_convention"], "properties": {"equation_or_model_id": {"type": "string"}, "input_port": {"type": "string"}, "output_port": {"type": "string"}, "phase_convention": {"const": "exp(+i omega t)"}, "model_artifact": {"type": ["string", "null"]}}},
-          "couplings": {
+          "candidate_id": {
+            "type": "string"
+          },
+          "transfer_model": {
             "type": "object",
-            "required": ["kappa_A_mod", "kappa_A_cell", "kappa_A_cascade", "computational_kappa"],
+            "required": [
+              "equation_or_model_id",
+              "input_port",
+              "output_port",
+              "phase_convention",
+              "transfer_samples"
+            ],
             "properties": {
-              "kappa_A_mod": {"$ref": "#/$defs/coupling"},
-              "kappa_A_cell": {"$ref": "#/$defs/coupling"},
-              "kappa_A_cascade": {"$ref": "#/$defs/coupling"},
-              "computational_kappa": {"enum": ["kappa_A_mod", "kappa_A_cell", "kappa_A_cascade"]}
+              "equation_or_model_id": {
+                "type": "string"
+              },
+              "input_port": {
+                "type": "string"
+              },
+              "output_port": {
+                "type": "string"
+              },
+              "phase_convention": {
+                "const": "exp(+i omega t)"
+              },
+              "model_artifact": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "transfer_samples": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "drive_value",
+                    "drive_unit",
+                    "H_real",
+                    "H_imag",
+                    "amplitude_field",
+                    "phase_unwrapped_rad"
+                  ],
+                  "properties": {
+                    "drive_value": {
+                      "type": "number"
+                    },
+                    "drive_unit": {
+                      "type": "string"
+                    },
+                    "H_real": {
+                      "type": "number"
+                    },
+                    "H_imag": {
+                      "type": "number"
+                    },
+                    "amplitude_field": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "phase_unwrapped_rad": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
             }
           },
-          "operating_ranges": {"type": "array", "items": {"type": "object", "required": ["drive_min", "drive_max", "drive_unit", "admissible", "admissibility_notes"], "properties": {"drive_min": {"type": "number"}, "drive_max": {"type": "number"}, "drive_unit": {"type": "string"}, "admissible": {"type": "boolean"}, "admissibility_notes": {"type": "string"}, "phase_unwrapped": {"type": "boolean"}, "near_zero_flag": {"type": "boolean"}}}},
-          "energy": {"type": "object", "required": ["dynamic_energy_fJ_per_event", "static_holding_power_mW", "waveform"], "properties": {"dynamic_energy_fJ_per_event": {"type": ["number", "null"]}, "static_holding_power_mW": {"type": ["number", "null"]}, "waveform": {"type": ["string", "null"]}, "measurement_boundary": {"type": "string"}}},
-          "detector": {"type": "object", "required": ["normalization", "responsivity_plus_A_per_W", "responsivity_minus_A_per_W", "responsivity_mismatch_fraction"], "properties": {"normalization": {"const": "2R"}, "responsivity_plus_A_per_W": {"type": ["number", "null"]}, "responsivity_minus_A_per_W": {"type": ["number", "null"]}, "responsivity_mismatch_fraction": {"type": ["number", "null"]}, "gain_mismatch": {"type": ["number", "null"]}, "offset": {"type": ["number", "null"]}}},
-          "process_variation": {"type": "object", "required": ["method", "sample_count", "seed", "sigma_kappa_interpretation"], "properties": {"method": {"type": "string"}, "sample_count": {"type": "integer", "minimum": 0}, "seed": {"type": ["integer", "null"]}, "sigma_kappa_interpretation": {"const": "modelled_process_sensitivity_not_measured_reproducibility"}, "distributions": {"type": "array", "items": {"type": "object", "required": ["parameter", "distribution", "provenance"], "properties": {"parameter": {"type": "string"}, "distribution": {"type": "string"}, "provenance": {"enum": ["measured", "fitted", "simulated", "assumed", "foundry-confidential"]}}}}}},
-          "parameters": {"type": "array", "items": {"$ref": "#/$defs/parameter"}}
+          "couplings": {
+            "type": "object",
+            "required": [
+              "kappa_A_mod",
+              "kappa_A_cell",
+              "kappa_A_cascade",
+              "computational_kappa"
+            ],
+            "properties": {
+              "kappa_A_mod": {
+                "$ref": "#/$defs/coupling"
+              },
+              "kappa_A_cell": {
+                "$ref": "#/$defs/coupling"
+              },
+              "kappa_A_cascade": {
+                "$ref": "#/$defs/coupling"
+              },
+              "computational_kappa": {
+                "enum": [
+                  "kappa_A_mod",
+                  "kappa_A_cell",
+                  "kappa_A_cascade"
+                ]
+              }
+            }
+          },
+          "operating_ranges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "drive_min",
+                "drive_max",
+                "drive_unit",
+                "admissible",
+                "admissibility_notes"
+              ],
+              "properties": {
+                "drive_min": {
+                  "type": "number"
+                },
+                "drive_max": {
+                  "type": "number"
+                },
+                "drive_unit": {
+                  "type": "string"
+                },
+                "admissible": {
+                  "type": "boolean"
+                },
+                "admissibility_notes": {
+                  "type": "string"
+                },
+                "phase_unwrapped": {
+                  "type": "boolean"
+                },
+                "near_zero_flag": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "energy": {
+            "type": "object",
+            "required": [
+              "dynamic_energy_fJ_per_event",
+              "static_holding_power_mW",
+              "waveform"
+            ],
+            "properties": {
+              "dynamic_energy_fJ_per_event": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "static_holding_power_mW": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "waveform": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "measurement_boundary": {
+                "type": "string"
+              }
+            }
+          },
+          "detector": {
+            "type": "object",
+            "required": [
+              "normalization",
+              "responsivity_plus_A_per_W",
+              "responsivity_minus_A_per_W",
+              "responsivity_mismatch_fraction"
+            ],
+            "properties": {
+              "normalization": {
+                "const": "2R"
+              },
+              "responsivity_plus_A_per_W": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "responsivity_minus_A_per_W": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "responsivity_mismatch_fraction": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "gain_mismatch": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "offset": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          },
+          "process_variation": {
+            "type": "object",
+            "required": [
+              "method",
+              "sample_count",
+              "seed",
+              "sigma_kappa_interpretation"
+            ],
+            "properties": {
+              "method": {
+                "type": "string"
+              },
+              "sample_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "seed": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "sigma_kappa_interpretation": {
+                "const": "modelled_process_sensitivity_not_measured_reproducibility"
+              },
+              "distributions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "parameter",
+                    "distribution",
+                    "provenance"
+                  ],
+                  "properties": {
+                    "parameter": {
+                      "type": "string"
+                    },
+                    "distribution": {
+                      "type": "string"
+                    },
+                    "provenance": {
+                      "enum": [
+                        "measured",
+                        "fitted",
+                        "simulated",
+                        "assumed",
+                        "foundry-confidential"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/parameter"
+            }
+          }
         }
       }
     },
-    "pareto_summary": {"type": "object", "required": ["method", "axes", "candidate_regions"], "properties": {"method": {"type": "string"}, "axes": {"type": "array", "items": {"type": "string"}}, "candidate_regions": {"type": "array", "items": {"type": "string"}}, "scalar_winner_declared": {"const": false}}},
-    "missing_data": {"type": "array", "items": {"type": "object", "required": ["item", "why_needed", "measurement_or_source_required"], "properties": {"item": {"type": "string"}, "why_needed": {"type": "string"}, "measurement_or_source_required": {"type": "string"}}}},
-    "release": {"type": "object", "required": ["classification", "contains_confidential_data", "public_artifact_safe"], "properties": {"classification": {"enum": ["public", "restricted", "mixed", "unknown"]}, "contains_confidential_data": {"type": "boolean"}, "public_artifact_safe": {"type": "boolean"}}}
+    "pareto_summary": {
+      "type": "object",
+      "required": [
+        "method",
+        "axes",
+        "candidate_regions"
+      ],
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "axes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "candidate_regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scalar_winner_declared": {
+          "const": false
+        }
+      }
+    },
+    "missing_data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item",
+          "why_needed",
+          "measurement_or_source_required"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "why_needed": {
+            "type": "string"
+          },
+          "measurement_or_source_required": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "required": [
+        "classification",
+        "contains_confidential_data",
+        "public_artifact_safe"
+      ],
+      "properties": {
+        "classification": {
+          "enum": [
+            "public",
+            "restricted",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "contains_confidential_data": {
+          "type": "boolean"
+        },
+        "public_artifact_safe": {
+          "type": "boolean"
+        }
+      }
+    }
   },
   "$defs": {
     "coupling": {
       "type": "object",
-      "required": ["drive_variable", "value", "unit", "drive_interval", "admissible", "derivative_method"],
+      "required": [
+        "drive_variable",
+        "value",
+        "unit",
+        "drive_interval",
+        "admissible",
+        "derivative_method",
+        "provenance",
+        "samples",
+        "provenance",
+        "samples",
+        "provenance",
+        "samples"
+      ],
       "properties": {
-        "drive_variable": {"type": "string"},
-        "value": {"type": ["number", "null"]},
-        "unit": {"const": "dimensionless"},
-        "drive_interval": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
-        "admissible": {"type": "boolean"},
-        "derivative_method": {"type": "string"},
-        "phase_unwrapped": {"type": "boolean"},
-        "near_zero_flag": {"type": "boolean"},
-        "uncertainty": {"type": ["number", "null"]}
+        "drive_variable": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "const": "dimensionless"
+        },
+        "drive_interval": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "admissible": {
+          "type": "boolean"
+        },
+        "derivative_method": {
+          "type": "string"
+        },
+        "phase_unwrapped": {
+          "type": "boolean"
+        },
+        "near_zero_flag": {
+          "type": "boolean"
+        },
+        "uncertainty": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "provenance": {
+          "enum": [
+            "measured",
+            "fitted",
+            "simulated",
+            "assumed",
+            "foundry-confidential"
+          ]
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "drive_value",
+              "kappa_A"
+            ],
+            "properties": {
+              "drive_value": {
+                "type": "number"
+              },
+              "kappa_A": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "parameter": {
       "type": "object",
-      "required": ["parameter", "value", "unit", "provenance", "source", "valid_range", "uncertainty", "conditions", "tool", "tool_version", "model_configuration", "pdK"],
+      "required": [
+        "parameter",
+        "value",
+        "unit",
+        "provenance",
+        "source",
+        "valid_range",
+        "uncertainty",
+        "conditions",
+        "tool",
+        "tool_version",
+        "model_configuration",
+        "pdk"
+      ],
       "properties": {
-        "parameter": {"type": "string"},
+        "parameter": {
+          "type": "string"
+        },
         "value": {},
-        "unit": {"type": "string"},
-        "provenance": {"enum": ["measured", "fitted", "simulated", "assumed", "foundry-confidential"]},
-        "source": {"type": ["string", "null"]},
+        "unit": {
+          "type": "string"
+        },
+        "provenance": {
+          "enum": [
+            "measured",
+            "fitted",
+            "simulated",
+            "assumed",
+            "foundry-confidential"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "valid_range": {},
         "uncertainty": {},
-        "conditions": {"type": "object"},
-        "tool": {"type": ["string", "null"]},
-        "tool_version": {"type": ["string", "null"]},
+        "conditions": {
+          "type": "object"
+        },
+        "tool": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tool_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "model_configuration": {},
-        "pdK": {"type": "object", "required": ["name", "version", "license_basis", "restriction"], "properties": {"name": {"type": ["string", "null"]}, "version": {"type": ["string", "null"]}, "license_basis": {"type": ["string", "null"]}, "restriction": {"enum": ["public", "restricted", "unknown"]}}}
+        "pdk": {
+          "type": "object",
+          "required": [
+            "name",
+            "version",
+            "license_basis",
+            "restriction"
+          ],
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "license_basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "restriction": {
+              "enum": [
+                "public",
+                "restricted",
+                "unknown"
+              ]
+            }
+          }
+        }
       }
     }
   }
