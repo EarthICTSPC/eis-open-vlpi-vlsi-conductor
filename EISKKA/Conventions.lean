@@ -48,6 +48,41 @@ abbrev LogAmplitudePhase := ℝ → ℝ
 noncomputable def kappaA (phaseLogA : LogAmplitudePhase) (x : ℝ) : ℝ :=
   deriv phaseLogA x
 
+/--
+A modulator-level phase response. Its phase is referenced to the declared
+optical reference plane and refers to the named modulator output port.
+-/
+structure ModulatorPhaseResponse where
+  phaseLogA : LogAmplitudePhase
+  phaseReference : PhaseReference
+  outputPortId : String
+
+/--
+A complete-cell phase response. This is measured at a named cell output port
+relative to an explicitly declared phase reference; it is not assumed equal
+to the modulator response.
+-/
+structure CellPhaseResponse where
+  phaseLogA : LogAmplitudePhase
+  phaseReference : PhaseReference
+  outputPortId : String
+
+/-- Modulator-only field-amplitude coupling κ_A^mod. -/
+noncomputable def kappaA_modulator
+    (response : ModulatorPhaseResponse) (x : ℝ) : ℝ :=
+  kappaA response.phaseLogA x
+
+/-- Complete computational-cell field-amplitude coupling κ_A^cell. -/
+noncomputable def kappaA_cell
+    (response : CellPhaseResponse) (x : ℝ) : ℝ :=
+  kappaA response.phaseLogA x
+
+/--
+The cascade-level quantity is intentionally not defined as a sum of cell
+couplings. A future multiport cascade contract must define its composite
+transfer, selected output port and phase reference first.
+-/
+
 /-- Express the same phase response in the log-intensity coordinate y = ln(I). -/
 def phaseLogIntensity (phaseLogA : LogAmplitudePhase) : ℝ → ℝ :=
   fun y => phaseLogA (y / 2)
