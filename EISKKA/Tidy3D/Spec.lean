@@ -1,5 +1,7 @@
 import Lean
 
+open Lean
+
 /-!
 # EIS-TIDY3D-LEAN-001 — Lean-owned SOI directional-coupler specification
 
