@@ -20,7 +20,7 @@ inductive EvidenceClass where
 
 /-- Release classification is independent of evidence quality. -/
 inductive Confidentiality where
-  | public
+  | publicRelease
   | foundryConfidential
   deriving DecidableEq, Repr
 
@@ -32,7 +32,7 @@ structure ParameterProvenance where
 
 /-- Public release is permitted only when the confidentiality tag is public. -/
 def PubliclyReleasable (p : ParameterProvenance) : Prop :=
-  p.confidentiality = .public
+  p.confidentiality = .publicRelease
 
 /-- Evidence rank, from weakest to strongest evidence. -/
 def EvidenceClass.rank : EvidenceClass → Nat
