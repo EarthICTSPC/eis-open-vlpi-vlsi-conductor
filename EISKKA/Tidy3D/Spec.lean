@@ -94,7 +94,7 @@ def illustrativeSOI : DirectionalCouplerSpec :=
 theorem illustrativeSOI_wellFormed : WellFormed illustrativeSOI := by
   simp [WellFormed, illustrativeSOI]
 
-private def nfield (key : String) (value : Nat) : String × Json :=
+def nfield (key : String) (value : Nat) : String × Json :=
   (key, Json.str (toString value))
 
 /-- Machine-readable interchange contract. Physical quantities remain strings
