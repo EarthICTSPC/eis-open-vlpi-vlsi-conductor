@@ -15,5 +15,5 @@ require Physlib from git
 @[default_target]
 lean_lib EISKKA
 
-lean_exe eis-tidy3d-spec where
+lean_exe eis_tidy3d_spec where
   root := `EISKKA.Tidy3D.Emit
