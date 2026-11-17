@@ -1,0 +1,59 @@
+name: EIS Tidy3D Lean bridge
+
+on:
+  pull_request:
+    paths:
+      - "EISKKA.lean"
+      - "EISKKA/Tidy3D/**"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - "tidy3d_bridge/**"
+      - "tests/tidy3d/**"
+      - "examples/tidy3d/**"
+      - "requirements-tidy3d.txt"
+      - ".github/workflows/eis-tidy3d-lean-001.yml"
+  push:
+    branches:
+      - eis-tidy3d-lean-001
+
+jobs:
+  lean-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+      - name: Build Lean project with warnings as errors
+        run: lake build --wfail
+      - name: Execute Lean JSON emitter
+        run: lake exe eis-tidy3d-spec > /tmp/eis-tidy3d-spec.json
+      - name: Validate emitted interchange document
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          spec = json.loads(Path("/tmp/eis-tidy3d-spec.json").read_text())
+          assert spec["spec_id"] == "EIS-SOI-DC-ILLUSTRATIVE-001"
+          assert spec["evidence_class"] == "assumed"
+          assert spec["launch_policy"] == "explicit_user_action_required"
+          print("Lean-emitted JSON contract: PASS")
+          PY
+      - name: Reject unfinished proof placeholders
+        run: |
+          if grep -R -n -E '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)' EISKKA EISKKA.lean; then
+            echo "Unfinished proof placeholder found."
+            exit 1
+          fi
+
+  python-adapter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Install Tidy3D adapter dependencies
+        run: python -m pip install -r requirements-tidy3d.txt
+      - name: Test validation and native simulation construction
+        run: python -m pytest tests/tidy3d -q
