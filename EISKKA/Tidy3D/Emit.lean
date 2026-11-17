@@ -1,5 +1,9 @@
-import Lean
-import EISKKA.Tidy3D.Spec
+module
+
+public import Lean
+public import EISKKA.Tidy3D.Spec
+
+@[expose] public section
 
 /-! Executable JSON emitter for EIS-TIDY3D-LEAN-001. -/
 
