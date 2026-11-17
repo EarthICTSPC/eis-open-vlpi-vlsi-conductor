@@ -110,8 +110,8 @@ theorem kappaI_eq_half_kappaA
         deriv (phaseLogA ∘ (fun y : ℝ => y / 2)) (2 * x) := rfl
     _ = k * (1 / 2) := hcomp.deriv
     _ = kappaA phaseLogA x / 2 := by
+      change k * (1 / 2) = deriv phaseLogA x / 2
       rw [hphase.deriv]
-      simp [kappaA]
       ring
 
 /-- A point is mathematically admissible for κ_A when the phase derivative exists. -/
