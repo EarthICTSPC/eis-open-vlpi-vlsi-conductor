@@ -1,6 +1,8 @@
 module
 
-import Mathlib.Analysis.Calculus.Deriv.Comp
+public import Mathlib
+
+@[expose] public section
 
 /-!
 # EIS-KKA-FORMAL-001 — Normative scalar conventions
@@ -29,7 +31,6 @@ def eisPhasorConvention : PhasorConvention :=
 structure PhaseReference where
   planeId : Nat
   phaseOriginRad : ℝ
-  deriving Repr
 
 /-- A closed interval in log field-amplitude coordinates. -/
 structure OperatingRange where
@@ -77,14 +78,14 @@ noncomputable def kappaA_cell
     (response : CellPhaseResponse) (x : ℝ) : ℝ :=
   kappaA response.phaseLogA x
 
-/--
+/- 
 The cascade-level quantity is intentionally not defined as a sum of cell
 couplings. A future multiport cascade contract must define its composite
 transfer, selected output port and phase reference first.
 -/
 
 /-- Express the same phase response in the log-intensity coordinate y = ln(I). -/
-def phaseLogIntensity (phaseLogA : LogAmplitudePhase) : ℝ → ℝ :=
+noncomputable def phaseLogIntensity (phaseLogA : LogAmplitudePhase) : ℝ → ℝ :=
   fun y => phaseLogA (y / 2)
 
 /-- Intensity-coordinate coupling, evaluated at y = 2 ln(A). -/
@@ -101,16 +102,16 @@ theorem kappaI_eq_half_kappaA
     (hphase : HasDerivAt phaseLogA k x) :
     kappaI phaseLogA x = kappaA phaseLogA x / 2 := by
   have hlin : HasDerivAt (fun y : ℝ => y / 2) (1 / 2) (2 * x) := by
-    simpa using (hasDerivAt_id' (2 * x)).div_const (2 : ℝ)
-  have hcomp := deriv_comp_of_eq (2 * x) hphase.differentiableAt
-    hlin.differentiableAt (by ring)
+    simpa [div_eq_mul_inv] using
+      (hasDerivAt_mul_const (1 / 2) (x := 2 * x))
+  have hcomp := hphase.comp_of_eq hlin (by ring)
   calc
     kappaI phaseLogA x =
-        deriv phaseLogA x * deriv (fun y : ℝ => y / 2) (2 * x) := by
-          simpa [kappaI, phaseLogIntensity] using hcomp
+        deriv (phaseLogA ∘ (fun y : ℝ => y / 2)) (2 * x) := rfl
+    _ = k * (1 / 2) := hcomp.deriv
     _ = kappaA phaseLogA x / 2 := by
-      rw [hlin.deriv]
-      simp [kappaA]
+      change k * (1 / 2) = deriv phaseLogA x / 2
+      rw [hphase.deriv]
       ring
 
 /-- A point is mathematically admissible for κ_A when the phase derivative exists. -/
