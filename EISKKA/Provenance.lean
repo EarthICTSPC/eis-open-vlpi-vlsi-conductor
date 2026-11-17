@@ -1,5 +1,7 @@
 module
 
+@[expose] public section
+
 /-!
 # EIS-KKA-FORMAL-001 — Evidence provenance and release classification
 
