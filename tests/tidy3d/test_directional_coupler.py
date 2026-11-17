@@ -22,6 +22,7 @@ def test_lean_emitted_spec_is_well_formed(spec):
     assert values["core_width_nm"] == 450
     assert values["gap_nm"] == 200
     assert values["coupling_length_nm"] == 8000
+    assert values["access_length_nm"] == 4000
 
 
 def test_rejects_wrong_phasor_convention(spec):
@@ -44,3 +45,4 @@ def test_builds_native_tidy3d_simulation_without_submission(spec):
     assert metadata["cloud_submission"] == "not_submitted"
     assert metadata["output_ports"] == ["through", "cross"]
     assert metadata["frequency_count"] == 31
+    assert metadata["coupling_length_um"] == 8.0

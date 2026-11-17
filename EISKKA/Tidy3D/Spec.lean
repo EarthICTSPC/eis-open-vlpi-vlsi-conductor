@@ -17,6 +17,7 @@ structure DirectionalCouplerSpec where
   coreHeightNm : Nat
   gapNm : Nat
   couplingLengthNm : Nat
+  accessLengthNm : Nat
   boxThicknessNm : Nat
   substrateThicknessNm : Nat
   corePermittivity : String
@@ -40,9 +41,10 @@ def WellFormed (s : DirectionalCouplerSpec) : Prop :=
   s.coreHeightNm > 0 ∧
   s.gapNm > 0 ∧
   s.couplingLengthNm > 0 ∧
+  s.accessLengthNm > 0 ∧
   s.boxThicknessNm > 0 ∧
   s.substrateThicknessNm > 0 ∧
-  s.domainXNm > s.couplingLengthNm ∧
+  s.domainXNm > s.couplingLengthNm + 2 * s.accessLengthNm ∧
   s.domainYNm > 2 * (s.coreWidthNm + s.gapNm) ∧
   s.domainZNm > s.boxThicknessNm + s.substrateThicknessNm + s.coreHeightNm ∧
   s.gridStepsPerWavelength > 0 ∧
@@ -66,11 +68,12 @@ def illustrativeSOI : DirectionalCouplerSpec :=
     coreHeightNm := 220
     gapNm := 200
     couplingLengthNm := 8000
+    accessLengthNm := 4000
     boxThicknessNm := 2000
     substrateThicknessNm := 2000
     corePermittivity := "12.1104"
     oxidePermittivity := "2.085136"
-    domainXNm := 16000
+    domainXNm := 18000
     domainYNm := 4500
     domainZNm := 6400
     domainCenterZNm := -1020
@@ -99,6 +102,7 @@ def toJson (s : DirectionalCouplerSpec) : Json :=
     , nfield "core_height_nm" s.coreHeightNm
     , nfield "gap_nm" s.gapNm
     , nfield "coupling_length_nm" s.couplingLengthNm
+    , nfield "access_length_nm" s.accessLengthNm
     , nfield "box_thickness_nm" s.boxThicknessNm
     , nfield "substrate_thickness_nm" s.substrateThicknessNm
     , ("core_permittivity", Json.str s.corePermittivity)
