@@ -1,6 +1,8 @@
 module
 
-import Mathlib
+public import Mathlib
+
+@[expose] public section
 
 /-!
 # EIS-KKA-SOI-001 — scalar field and interference contract
