@@ -1,7 +1,8 @@
 module
 
-import Mathlib
-import EISKKA.Scalar
+public import EISKKA.Scalar
+
+@[expose] public section
 
 /-!
 # EIS-KKA-FORMAL-001 — Detector sign, phase-reference and normalization contract
