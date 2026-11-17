@@ -1,7 +1,8 @@
 module
 
-import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Analysis.Calculus.Deriv.Mul
+public import Mathlib
+
+@[expose] public section
 
 /-!
 # EIS-KKA-FORMAL-001 — Normative scalar conventions
