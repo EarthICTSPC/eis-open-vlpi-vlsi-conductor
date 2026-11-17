@@ -1,6 +1,8 @@
 module
 
-import EISKKA.Scalar
+public import EISKKA.Scalar
+
+@[expose] public section
 
 /-!
 Exact rational/integer examples for the scalar operator. These named
