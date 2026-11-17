@@ -47,7 +47,7 @@ The retained evidence must include complex modal amplitudes, not only squared ma
 From the repository root:
 
 ```bash
-lake exe eis-tidy3d-spec > examples/tidy3d/eis_soi_dc_spec.json
+lake exe eis_tidy3d_spec > examples/tidy3d/eis_soi_dc_spec.json
 python -m pip install -r requirements-tidy3d.txt
 python -m pytest tests/tidy3d -q
 ```
