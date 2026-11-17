@@ -88,7 +88,7 @@ def illustrativeSOI : DirectionalCouplerSpec :=
     phasorConvention := "exp(+i omega t)" }
 
 theorem illustrativeSOI_wellFormed : WellFormed illustrativeSOI := by
-  decide
+  simp [WellFormed, illustrativeSOI]
 
 private def nfield (key : String) (value : Nat) : String × Json :=
   (key, Json.str (toString value))
