@@ -31,6 +31,56 @@ where:
 
 The abstraction does not assume that photonic computation is inherently a Boolean gate, electronic MAC, or conventional matrix-vector operation.
 
+
+### KKA / PTC: amplitude–phase coupling as a computational primitive
+
+EIS's current photonic-computing research includes the Kramers–Kronig-inspired Photonic Transformer Chip (PTC) architecture described by [Tian et al. (PhotoniX, 2025)](https://doi.org/10.1186/s43074-025-00182-7). The EIS engineering hypothesis is that a **designed and characterized amplitude–phase relationship in a data-driven modulator–interferometer cascade can carry the activation used by the computation**.
+
+This is a different design question from either adding a separate nonlinear optical effect or treating every amplitude–phase relationship as an unwanted distortion:
+
+| Framing | Mechanism or objective | EIS position |
+|---|---|---|
+| Intentional nonlinear optics | Add or exploit XPM, two-photon absorption (TPA), or gain compression as the computational mechanism | Not the target mechanism in the current PTC/KKA work |
+| Distortion compensation | Treat amplitude–phase coupling as an error relative to an ideal linear transfer, then bound or compensate it to preserve ENOB | Insufficient as the computational framing |
+| Computational primitive | Design, characterize, and optimize the useful complex transfer of the modulator–interferometer cascade; its amplitude–phase relationship carries the activation | Current EIS research direction |
+
+The distinction is not that fidelity ceases to matter. **ENOB, interference visibility, signal retention, noise, repeatability, energy, and operating range remain important evidence and engineering metrics.** They characterize how faithfully and efficiently the physical primitive performs its intended transformation; ENOB alone does not define the primitive.
+
+#### Mathematical convention
+
+For a complex field transfer
+`H(u)=A(u)e^{i\phi(u)}`, with `A` denoting **field-amplitude transmission** (not intensity transmission), EIS uses the convention
+
+`\kappa_A = d\phi/d\ln A`, and `\kappa_I = \tfrac{1}{2}\kappa_A`.
+
+For an explicitly declared drive variable `u`, the corresponding trajectory expression is
+
+`\kappa_A^{(u)} = (d\phi/du)/(d\ln|H|/du)`,
+
+where the derivatives exist and the denominator is nonzero on the stated operating interval. Phase reference, input configuration, topology, output port, and operating interval must be identified. No single amplitude–phase curve or `\kappa_A` value is assumed to apply to every MZI.
+
+For a balanced 50:50 interferometric detector, the ideal signed optical cross-term is proportional to `2 Re(A B^*)`; detector polarity, responsivity, normalization, and reference planes belong in the implementation contract.
+
+#### What this does—and does not—claim
+
+- The modulator–interferometer cascade is the computational object under investigation; the exact device transfer must be derived and characterized for its declared topology.
+- The amplitude–phase relationship is treated as a designed computational resource, not presumed to be a universal material nonlinearity.
+- Tian et al.'s demonstrated device results, projected larger-scale performance, EIS hypotheses, simulations, and future measurements must remain separately identified.
+- This repository does not claim that EIS has fabricated or experimentally validated a large-scale KKA array or a complete photonic attention system.
+
+#### Formal specification and electromagnetic evidence
+
+The EIS implementation separates authority by domain:
+
+1. **Lean** specifies and checks mathematical conventions, device contracts, assumptions, and acceptance properties.
+2. **Lean-generated JSON** is the machine-readable interface from the formal specification to downstream tooling.
+3. **Python** validates that data contract and constructs reproducible simulation inputs; it does not redefine Lean's mathematical authority.
+4. **Electromagnetic simulation** produces solver-specific computational evidence, including complex modal amplitudes and phase.
+5. **Physical measurement** is a separate evidence class and is required for claims about fabricated-device behavior.
+
+The canonical KKA conventions and detector contracts are developed in [EIS-KKA-FORMAL-001 (PR #84)](https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/pull/84). The Lean-to-Tidy3D device-simulation bridge is developed separately in [EIS-TIDY3D-LEAN-001 (PR #86)](https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/pull/86). These pull requests are development artifacts; their status and evidence must be checked directly. A pull request, JSON file, or simulation setup is not itself a measurement.
+
+
 ## The "make your own" principle
 
 The repository is intended to support independent implementation.
