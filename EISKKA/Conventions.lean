@@ -77,7 +77,7 @@ noncomputable def kappaA_cell
     (response : CellPhaseResponse) (x : ℝ) : ℝ :=
   kappaA response.phaseLogA x
 
-/--
+/- 
 The cascade-level quantity is intentionally not defined as a sum of cell
 couplings. A future multiport cascade contract must define its composite
 transfer, selected output port and phase reference first.
@@ -103,7 +103,7 @@ theorem kappaI_eq_half_kappaA
   have hlin : HasDerivAt (fun y : ℝ => y / 2) (1 / 2) (2 * x) := by
     simpa [div_eq_mul_inv] using
       (hasDerivAt_mul_const (1 / 2) (x := 2 * x))
-  have hcomp := hphase.comp (2 * x) hlin
+  have hcomp := hphase.comp_of_eq hlin (by ring)
   calc
     kappaI phaseLogA x =
         deriv (phaseLogA ∘ (fun y : ℝ => y / 2)) (2 * x) := rfl
