@@ -1,7 +1,8 @@
 module
 
-import QuantumInfo.ForMathlib.HermitianMat.Unitary
-import Physlib.Particles.FlavorPhysics.CKMMatrix.Basic
+public import QuantumInfo.ForMathlib.HermitianMat.Unitary
+
+@[expose] public section
 
 /-!
 # EIS-KKA-FORMAL-001 — Physlib dependency boundary
