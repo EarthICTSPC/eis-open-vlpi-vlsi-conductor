@@ -34,7 +34,7 @@ The abstraction does not assume that photonic computation is inherently a Boolea
 
 ### KKA / PTC: amplitude–phase coupling as a computational primitive
 
-EIS's current photonic-computing research includes the Kramers–Kronig-inspired Photonic Transformer Chip (PTC) architecture described by Tian et al. The EIS engineering hypothesis is that a **designed and characterized amplitude–phase relationship in a data-driven modulator–interferometer cascade can carry the activation used by the computation**.
+EIS's current photonic-computing research includes the Kramers–Kronig-inspired Photonic Transformer Chip (PTC) architecture described by [Tian et al. (PhotoniX, 2025)](https://doi.org/10.1186/s43074-025-00182-7). The EIS engineering hypothesis is that a **designed and characterized amplitude–phase relationship in a data-driven modulator–interferometer cascade can carry the activation used by the computation**.
 
 This is a different design question from either adding a separate nonlinear optical effect or treating every amplitude–phase relationship as an unwanted distortion:
 
