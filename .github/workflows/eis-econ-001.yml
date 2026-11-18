@@ -28,3 +28,4 @@ jobs:
           python experiments/EIS-ECON-001/dashboard.py --assumptions experiments/EIS-ECON-001/assumptions.json --inputs experiments/EIS-ECON-001/inputs --out /tmp/eis-econ-output
           test -s /tmp/eis-econ-output/eis_econ_001_quarterly_dashboard.png
           test -s /tmp/eis-econ-output/california_reporting_readiness.json
+          test -s /tmp/eis-econ-output/eis_econ_001_california_reporting.png
