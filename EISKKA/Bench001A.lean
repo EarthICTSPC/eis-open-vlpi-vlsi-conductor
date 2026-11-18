@@ -185,7 +185,7 @@ def specJson (s : Shape) : Json :=
     , ("scope_note", toJson "Q/K/V projections are upstream and excluded from this attention-core ledger; report them separately when comparing a complete transformer block.")
     ]
 
-def main : IO Unit := do
-  IO.println (specJson exampleShape).compress
-
 end EISKKA.Bench001A
+
+def main : IO Unit := do
+  IO.println (EISKKA.Bench001A.specJson EISKKA.Bench001A.exampleShape).compress
