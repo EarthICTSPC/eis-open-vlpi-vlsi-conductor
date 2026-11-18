@@ -108,7 +108,44 @@ def make_dashboard(assumptions_path: str | Path, input_dir: str | Path,
     }
     with open(output_dir / "california_reporting_readiness.json", "w", encoding="utf-8") as f:
         json.dump(readiness, f, indent=2)
-    return [chart, output_dir / "california_reporting_readiness.json"]
+    # California operating dashboard: energy, spend and Scope 2 emissions remain separate.
+    ca_chart = output_dir / "eis_econ_001_california_reporting.png"
+    ca_fig, ca_axes = plt.subplots(3, 1, figsize=(10, 9), sharex=True)
+    if populated:
+        by_period: dict[str, dict[str, float]] = {}
+        for row in populated:
+            period = row.get("reporting_period", "")
+            if not period:
+                continue
+            bucket = by_period.setdefault(period, {"kwh": 0.0, "cost": 0.0, "scope2_location": 0.0, "scope2_market": 0.0})
+            for key, target in (("monthly_grid_electricity_kwh", "kwh"),
+                                ("grid_electricity_cost_usd", "cost"),
+                                ("scope2_location_based_kgco2e", "scope2_location"),
+                                ("scope2_market_based_kgco2e", "scope2_market")):
+                if row.get(key):
+                    bucket[target] += float(row[key])
+        periods = sorted(by_period)
+        if periods:
+            ca_axes[0].plot(periods, [by_period[x]["kwh"] for x in periods], marker="o")
+            ca_axes[1].plot(periods, [by_period[x]["cost"] for x in periods], marker="o")
+            ca_axes[2].plot(periods, [by_period[x]["scope2_location"] for x in periods], marker="o", label="Location-based")
+            ca_axes[2].plot(periods, [by_period[x]["scope2_market"] for x in periods], marker="s", label="Market-based")
+            ca_axes[2].legend()
+        else:
+            ca_axes[0].text(.5, .5, "Facility rows need reporting_period values", ha="center", va="center", transform=ca_axes[0].transAxes)
+    else:
+        ca_axes[0].text(.5, .5, "No California facility observations yet\\n(template only)", ha="center", va="center", transform=ca_axes[0].transAxes)
+    ca_axes[0].set_ylabel("Grid electricity (kWh)")
+    ca_axes[1].set_ylabel("Electricity cost (USD)")
+    ca_axes[2].set_ylabel("Scope 2 emissions (kgCO2e)")
+    ca_axes[2].set_xlabel("Reporting period")
+    for axis in ca_axes:
+        axis.grid(True, alpha=.25)
+    ca_fig.suptitle("California facility energy and Scope 2 reporting")
+    ca_fig.tight_layout(rect=(0, 0, 1, .96))
+    ca_fig.savefig(ca_chart, dpi=160)
+    plt.close(ca_fig)
+    return [chart, ca_chart, output_dir / "california_reporting_readiness.json"]
 
 
 def main() -> None:
