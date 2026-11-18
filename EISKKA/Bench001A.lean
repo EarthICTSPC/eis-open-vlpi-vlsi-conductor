@@ -1,5 +1,7 @@
 import Mathlib
 
+open Lean
+
 /-!
 EIS-KKA-BENCH-001A
 Formal boundary for Tian et al. PTC Eq. (1) and the attention comparison in Eq. (2).
