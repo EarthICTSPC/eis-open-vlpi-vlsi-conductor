@@ -34,7 +34,7 @@ Keep location-based and market-based Scope 2 emissions separate from the cost ca
 
 Annual accepted capacity is:
 
-`annual_accepted = peak_accepted_outputs_per_second × 3600 × operating_hours_per_year × utilization × uptime × acceptance_rate`
+`annual_accepted = peak_attempted_outputs_per_second × 3600 × operating_hours_per_year × utilization × uptime × acceptance_rate`
 
 Capital recovery factor:
 
@@ -46,7 +46,7 @@ where `i` is annual cost of capital and `n` is useful life in years. For zero di
 
 `capital_cost_per_accepted = annualized_capital_cost / annual_accepted`
 
-The model reports utilization explicitly. Low utilization increases capital cost per accepted output. The same method is applied to the electronic baseline and EIS candidate.
+The model reports utilization explicitly. Low utilization increases capital cost per accepted output. Peak throughput is defined as attempted outputs per second; acceptance rate is applied once to obtain accepted output capacity. The same method is applied to the electronic baseline and EIS candidate.
 
 ## 4. Cost and affordable premium
 
