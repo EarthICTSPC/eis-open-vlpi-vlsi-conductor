@@ -58,6 +58,22 @@ class DecisionModelTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             integrate_power_trace(rows, "t2", "component_rails", ["laser","control"])
 
+    def test_matched_comparison_reports_capex_headroom(self):
+        baseline = {"workload_id":"w","model_or_task_id":"m","input_set_hash":"h",
+                    "quality_contract_id":"q","latency_limit_ms":10,"throughput_target_outputs_s":2,
+                    "total_cost_per_accepted_usd":1.0,"variable_cost_per_accepted_usd":.7,
+                    "annual_accepted_outputs":1000,"capital_recovery_factor":.1,
+                    "net_capital_cost_basis_usd":2000}
+        candidate = {"workload_id":"w","model_or_task_id":"m","input_set_hash":"h",
+                     "quality_contract_id":"q","latency_limit_ms":10,"throughput_target_outputs_s":2,
+                     "total_cost_per_accepted_usd":.9,"variable_cost_per_accepted_usd":.5,
+                     "annual_accepted_outputs":1000,"capital_recovery_factor":.1,
+                     "net_capital_cost_basis_usd":3000}
+        result = compare_matched(baseline, candidate)
+        self.assertAlmostEqual(result["remaining_affordable_cost_per_accepted_usd"], .1)
+        self.assertAlmostEqual(result["maximum_affordable_total_eis_net_capex_usd"], 5000)
+        self.assertAlmostEqual(result["additional_capex_headroom_vs_candidate_usd"], 2000)
+
     def test_reject_mismatched_quality_contract(self):
         a = {"workload_id":"w","model_or_task_id":"m","input_set_hash":"h",
              "quality_contract_id":"q1","latency_limit_ms":10,"throughput_target_outputs_s":2,
