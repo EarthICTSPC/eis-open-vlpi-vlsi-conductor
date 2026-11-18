@@ -95,7 +95,7 @@ def make_dashboard(assumptions_path: str | Path, input_dir: str | Path,
         "tracked_fields": [
             "facility_id, reporting_period, facility_location, installed_it_capacity_mw",
             "monthly_grid_electricity_kwh, onsite_generation_kwh_by_type, onsite_fuel_by_type",
-            "storage_capacity_and_dispatch, renewable_procurement, pue",
+            "storage_capacity_and_dispatch, renewable_procurement, electricity_cost_and_tariff, hourly_or_monthly_grid_emissions_factor, scope2_location_and_market_based_emissions, caiso_zone_and_interval_data, pue",
             "water, cooling, waste_heat, source_document, data_owner, review_status"
         ],
         "regulatory_tracks": {
