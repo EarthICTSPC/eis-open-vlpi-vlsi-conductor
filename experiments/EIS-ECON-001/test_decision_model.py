@@ -11,7 +11,7 @@ class DecisionModelTests(unittest.TestCase):
         self.assertAlmostEqual(crf(.1, 10), .1627453949, places=8)
 
     def test_utilization_scales_annual_volume(self):
-        hw = {"peak_accepted_outputs_s":"10", "operating_hours_per_year":"1000",
+        hw = {"peak_attempted_outputs_s":"10", "operating_hours_per_year":"1000",
               "utilization":"0.5", "uptime":"0.9"}
         self.assertAlmostEqual(annual_accepted_outputs(hw, .8), 10*3600*1000*.5*.9*.8)
 
@@ -47,6 +47,16 @@ class DecisionModelTests(unittest.TestCase):
                  "boundary":"component_rails","calibration_id":"cal1","synchronized":"true"}]
         with self.assertRaises(ValueError):
             integrate_power_trace(rows, "t1", "component_rails", ["laser","control"])
+
+    def test_reject_unsynchronized_component_time_vectors(self):
+        rows = []
+        for component, times in (("laser", [0, 1]), ("control", [0, 2])):
+            for t in times:
+                rows.append({"trace_id":"t2","timestamp_s":str(t),"component":component,
+                             "power_w":"10","boundary":"component_rails",
+                             "calibration_id":"cal2","synchronized":"true"})
+        with self.assertRaises(ValueError):
+            integrate_power_trace(rows, "t2", "component_rails", ["laser","control"])
 
     def test_reject_mismatched_quality_contract(self):
         a = {"workload_id":"w","model_or_task_id":"m","input_set_hash":"h",
