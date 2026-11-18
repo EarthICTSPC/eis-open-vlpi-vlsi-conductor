@@ -44,6 +44,7 @@ def capital_cost_per_accepted(hw: dict[str, str], acceptance_rate: float) -> dic
     annualized = (capex - salvage) * factor
     return {
         "capital_recovery_factor": factor,
+        "net_capital_cost_basis_usd": capex - salvage,
         "annual_accepted_outputs": annual_volume,
         "annualized_capital_cost_usd": annualized,
         "capital_cost_per_accepted_usd": annualized / annual_volume,
@@ -182,9 +183,14 @@ def compare_matched(baseline: dict[str, Any], candidate: dict[str, Any]) -> dict
             0.0, base - candidate["variable_cost_per_accepted_usd"]),
         "baseline_annual_accepted_outputs": baseline["annual_accepted_outputs"],
         "eis_annual_accepted_outputs": candidate["annual_accepted_outputs"],
-        "maximum_affordable_total_eis_capex_usd": max(
+        "maximum_affordable_total_eis_net_capex_usd": max(
             0.0, base - candidate["variable_cost_per_accepted_usd"])
             * candidate["annual_accepted_outputs"] / candidate["capital_recovery_factor"],
+        "candidate_actual_net_capex_usd": candidate["net_capital_cost_basis_usd"],
+        "additional_capex_headroom_vs_candidate_usd": (
+            max(0.0, base - candidate["variable_cost_per_accepted_usd"])
+            * candidate["annual_accepted_outputs"] / candidate["capital_recovery_factor"]
+            - candidate["net_capital_cost_basis_usd"]),
         "interpretation": "Measured comparison under matched workload and contract; capex ceiling excludes unmodeled financing, deployment, tax and risk costs."
     }
 
