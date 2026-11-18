@@ -81,6 +81,7 @@ def accepted_cost(baseline_cost: float, energy_share: float, energy_cost_reducti
         "energy_cost_reduction_fraction": energy_cost_reduction,
         "energy_share_fraction": energy_share,
         "incremental_non_energy_cost": incremental_non_energy_cost,
+        "maximum_incremental_cost_before_parity": baseline_cost * energy_share * energy_cost_reduction,
     }
 
 
