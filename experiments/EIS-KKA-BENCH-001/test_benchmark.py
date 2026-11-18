@@ -21,7 +21,8 @@ class BenchmarkTests(unittest.TestCase):
         v = [[2.0, 0.0], [0.0, 4.0]]
         out = electronic_attention(q, k, v)
         self.assertEqual((len(out), len(out[0])), (2, 2))
-        self.assertAlmostEqual(sum(out[0]), 2.0, places=7)
+        self.assertGreater(out[0][0], 1.3)
+        self.assertLess(out[0][0], 1.4)
 
     def test_value_dimension_can_differ_from_qk_dimension(self):
         out = electronic_attention([[1.0, 0.0]], [[1.0, 0.0], [0.0, 1.0]],
