@@ -1,6 +1,9 @@
 name: EIS-KKA-BENCH-001A Lean equation and count reproduction
 
 on:
+  push:
+    branches:
+      - "eis-kka-bench-001a-lean-tian-equations"
   pull_request:
     paths:
       - "EISKKA/Bench001A.lean"
