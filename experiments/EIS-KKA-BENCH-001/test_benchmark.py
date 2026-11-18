@@ -65,6 +65,13 @@ class BenchmarkTests(unittest.TestCase):
         self.assertAlmostEqual(record.total_energy_j, 3.0)
         self.assertEqual(record.latency_s, 0.25)
 
+    def test_physical_record_rejects_unsynchronized_component_traces(self):
+        with self.assertRaises(ValueError):
+            physical_soi_record([[0.5]], {
+                "laser": [(0.0, 2.0), (1.0, 2.0)],
+                "detector": [(0.1, 1.0), (1.1, 1.0)],
+            }, latency_s=0.25)
+
     def test_operation_ledger_preserves_operation_types(self):
         ledger = softmax_operation_ledger(4, 2)
         self.assertEqual(ledger["softmax_exponentials"], 32)
