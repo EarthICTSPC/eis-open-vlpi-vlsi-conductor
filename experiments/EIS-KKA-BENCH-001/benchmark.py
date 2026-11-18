@@ -154,6 +154,15 @@ def physical_soi_record(detector_output: Matrix,
         raise ValueError("measured detector output and component power traces are required")
     if latency_s <= 0:
         raise ValueError("measured latency must be positive")
+    windows = set()
+    for name, trace in component_power_traces.items():
+        if not name:
+            raise ValueError("each measured component needs a non-empty name")
+        if len(trace) < 2:
+            raise ValueError("each component needs at least two power samples")
+        windows.add((trace[0][0], trace[-1][0]))
+    if len(windows) != 1:
+        raise ValueError("component power traces must share the same synchronized time window")
     energies = {name: integrate_power_trace(trace)
                 for name, trace in component_power_traces.items()}
     return PhysicalSOIRecord(detector_output, energies, sum(energies.values()), latency_s)
