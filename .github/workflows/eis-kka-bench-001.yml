@@ -1,0 +1,21 @@
+name: EIS-KKA-BENCH-001
+
+on:
+  pull_request:
+    paths:
+      - "experiments/EIS-KKA-BENCH-001/**"
+      - ".github/workflows/eis-kka-bench-001.yml"
+  workflow_dispatch:
+
+jobs:
+  python-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run benchmark unit tests
+        run: python -m unittest discover -s experiments/EIS-KKA-BENCH-001 -p 'test_*.py' -v
+      - name: Validate example manifest JSON
+        run: python -m json.tool experiments/EIS-KKA-BENCH-001/run_manifest.example.json > /dev/null
