@@ -61,6 +61,19 @@ These are not FLOPs and must not be subtracted from electronic MAC counts as if 
 
 The attention-core ledger excludes Q/K/V learned projections. Tian's paper also expresses Q, K and V generation using the interference operator; if the benchmark boundary includes those projections, they must be counted in a separate projection ledger with the actual input/weight dimensions. Do not silently omit or double-count them.
 
+## Worked count example
+
+For the Lean emitter's illustrative shape `H=2, S=10, d=5, d_v=5`:
+
+- 200 attention scores.
+- QK: 1,000 multiplications + 800 additions.
+- Score scaling: 200 multiplications.
+- Stable SoftMax: 180 row-max comparisons + 200 score subtractions + 200 exponentials + 180 row-sum additions + 200 divisions.
+- AV: 1,000 multiplications + 800 additions.
+- KKA logical field-pair samples: 1,000 for QK + 1,000 for value aggregation.
+
+The 200 score-scaling multiplications plus the five stable-SoftMax categories total 1,160 typed conventional operations that the KKA path is designed to bypass or replace. This is **not** a claim of 1,160 physical operations or a net system saving: the row reduction is replaced by time-domain integration, SoftMax approximation quality must be measured, and the KKA path adds interference, modulation, control, calibration and detector costs. QK/AV arithmetic terms are replaced by interference events, not counted as eliminated work.
+
 ## Generated artifacts
 
 - `EISKKA/Bench001A.lean`: theorem-backed field identities, exact Nat operation-count definitions and JSON emitter.
