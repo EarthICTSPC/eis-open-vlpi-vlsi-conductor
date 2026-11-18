@@ -133,8 +133,8 @@ def run_model(assumptions_path: str | Path, input_dir: str | Path,
         writer.writerows(capability)
 
     market_rows = load_csv(input_dir / "market_observations.csv")
-    api_price = weighted_api_price_per_million(market_rows)
     market_records = [r for r in market_rows if r.get("date") and r.get("provider")]
+    api_price = weighted_api_price_per_million(market_records)
 
     scenario_rows = build_scenario_rows(config)
     with open(output_dir / "eis_cost_scenarios.csv", "w", newline="", encoding="utf-8") as f:
