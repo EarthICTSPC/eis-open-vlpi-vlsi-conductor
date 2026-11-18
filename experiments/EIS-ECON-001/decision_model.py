@@ -23,7 +23,7 @@ def crf(rate: float, years: float) -> float:
 
 
 def annual_accepted_outputs(hw: dict[str, str], acceptance_rate: float) -> float:
-    peak = float(hw["peak_accepted_outputs_s"])
+    peak = float(hw["peak_attempted_outputs_s"])
     hours = float(hw["operating_hours_per_year"])
     utilization = float(hw["utilization"])
     uptime = float(hw["uptime"])
@@ -79,6 +79,11 @@ def integrate_power_trace(rows: list[dict[str, str]], trace_id: str,
             raise ValueError("component rail set must exactly match required_components; avoid omissions and overlap")
     else:
         raise ValueError("unsupported boundary; use facility_meter or component_rails")
+
+    if expected_boundary == "component_rails":
+        time_vectors = {component: [t for t, _ in sorted(samples)] for component, samples in by_component.items()}
+        if len({tuple(times) for times in time_vectors.values()}) != 1:
+            raise ValueError("component rails must share identical synchronized timestamps")
 
     total_j = 0.0
     component_j = {}
@@ -172,11 +177,12 @@ def compare_matched(baseline: dict[str, Any], candidate: dict[str, Any]) -> dict
         "savings_per_accepted_usd": delta,
         "cost_reduction_fraction": delta / base if base else None,
         "eis_advantage": delta > 0,
-        "maximum_incremental_eis_cost_per_accepted_usd": max(
+        "remaining_affordable_cost_per_accepted_usd": max(0.0, delta),
+        "maximum_affordable_total_eis_capital_cost_per_accepted_usd": max(
             0.0, base - candidate["variable_cost_per_accepted_usd"]),
         "baseline_annual_accepted_outputs": baseline["annual_accepted_outputs"],
         "eis_annual_accepted_outputs": candidate["annual_accepted_outputs"],
-        "maximum_incremental_eis_capex_usd": max(
+        "maximum_affordable_total_eis_capex_usd": max(
             0.0, base - candidate["variable_cost_per_accepted_usd"])
             * candidate["annual_accepted_outputs"] / candidate["capital_recovery_factor"],
         "interpretation": "Measured comparison under matched workload and contract; capex ceiling excludes unmodeled financing, deployment, tax and risk costs."
