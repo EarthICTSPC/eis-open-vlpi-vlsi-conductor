@@ -46,7 +46,7 @@ theorem interference_identity (a b : Field) :
 Ideal balanced photodetection with fields (a+b)/sqrt(2) and (a-b)/sqrt(2).
 The factor 1/2 inside the difference is the 50:50 field-normalization factor.
 -/
-def balancedDifference (responsivity : ℝ) (a b : Field) : ℝ :=
+noncomputable def balancedDifference (responsivity : ℝ) (a b : Field) : ℝ :=
   responsivity * ((intensity (add a b) - intensity (sub a b)) / 2)
 
 /-- The self-intensity terms cancel in ideal balanced detection. -/
