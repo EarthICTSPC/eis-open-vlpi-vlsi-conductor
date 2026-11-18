@@ -1,0 +1,40 @@
+name: EIS-KKA-BENCH-001A Lean equation and count reproduction
+
+on:
+  pull_request:
+    paths:
+      - "EISKKA/Bench001A.lean"
+      - "EISKKA.lean"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - "experiments/EIS-KKA-BENCH-001A/**"
+      - ".github/workflows/eis-kka-bench-001a.yml"
+  workflow_dispatch:
+
+jobs:
+  formal-and-generated-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          build-args: "--wfail"
+          axiom-audit: true
+          axiom-audit-allow: "propext,Classical.choice,Quot.sound"
+      - name: Emit machine-readable specification from Lean
+        run: lake exe eis_kka_bench_001a > experiments/EIS-KKA-BENCH-001A/formal_spec.generated.json
+      - name: Generate Python from Lean output
+        run: python3 experiments/EIS-KKA-BENCH-001A/generate_python.py
+      - name: Check generated Python is committed and current
+        run: git diff --exit-code -- experiments/EIS-KKA-BENCH-001A/formal_counts.py
+      - name: Run generated-Python tests
+        run: python3 -m unittest discover -s experiments/EIS-KKA-BENCH-001A -p 'test_*.py' -v
+      - name: Reject unfinished Lean proofs
+        shell: bash
+        run: |
+          if grep -R -n -E '\bsorry\b|^[[:space:]]*axiom[[:space:]]' EISKKA/Bench001A.lean; then
+            echo "Unreviewed sorry/custom axiom declaration found"
+            exit 1
+          fi
