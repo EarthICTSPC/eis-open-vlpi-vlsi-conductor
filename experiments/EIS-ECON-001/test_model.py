@@ -29,6 +29,7 @@ class EconModelTests(unittest.TestCase):
         result = accepted_cost(1.0, .5, .3, .02)
         self.assertAlmostEqual(result["eis_cost_per_accepted"], .87)
         self.assertTrue(result["break_even"])
+        self.assertAlmostEqual(result["maximum_incremental_cost_before_parity"], .15)
 
     def test_no_advantage_if_incremental_cost_exceeds_energy_saving(self):
         result = accepted_cost(1.0, .3, .2, .08)
