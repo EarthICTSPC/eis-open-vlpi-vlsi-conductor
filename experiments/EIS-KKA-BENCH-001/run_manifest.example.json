@@ -1,0 +1,50 @@
+{
+  "benchmark_id": "EIS-KKA-BENCH-001",
+  "schema_version": "0.1.0",
+  "evidence_level": "E0",
+  "status": "example_not_run",
+  "workload": {
+    "model_id": "REQUIRED",
+    "model_revision": "REQUIRED",
+    "dataset_id": "REQUIRED",
+    "dataset_revision": "REQUIRED",
+    "batch_size": null,
+    "sequence_length": null,
+    "heads": null,
+    "head_dimension": null,
+    "dtype": "REQUIRED",
+    "causal_mask": null,
+    "kv_cache_policy": "REQUIRED"
+  },
+  "configuration": {
+    "kind": "electronic_baseline | electronic_kka_reference | physical_soi_kka",
+    "source_revision": "REQUIRED",
+    "operator_equation_reference": "REQUIRED_FOR_KKA",
+    "complex_transfer_data_sha256": null,
+    "phase_reference": null,
+    "detector_convention": null,
+    "calibration_record": null
+  },
+  "acceptance": {
+    "max_absolute_error": null,
+    "rms_error": null,
+    "minimum_cosine_similarity": null,
+    "task_quality_metric": "REQUIRED",
+    "latency_limit_seconds": null
+  },
+  "energy": {
+    "boundary": "REQUIRED",
+    "power_trace_file": null,
+    "power_trace_sha256": null,
+    "instrument_calibration_id": null,
+    "includes_laser": null,
+    "includes_modulator_drive": null,
+    "includes_phase_control": null,
+    "includes_detector_tia_adc": null,
+    "includes_calibration": null,
+    "includes_memory_and_control": null,
+    "includes_cooling": null,
+    "measurement_status": "not_measured"
+  },
+  "notes": "Synthetic fixture values in tests are not physical evidence."
+}
