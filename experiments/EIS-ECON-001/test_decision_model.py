@@ -18,7 +18,7 @@ class DecisionModelTests(unittest.TestCase):
     def test_capital_cost_per_accepted(self):
         hw = {"capex_usd":"100000", "salvage_value_usd":"0",
               "useful_life_years":"10", "annual_cost_of_capital":"0",
-              "peak_accepted_outputs_s":"10", "operating_hours_per_year":"1000",
+              "peak_attempted_outputs_s":"10", "operating_hours_per_year":"1000",
               "utilization":"0.5", "uptime":"1"}
         r = capital_cost_per_accepted(hw, 1)
         self.assertAlmostEqual(r["annualized_capital_cost_usd"], 10000)
