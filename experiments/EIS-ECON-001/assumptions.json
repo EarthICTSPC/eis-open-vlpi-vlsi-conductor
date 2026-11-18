@@ -1,0 +1,35 @@
+{
+  "model_version": "0.1.0",
+  "currency": "USD",
+  "capability_price_scenario": {
+    "base_index": 100.0,
+    "years": [2026, 2027, 2028, 2029, 2030],
+    "annual_decline_factors": [5.0, 13.0],
+    "interpretation": "Price level divided by 5 or 13 each year. Scenario only; not a universal market observation."
+  },
+  "workload_scenario": {
+    "baseline_cost_per_accepted_usd": 0.01,
+    "baseline_cost_note": "Illustrative placeholder only; replace with a measured all-in electronic baseline for a declared workload.",
+    "scenarios": [
+      {
+        "name": "Conservative",
+        "energy_share": 0.30,
+        "energy_cost_reduction": 0.20,
+        "incremental_non_energy_cost_usd": 0.0
+      },
+      {
+        "name": "Central",
+        "energy_share": 0.50,
+        "energy_cost_reduction": 0.30,
+        "incremental_non_energy_cost_usd": 0.0
+      },
+      {
+        "name": "High-upside",
+        "energy_share": 0.70,
+        "energy_cost_reduction": 0.40,
+        "incremental_non_energy_cost_usd": 0.0
+      }
+    ],
+    "scenario_note": "Energy share and energy-cost reduction are sensitivity assumptions, not measured EIS parameters. Incremental non-energy cost is explicitly included and should not be left at zero for an investment-grade case."
+  }
+}
