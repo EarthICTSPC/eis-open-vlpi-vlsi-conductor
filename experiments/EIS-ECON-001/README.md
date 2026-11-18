@@ -33,7 +33,7 @@ The quarterly dashboard includes a California reporting-readiness register. It i
 - **SB 253:** CARB's 2026 first-year Scope 1 and 2 reporting deadline was November 10, 2026 for covered U.S.-based entities with more than $1 billion annual revenue doing business in California. Scope 3 begins in 2027 under subsequent rulemaking. This is not presumed applicable to EIS.
 - **SB 261:** enforcement remains enjoined while appellate proceedings are pending; CARB says it will not enforce the statutory deadline during the injunction. Track status; do not mark as an active mandatory filing absent updated legal guidance.
 
-California data fields tracked: monthly grid electricity (kWh), on-site generation and fuel by type, storage, renewable procurement/attributes, PUE, IT load/capacity, water, cooling and waste heat where available; location and facility-size/threshold evidence; reporting owner, period, source and status. Preserve confidentiality and statutory limits on disclosure.
+California data fields tracked: monthly grid electricity (kWh), electricity cost and tariff, on-site generation and fuel by type, storage, renewable procurement/attributes, location-based and market-based Scope 2 emissions, hourly/interval emissions factors and CAISO zone where available, PUE, IT load/capacity, water, cooling and waste heat where available; location and facility-size/threshold evidence; reporting owner, period, source and status. Preserve confidentiality and statutory limits on disclosure.
 
 Official and primary references:
 - CEC data centers: https://www.energy.ca.gov/programs-and-topics/topics/data-centers
