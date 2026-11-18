@@ -1,0 +1,9 @@
+{
+  "model_version": "0.2.0",
+  "effective_electricity_tariff_usd_per_kwh": null,
+  "tariff_source": "",
+  "tariff_period": "",
+  "power_trace_boundary": "facility_meter",
+  "required_components": [],
+  "evidence_rule": "Only calibrated synchronized facility_meter or explicitly non-overlapping component_rails traces qualify as measured system energy."
+}
