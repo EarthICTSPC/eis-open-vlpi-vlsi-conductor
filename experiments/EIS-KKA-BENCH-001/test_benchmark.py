@@ -1,6 +1,7 @@
 import unittest
 from benchmark import (compare_outputs, electronic_attention,
-    electronic_kka_reference, integrate_power_trace, softmax_operation_ledger)
+    electronic_kka_reference, integrate_power_trace, physical_soi_record,
+    softmax_operation_ledger)
 
 
 def fixture_kka_operator(q_fields, k_fields, causal_offset):
@@ -21,6 +22,11 @@ class BenchmarkTests(unittest.TestCase):
         out = electronic_attention(q, k, v)
         self.assertEqual((len(out), len(out[0])), (2, 2))
         self.assertAlmostEqual(sum(out[0]), 2.0, places=7)
+
+    def test_value_dimension_can_differ_from_qk_dimension(self):
+        out = electronic_attention([[1.0, 0.0]], [[1.0, 0.0], [0.0, 1.0]],
+                                   [[3.0], [9.0]])
+        self.assertEqual(len(out[0]), 1)
 
     def test_causal_attention(self):
         q = [[1.0, 0.0], [0.0, 1.0]]
@@ -49,6 +55,14 @@ class BenchmarkTests(unittest.TestCase):
     def test_power_trace_rejects_non_monotonic_time(self):
         with self.assertRaises(ValueError):
             integrate_power_trace([(1.0, 2.0), (1.0, 3.0)])
+
+    def test_physical_record_integrates_component_traces(self):
+        record = physical_soi_record([[0.5]], {
+            "laser": [(0.0, 2.0), (1.0, 2.0)],
+            "detector": [(0.0, 1.0), (1.0, 1.0)],
+        }, latency_s=0.25)
+        self.assertAlmostEqual(record.total_energy_j, 3.0)
+        self.assertEqual(record.latency_s, 0.25)
 
     def test_operation_ledger_preserves_operation_types(self):
         ledger = softmax_operation_ledger(4, 2)
