@@ -1,5 +1,7 @@
-import Mathlib
-import EISKKA.Bench001A
+module
+
+public import Mathlib
+public import EISKKA.Bench001A
 
 /-!
 EIS-KKA-CONTRACT-001
@@ -83,7 +85,6 @@ structure DetectorCalibration where
   gainMinus : ℝ
   offsetPlus : ℝ
   offsetMinus : ℝ
-deriving Repr
 
 def plusBranchCurrent (cal : DetectorCalibration) (a b : Field) : ℝ :=
   cal.responsivity * cal.gainPlus * plusPortPower a b + cal.offsetPlus
@@ -112,7 +113,6 @@ structure OperatingPoint where
   phaseReferenceRad : ℝ
   biasValue : Option ℝ
   biasUnit : Option String
-deriving Repr
 
 /-- Process-independent numerical limits; units are declared by the operating point. -/
 structure AcceptanceLimits where
@@ -124,7 +124,6 @@ structure AcceptanceLimits where
   maxKappaA : ℝ
   maxNoiseRmsA : Option ℝ
   minBandwidthHz : Option ℝ
-deriving Repr
 
 structure EvidenceRecord where
   evidenceClass : EvidenceClass
@@ -145,13 +144,11 @@ structure EvidenceRecord where
   kappaA : ℝ
   noiseRmsA : Option ℝ
   bandwidthHz : Option ℝ
-deriving Repr
 
 structure AcceptanceContract where
   contractId : String
   version : String
   limits : AcceptanceLimits
-deriving Repr
 
 def AcceptanceLimits.WellFormed (limits : AcceptanceLimits) : Prop :=
   0 ≤ limits.maxAbsResidual ∧
