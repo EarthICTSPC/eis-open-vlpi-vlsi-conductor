@@ -110,6 +110,8 @@ structure OperatingPoint where
   driveUnit : String
   fieldPowerUnit : String
   phaseReferenceRad : ℝ
+  biasValue : Option ℝ
+  biasUnit : Option String
 deriving Repr
 
 /-- Process-independent numerical limits; units are declared by the operating point. -/
@@ -134,6 +136,7 @@ structure EvidenceRecord where
   calibrationRecordId : String
   rawDataSha256 : String
   operatingPoint : OperatingPoint
+  detectorCalibration : DetectorCalibration
   sampleCount : Nat
   absResidual : ℝ
   standardUncertainty : ℝ
@@ -187,6 +190,12 @@ def passesPhysicalAcceptance
   0 < evidence.operatingPoint.wavelengthNm ∧
   evidence.operatingPoint.driveUnit ≠ "" ∧
   evidence.operatingPoint.fieldPowerUnit ≠ "" ∧
+  ((evidence.operatingPoint.biasValue = none ∧ evidence.operatingPoint.biasUnit = none) ∨
+    (∃ value unitName, evidence.operatingPoint.biasValue = some value ∧
+      evidence.operatingPoint.biasUnit = some unitName ∧ unitName ≠ "")) ∧
+  0 ≤ evidence.detectorCalibration.responsivity ∧
+  0 ≤ evidence.detectorCalibration.gainPlus ∧
+  0 ≤ evidence.detectorCalibration.gainMinus ∧
   0 < evidence.sampleCount ∧
   0 ≤ evidence.absResidual ∧
   evidence.absResidual ≤ contract.limits.maxAbsResidual ∧
