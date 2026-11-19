@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://earthictspc.com/schemas/eis-vlpi-acceptance-001.schema.json",
+  "title": "EIS VLPI Primitive Qualification Evidence",
+  "description": "Process-independent evidence manifest. A physical pass requires physically measured evidence with traceable device, instrument, calibration, raw-data provenance, operating point and uncertainty.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "contract",
+    "evidence_class",
+    "device",
+    "process",
+    "layout_revision",
+    "detector_calibration",
+    "instrument",
+    "instrument_calibration_id",
+    "calibration_record_id",
+    "raw_data_sha256",
+    "operating_point",
+    "sample_count",
+    "metrics",
+    "acceptance_limits",
+    "decision"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "EIS-VLPI-ACCEPTANCE-001"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_id",
+        "version"
+      ],
+      "properties": {
+        "contract_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formal_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formal_commit": {
+          "type": "string",
+          "minLength": 7
+        }
+      }
+    },
+    "evidence_class": {
+      "enum": [
+        "formal",
+        "simulated",
+        "synthetic",
+        "physically_measured"
+      ]
+    },
+    "device": {
+      "type": "string",
+      "minLength": 1
+    },
+    "process": {
+      "type": "string",
+      "minLength": 1
+    },
+    "layout_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instrument": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instrument_calibration_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "calibration_record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "raw_data_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "operating_point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "wavelength_nm",
+        "temperature_c",
+        "drive_value",
+        "drive_unit",
+        "field_power_unit",
+        "phase_reference_rad"
+      ],
+      "properties": {
+        "wavelength_nm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "temperature_c": {
+          "type": "number"
+        },
+        "drive_value": {
+          "type": "number"
+        },
+        "drive_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bias_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "bias_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phase_reference_rad": {
+          "type": "number"
+        },
+        "field_power_unit": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "sample_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "abs_residual",
+        "standard_uncertainty",
+        "visibility",
+        "insertion_loss_db",
+        "kappa_a"
+      ],
+      "properties": {
+        "abs_residual": {
+          "type": "number",
+          "minimum": 0
+        },
+        "standard_uncertainty": {
+          "type": "number",
+          "minimum": 0
+        },
+        "visibility": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "insertion_loss_db": {
+          "type": "number",
+          "minimum": 0
+        },
+        "kappa_a": {
+          "type": "number"
+        },
+        "kappa_i": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "noise_rms_a": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bandwidth_hz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "acceptance_limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_abs_residual",
+        "max_standard_uncertainty",
+        "min_visibility",
+        "max_insertion_loss_db",
+        "min_kappa_a",
+        "max_kappa_a"
+      ],
+      "properties": {
+        "max_abs_residual": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_standard_uncertainty": {
+          "type": "number",
+          "minimum": 0
+        },
+        "min_visibility": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "max_insertion_loss_db": {
+          "type": "number",
+          "minimum": 0
+        },
+        "min_kappa_a": {
+          "type": "number"
+        },
+        "max_kappa_a": {
+          "type": "number"
+        },
+        "max_noise_rms_a": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "min_bandwidth_hz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "decision": {
+      "enum": [
+        "not_evaluated",
+        "pass",
+        "fail",
+        "blocked"
+      ]
+    },
+    "decision_rationale": {
+      "type": "string"
+    },
+    "evidence_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "sha256"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uri": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "detector_calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "responsivity_value",
+        "responsivity_unit",
+        "gain_plus",
+        "gain_minus",
+        "offset_plus_a",
+        "offset_minus_a"
+      ],
+      "properties": {
+        "responsivity_value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "responsivity_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gain_plus": {
+          "type": "number",
+          "minimum": 0
+        },
+        "gain_minus": {
+          "type": "number",
+          "minimum": 0
+        },
+        "offset_plus_a": {
+          "type": "number"
+        },
+        "offset_minus_a": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "pass"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence_class": {
+            "const": "physically_measured"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "acceptance_limits": {
+            "required": [
+              "max_noise_rms_a"
+            ],
+            "properties": {
+              "max_noise_rms_a": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "metrics": {
+            "required": [
+              "noise_rms_a"
+            ],
+            "properties": {
+              "noise_rms_a": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "acceptance_limits": {
+            "required": [
+              "min_bandwidth_hz"
+            ],
+            "properties": {
+              "min_bandwidth_hz": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "metrics": {
+            "required": [
+              "bandwidth_hz"
+            ],
+            "properties": {
+              "bandwidth_hz": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
