@@ -34,8 +34,7 @@ deriving Repr
 def TransferSample.toField (sample : TransferSample) : Field :=
   amplitudePhaseField sample.amplitude sample.phaseRad
 
-/-- κ_A = (dφ/du) / (d ln(A)/du)
-    = (dφ/du) / ((dA/du)/A), on a regular operating point. -/
+/-- κ_A = (dφ/du) / (d ln(A)/du) = (dφ/du) / ((dA/du)/A). -/
 noncomputable def kappaAFromDrive
     (amplitude phaseRad : ℝ → ℝ) (u : ℝ) : ℝ :=
   deriv phaseRad u / (deriv amplitude u / amplitude u)
@@ -64,10 +63,16 @@ def minusPortPower (a b : Field) : ℝ :=
 noncomputable def idealBalancedOutput (r : ℝ) (a b : Field) : ℝ :=
   balancedDifference r a b
 
+/-- Difference of the normalized ideal output powers is the signed cross term. -/
+lemma balanced_port_power_difference (a b : Field) :
+    plusPortPower a b - minusPortPower a b = 2 * crossTerm a b := by
+  simp [plusPortPower, minusPortPower, intensity, add, sub, crossTerm]
+  ring
+
 /-- Ideal balanced detection retains the signed cross term:
     Y = 2 r Re(a * conj(b)).
     Assumes a 50:50 combiner and matched detector branches. -/
-theorem ideal_balanced_detector_identity (r : ℝ) (a b : Field) :
+lemma ideal_balanced_detector_identity (r : ℝ) (a b : Field) :
     idealBalancedOutput r a b = 2 * r * crossTerm a b := by
   exact balanced_difference_identity r a b
 
@@ -97,12 +102,26 @@ inductive EvidenceClass
   | physicallyMeasured
 deriving Repr, DecidableEq
 
-/-- Process-independent numerical limits; units are declared in the evidence manifest. -/
+/-- Operating conditions and field normalization used to interpret measurements. -/
+structure OperatingPoint where
+  wavelengthNm : ℝ
+  temperatureC : ℝ
+  driveValue : ℝ
+  driveUnit : String
+  fieldPowerUnit : String
+  phaseReferenceRad : ℝ
+deriving Repr
+
+/-- Process-independent numerical limits; units are declared by the operating point. -/
 structure AcceptanceLimits where
   maxAbsResidual : ℝ
   maxStandardUncertainty : ℝ
   minVisibility : ℝ
   maxInsertionLossDb : ℝ
+  minKappaA : ℝ
+  maxKappaA : ℝ
+  maxNoiseRmsA : Option ℝ
+  minBandwidthHz : Option ℝ
 deriving Repr
 
 structure EvidenceRecord where
@@ -114,12 +133,15 @@ structure EvidenceRecord where
   instrumentCalibrationId : String
   calibrationRecordId : String
   rawDataSha256 : String
-  operatingPointId : String
+  operatingPoint : OperatingPoint
   sampleCount : Nat
   absResidual : ℝ
   standardUncertainty : ℝ
   visibility : ℝ
   insertionLossDb : ℝ
+  kappaA : ℝ
+  noiseRmsA : Option ℝ
+  bandwidthHz : Option ℝ
 deriving Repr
 
 structure AcceptanceContract where
@@ -132,21 +154,39 @@ def AcceptanceLimits.WellFormed (limits : AcceptanceLimits) : Prop :=
   0 ≤ limits.maxAbsResidual ∧
   0 ≤ limits.maxStandardUncertainty ∧
   0 ≤ limits.minVisibility ∧ limits.minVisibility ≤ 1 ∧
-  0 ≤ limits.maxInsertionLossDb
+  0 ≤ limits.maxInsertionLossDb ∧
+  limits.minKappaA ≤ limits.maxKappaA ∧
+  (limits.maxNoiseRmsA = none ∨ ∃ bound, limits.maxNoiseRmsA = some bound ∧ 0 ≤ bound) ∧
+  (limits.minBandwidthHz = none ∨ ∃ bound, limits.minBandwidthHz = some bound ∧ 0 ≤ bound)
 
-/-- A physical pass requires measured evidence, complete provenance, samples,
-    and every numerical limit to be satisfied. -/
+def optionalUpperBoundPasses (limit measurement : Option ℝ) : Prop :=
+  match limit, measurement with
+  | none, _ => True
+  | some bound, some value => 0 ≤ value ∧ value ≤ bound
+  | some _, none => False
+
+def optionalLowerBoundPasses (limit measurement : Option ℝ) : Prop :=
+  match limit, measurement with
+  | none, _ => True
+  | some bound, some value => 0 ≤ value ∧ bound ≤ value
+  | some _, none => False
+
+/-- A physical pass requires measured evidence, complete provenance, an
+    operating point, KKA trajectory value, and every enabled numerical limit. -/
 def passesPhysicalAcceptance
     (contract : AcceptanceContract) (evidence : EvidenceRecord) : Prop :=
   contract.limits.WellFormed ∧
   evidence.evidenceClass = EvidenceClass.physicallyMeasured ∧
   evidence.deviceId ≠ "" ∧
   evidence.processId ≠ "" ∧
+  evidence.layoutRevision ≠ "" ∧
   evidence.instrumentId ≠ "" ∧
   evidence.instrumentCalibrationId ≠ "" ∧
   evidence.calibrationRecordId ≠ "" ∧
   evidence.rawDataSha256 ≠ "" ∧
-  evidence.operatingPointId ≠ "" ∧
+  0 < evidence.operatingPoint.wavelengthNm ∧
+  evidence.operatingPoint.driveUnit ≠ "" ∧
+  evidence.operatingPoint.fieldPowerUnit ≠ "" ∧
   0 < evidence.sampleCount ∧
   0 ≤ evidence.absResidual ∧
   evidence.absResidual ≤ contract.limits.maxAbsResidual ∧
@@ -155,10 +195,14 @@ def passesPhysicalAcceptance
   0 ≤ evidence.visibility ∧ evidence.visibility ≤ 1 ∧
   contract.limits.minVisibility ≤ evidence.visibility ∧
   0 ≤ evidence.insertionLossDb ∧
-  evidence.insertionLossDb ≤ contract.limits.maxInsertionLossDb
+  evidence.insertionLossDb ≤ contract.limits.maxInsertionLossDb ∧
+  contract.limits.minKappaA ≤ evidence.kappaA ∧
+  evidence.kappaA ≤ contract.limits.maxKappaA ∧
+  optionalUpperBoundPasses contract.limits.maxNoiseRmsA evidence.noiseRmsA ∧
+  optionalLowerBoundPasses contract.limits.minBandwidthHz evidence.bandwidthHz
 
 /-- Simulated, synthetic or formal evidence alone cannot satisfy physical qualification. -/
-theorem nonphysical_evidence_cannot_pass
+lemma nonphysical_evidence_cannot_pass
     (contract : AcceptanceContract) (evidence : EvidenceRecord)
     (h : passesPhysicalAcceptance contract evidence) :
     evidence.evidenceClass = EvidenceClass.physicallyMeasured :=
