@@ -80,6 +80,7 @@ lemma ideal_balanced_detector_identity (r : ℝ) (a b : Field) :
 /-- Explicit branch calibration parameters for a nonideal detector. -/
 structure DetectorCalibration where
   responsivity : ℝ
+  responsivityUnit : String
   gainPlus : ℝ
   gainMinus : ℝ
   offsetPlus : ℝ
@@ -190,6 +191,7 @@ def passesPhysicalAcceptance
     (∃ value unitName, evidence.operatingPoint.biasValue = some value ∧
       evidence.operatingPoint.biasUnit = some unitName ∧ unitName ≠ "")) ∧
   0 ≤ evidence.detectorCalibration.responsivity ∧
+  evidence.detectorCalibration.responsivityUnit ≠ "" ∧
   0 ≤ evidence.detectorCalibration.gainPlus ∧
   0 ≤ evidence.detectorCalibration.gainMinus ∧
   0 < evidence.sampleCount ∧
