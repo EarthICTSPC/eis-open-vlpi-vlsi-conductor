@@ -52,7 +52,7 @@ I_diff = R(g_plus P_plus - g_minus P_minus) + o_plus - o_minus.
 
 ### Acceptance and evidence
 
-A physical pass requires physically measured evidence, device/process/layout identity, instrument identity and calibration record, calibration procedure record, operating point (including wavelength, temperature, drive units, phase reference and field-power normalization), sample count, raw-data SHA-256, residual, standard uncertainty, visibility, insertion loss, and a measured kappa_A inside the contract's declared range. Optional noise and bandwidth limits become mandatory evidence when enabled in the contract. Limits are configuration values; EIS must set them from the intended device and workload rather than invent universal thresholds.
+A physical pass requires physically measured evidence, device/process/layout identity, instrument identity and calibration record, calibration procedure record, operating point (including wavelength, temperature, drive units, optional bias, phase reference and field-power normalization), explicit detector responsivity/gains/offsets, sample count, raw-data SHA-256, residual, standard uncertainty, visibility, insertion loss, and a measured kappa_A inside the contract's declared range. Optional noise and bandwidth limits become mandatory evidence when enabled in the contract. Limits are configuration values; EIS must set them from the intended device and workload rather than invent universal thresholds.
 
 Formal, simulated and synthetic records are useful but cannot produce a physical pass. Unknown values remain unknown/null; they are not zero.
 
