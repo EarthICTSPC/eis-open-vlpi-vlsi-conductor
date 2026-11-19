@@ -45,7 +45,7 @@ With polarity I_plus - I_minus, matched responsivity R, and ideal branches:
 
 I_plus - I_minus = 2 R Re(a conj(b)).
 
-The cross term is signed and must not be clipped. If |E|² is expressed in watts, R is A/W. If fields are dimensionless normalized envelopes, responsivity is A per normalized-power unit. The experiment must declare which interpretation applies.
+The cross term is signed and must not be clipped. If |E|² is expressed in watts, R is A/W. If fields are dimensionless normalized envelopes, responsivity is A per normalized-power unit. The evidence manifest records the responsivity value and unit explicitly; the experiment must declare which interpretation applies.
 
 The nonideal reference model preserves separate branch gains and offsets:
 I_diff = R(g_plus P_plus - g_minus P_minus) + o_plus - o_minus.
