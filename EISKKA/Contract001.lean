@@ -31,7 +31,6 @@ structure TransferSample where
   amplitude : ℝ
   phaseRad : ℝ
   amplitude_nonneg : 0 ≤ amplitude
-deriving Repr
 
 def TransferSample.toField (sample : TransferSample) : Field :=
   amplitudePhaseField sample.amplitude sample.phaseRad
