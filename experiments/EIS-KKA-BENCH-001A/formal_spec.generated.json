@@ -1,0 +1,27 @@
+{
+  "spec_id": "EIS-KKA-BENCH-001A",
+  "spec_version": "0.1.0",
+  "source_equation": "Tian et al., PTC (2025), Eq. 1 and Eq. 2",
+  "interference_equation": "|a+b|^2 = |a|^2 + |b|^2 + 2 Re(a conj(b))",
+  "balanced_detector_equation": "Y = 2 R Re(a conj(b))",
+  "tian_eq2_status": "approximation_claim_not_universal_identity",
+  "shape": {"heads": 2, "sequence_length": 10, "head_dimension": 5, "value_dimension": 5},
+  "operation_ledger": {
+    "score_count": 200,
+    "qk_multiplications": 1000,
+    "qk_additions": 800,
+    "score_scaling_multiplications": 200,
+    "softmax_row_max_comparisons": 180,
+    "softmax_score_subtractions": 200,
+    "softmax_exponentials": 200,
+    "softmax_row_sum_additions": 180,
+    "softmax_normalization_divisions": 200,
+    "av_multiplications": 1000,
+    "av_additions": 800,
+    "kka_qk_interference_samples": 1000,
+    "kka_av_interference_samples": 1000,
+    "kka_total_interference_samples": 2000
+  },
+  "counting_note": "Interference samples are logical field-pair events, not FLOPs, cycles, or measured device operations.",
+  "scope_note": "Q/K/V projections are upstream and excluded from this attention-core ledger; report them separately when comparing a complete transformer block."
+}
