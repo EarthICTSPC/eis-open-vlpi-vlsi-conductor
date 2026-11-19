@@ -1,4 +1,6 @@
-import Mathlib
+module
+
+public import Mathlib
 
 open Lean
 
@@ -18,7 +20,6 @@ namespace EISKKA.Bench001A
 structure Field where
   re : ℝ
   im : ℝ
-deriving Repr
 
 def add (a b : Field) : Field := ⟨a.re + b.re, a.im + b.im⟩
 def sub (a b : Field) : Field := ⟨a.re - b.re, a.im - b.im⟩
