@@ -288,16 +288,21 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "responsivity_a_per_w",
+        "responsivity_value",
+        "responsivity_unit",
         "gain_plus",
         "gain_minus",
         "offset_plus_a",
         "offset_minus_a"
       ],
       "properties": {
-        "responsivity_a_per_w": {
+        "responsivity_value": {
           "type": "number",
           "minimum": 0
+        },
+        "responsivity_unit": {
+          "type": "string",
+          "minLength": 1
         },
         "gain_plus": {
           "type": "number",
