@@ -18,7 +18,7 @@ namespace EISKKA.Bench001A
 structure Field where
   re : ℝ
   im : ℝ
-deriving Repr
+deriving
 
 def add (a b : Field) : Field := ⟨a.re + b.re, a.im + b.im⟩
 def sub (a b : Field) : Field := ⟨a.re - b.re, a.im - b.im⟩
