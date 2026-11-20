@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - "eis-kka-bench-001a-lean-tian-equations"
+      - "eis-kka-frontier-001-model-map"
   pull_request:
     paths:
       - "EISKKA/Bench001A.lean"
+      - "EISKKA/Contract001.lean"
+      - "EISKKA/Frontier001.lean"
       - "EISKKA.lean"
       - "lakefile.lean"
       - "lake-manifest.json"
@@ -37,7 +40,7 @@ jobs:
       - name: Reject unfinished Lean proofs
         shell: bash
         run: |
-          if grep -R -n -E '\bsorry\b|^[[:space:]]*axiom[[:space:]]' EISKKA/Bench001A.lean; then
+          if grep -R -n -E '\bsorry\b|^[[:space:]]*axiom[[:space:]]' EISKKA; then
             echo "Unreviewed sorry/custom axiom declaration found"
             exit 1
           fi

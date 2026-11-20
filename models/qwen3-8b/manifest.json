@@ -1,0 +1,23 @@
+{
+  "model_id": "Qwen/Qwen3-8B",
+  "model_revision": "d117af2f304f02a8647f88fe05b61cfb405a1d9e",
+  "config_path": "models/qwen3-8b/config.json",
+  "config_source": "https://huggingface.co/Qwen/Qwen3-8B/blob/d117af2f304f02a8647f88fe05b61cfb405a1d9e/config.json",
+  "model_card": "https://huggingface.co/Qwen/Qwen3-8B",
+  "license": "Apache-2.0 (model-card declaration; verify license files at the pinned revision before redistribution)",
+  "evidence_class": "public_model_metadata",
+  "status": "configuration_snapshot_pinned; weight snapshot not downloaded or hashed by this work package",
+  "known_context_metadata_discrepancy": {
+    "config_max_position_embeddings": 40960,
+    "model_card_native_context_claim": 32768,
+    "model_card_yarn_context_claim": 131072,
+    "config_rope_scaling": null,
+    "resolution": "unresolved; do not claim supported context length until pinned modeling code, tokenizer metadata and model card are reconciled"
+  },
+  "parameter_count_model_card": "approximately 8.2B",
+  "notes": [
+    "The immutable revision pins the configuration source, not a local copy of all model weights.",
+    "Do not silently substitute a later main revision.",
+    "Before a training run, download and hash every weight shard, tokenizer file, generation config and modeling source used."
+  ]
+}
