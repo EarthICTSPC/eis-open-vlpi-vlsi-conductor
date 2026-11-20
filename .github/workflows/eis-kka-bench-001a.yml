@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "eis-kka-bench-001a-lean-tian-equations"
+      - "eis-kka-frontier-001-model-map"
   pull_request:
     paths:
       - "EISKKA/Bench001A.lean"
