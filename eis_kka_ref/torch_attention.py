@@ -72,7 +72,7 @@ class KKAInterferenceCore(nn.Module):
         batch, q_heads, q_len, dim = q.shape
         kb, kv_heads, k_len, k_dim = k.shape
         vb, v_heads, v_len, value_dim = v.shape
-        if (kb, vb) != (batch, batch) or kv_heads != self.kv_heads:
+        if kb != batch or vb != batch or kv_heads != self.kv_heads:
             raise ValueError("batch or KV-head dimensions do not match")
         if q_heads != self.query_heads or dim != self.head_dim or k_dim != dim:
             raise ValueError("query head dimensions do not match this module")
@@ -85,8 +85,10 @@ class KKAInterferenceCore(nn.Module):
 
         k_expanded = k.repeat_interleave(self.group_size, dim=1)
         v_expanded = v.repeat_interleave(self.group_size, dim=1)
-        q_field = self._encode(q, self.kappa)
-        k_field = self._encode(k_expanded, self.kappa)
+        # Field encoding and detector arithmetic use float32 even when the
+        # surrounding transformer runs BF16/FP16.
+        q_field = self._encode(q.float(), self.kappa.float())
+        k_field = self._encode(k_expanded.float(), self.kappa.float())
 
         # Ideal balanced detector: I+ - I- = 2 R Re(q * conj(k)); R=1 here.
         scores = 2.0 * torch.matmul(
@@ -105,5 +107,5 @@ class KKAInterferenceCore(nn.Module):
             scores = scores.masked_fill(~mask, torch.finfo(scores.dtype).min)
 
         probabilities = torch.softmax(scores, dim=-1)
-        output = torch.matmul(probabilities, v_expanded)
+        output = torch.matmul(probabilities, v_expanded.float()).to(v.dtype)
         return output, probabilities
