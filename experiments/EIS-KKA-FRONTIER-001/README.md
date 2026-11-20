@@ -132,7 +132,12 @@ SoftMax, causal masking and value aggregation remain explicit electronic referen
 
 It does not prove model quality, the approximation of SoftMax by KKA, physical device behavior, timing, energy or an optical implementation.
 
-## 8. Required next gates
+
+## 9. Local development hardware boundary
+
+The 8 GB Apple M1 development machine is suitable for repository work, Lean/Python tests and small synthetic attention-core tests. It is not a suitable target for loading the full 8.2B-parameter BF16 model: raw BF16 weights alone are roughly 16.4 GB before runtime, activations and KV cache. Even 4-bit weights require additional scale/metadata, runtime memory and KV cache. Full-model baseline profiling and fine-tuning should therefore use an appropriately provisioned remote accelerator or managed compute environment. Keep local work bounded and do not download multi-gigabyte weights merely to test the shape mapper.
+
+## 10. Required next gates
 
 1. CI compiles the Lean module and passes the existing axiom/proof checks.
 2. Python shape tests pass against the checked-in config.
