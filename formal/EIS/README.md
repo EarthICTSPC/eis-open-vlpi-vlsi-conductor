@@ -38,3 +38,9 @@ If a required component kind has no registered cell, lowering fails closed. The 
 Every lowered artifact should record the Lean source commit and compiler version; netlist JSON SHA-256; adapter version and Python package versions; component-registry revision and PDK identity; any eis_assumed physical values; and resulting PhotonForge component and GDS/OASIS hashes.
 
 No optimizer may modify a Lean-authored source netlist in place. Candidate variants must be new netlist values with new IDs and provenance.
+
+## Exploratory example
+
+The current 10-output Tian-inspired example is stored at `schema/examples/eis_tian_ptc_10_output_exploratory.json`. It contains 11 MZI macro-cell instances (10 A-side plus one shared B-side), 33 phase-shifter functions, ten output-combiner MMIs and ten BPDs. Source-derived values and unknowns are individually labelled in each parameter record. The A-side fanout and B-side broadcast remain logical-only abstractions; they are not physical splitter trees yet.
+
+The Python bridge is `experiments/eis-kka-001b-mzi-field/eis_netlist_to_photonforge.py`. It requires a caller-supplied component registry and fails closed if a component kind has no approved PhotonForge cell. It does not currently export top-level boundary ports because that mapping must be pinned to the selected PhotonForge API version and tested explicitly.
