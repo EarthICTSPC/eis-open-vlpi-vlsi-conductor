@@ -68,6 +68,16 @@ def validate_netlist(document: Mapping[str, Any]) -> None:
             raise ValueError(f"{instance_id}: ports must be non-empty strings")
         if len(set(ports)) != len(ports):
             raise ValueError(f"{instance_id}: duplicate port name")
+        parameters = item.get("parameters", [])
+        if not isinstance(parameters, list):
+            raise ValueError(f"{instance_id}: parameters must be an array")
+        for parameter in parameters:
+            if not isinstance(parameter, Mapping):
+                raise ValueError(f"{instance_id}: parameter entry must be an object")
+            if not all(isinstance(parameter.get(k), str) for k in ("name", "value", "unit")):
+                raise ValueError(f"{instance_id}: parameter name/value/unit must be strings")
+            if parameter.get("evidence") not in EVIDENCE_CLASSES:
+                raise ValueError(f"{instance_id}: parameter evidence class is missing or invalid")
         by_id[instance_id] = item
 
     def exists(ref: tuple[str, str]) -> bool:
