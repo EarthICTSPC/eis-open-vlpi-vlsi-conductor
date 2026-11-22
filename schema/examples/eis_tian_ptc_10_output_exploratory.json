@@ -19,14 +19,30 @@
         "out_b"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "evidence",
-          "eis_architecture_choice"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "evidence",
+          "value": "eis_architecture_choice",
+          "unit": "text",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -46,14 +62,18 @@
         "out_10"
       ],
       "parameters": [
-        [
-          "fanout",
-          "10"
-        ],
-        [
-          "geometry_status",
-          "logical_only"
-        ]
+        {
+          "name": "fanout",
+          "value": "10",
+          "unit": "count",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "geometry_status",
+          "value": "logical_only",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        }
       ]
     },
     {
@@ -65,22 +85,96 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "role",
-          "shared_B"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "role",
+          "value": "shared_B",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -100,14 +194,18 @@
         "out_10"
       ],
       "parameters": [
-        [
-          "fanout",
-          "10"
-        ],
-        [
-          "geometry_status",
-          "logical_only"
-        ]
+        {
+          "name": "fanout",
+          "value": "10",
+          "unit": "count",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "geometry_status",
+          "value": "logical_only",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        }
       ]
     },
     {
@@ -119,26 +217,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "01"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "01",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -151,14 +325,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "01"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "01",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -169,10 +359,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "01"
-        ]
+        {
+          "name": "channel",
+          "value": "01",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -184,26 +376,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "02"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "02",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -216,14 +484,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "02"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "02",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -234,10 +518,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "02"
-        ]
+        {
+          "name": "channel",
+          "value": "02",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -249,26 +535,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "03"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "03",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -281,14 +643,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "03"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "03",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -299,10 +677,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "03"
-        ]
+        {
+          "name": "channel",
+          "value": "03",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -314,26 +694,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "04"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "04",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -346,14 +802,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "04"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "04",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -364,10 +836,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "04"
-        ]
+        {
+          "name": "channel",
+          "value": "04",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -379,26 +853,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "05"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "05",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -411,14 +961,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "05"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "05",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -429,10 +995,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "05"
-        ]
+        {
+          "name": "channel",
+          "value": "05",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -444,26 +1012,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "06"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "06",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -476,14 +1120,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "06"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "06",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -494,10 +1154,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "06"
-        ]
+        {
+          "name": "channel",
+          "value": "06",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -509,26 +1171,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "07"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "07",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -541,14 +1279,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "07"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "07",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -559,10 +1313,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "07"
-        ]
+        {
+          "name": "channel",
+          "value": "07",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -574,26 +1330,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "08"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "08",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -606,14 +1438,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "08"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "08",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -624,10 +1472,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "08"
-        ]
+        {
+          "name": "channel",
+          "value": "08",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -639,26 +1489,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "09"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "09",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -671,14 +1597,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "09"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "09",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -689,10 +1631,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "09"
-        ]
+        {
+          "name": "channel",
+          "value": "09",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     },
     {
@@ -704,26 +1648,102 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "phase_shifters",
-          "3"
-        ],
-        [
-          "splitter",
-          "mmi1x2"
-        ],
-        [
-          "combiner",
-          "mmi2x2"
-        ],
-        [
-          "channel",
-          "10"
-        ],
-        [
-          "role",
-          "A"
-        ]
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "10",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -736,14 +1756,30 @@
         "out_complement"
       ],
       "parameters": [
-        [
-          "geometry_status",
-          "abstract"
-        ],
-        [
-          "channel",
-          "10"
-        ]
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "10",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
       ]
     },
     {
@@ -754,10 +1790,12 @@
         "electrical_out"
       ],
       "parameters": [
-        [
-          "channel",
-          "10"
-        ]
+        {
+          "name": "channel",
+          "value": "10",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
       ]
     }
   ],
