@@ -52,3 +52,11 @@ The 10-output topology is also constructed in `formal/EIS/Examples/TianExplorato
 The JSON example was independently checked for declared endpoints, duplicate connection-port use, 11 MZI instances, 33 phase-shifter functions, ten BPD instances, and valid evidence-class labels.
 
 The Python adapter and its pytest tests are authored but have not yet been executed in this environment. PhotonForge is not installed here. No PhotonForge component was built, no layout was exported, and no Tidy3D job was submitted.
+
+## Python lowering boundary
+
+Use lower_with_manifest(document, component_registry) to obtain two separate objects:
+- photonforge_netlist: the dictionary passed to PhotonForge component_from_netlist();
+- eis_manifest: the complete source netlist, including parameter evidence labels and top-level boundary ports, retained as a sidecar.
+
+Do not pass the sidecar to PhotonForge as if it were a supported netlist field. Top-level boundary-port export is intentionally deferred until the exact PhotonForge version and its port-mapping contract are pinned and tested. The bridge currently lowers instance connectivity only.
