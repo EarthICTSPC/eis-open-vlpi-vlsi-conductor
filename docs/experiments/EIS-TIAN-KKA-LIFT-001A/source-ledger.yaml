@@ -1,0 +1,168 @@
+schema_id: eis.ledger.v0.1
+artifact:
+  id: EIS-TIAN-KKA-LIFT-001A
+  title: Source Ledger and Calibration Contract
+  version: 0.1.0
+  owner: Earth ICT, SPC
+  status: source_snapshot_frozen_interpretation_gates_open
+  freeze_date: 2026-11-21
+  purpose: Freeze Tian 2025 source facts and calibration data before any new KKA optimizer is written or run.
+
+sources:
+  primary_article:
+    citation: "Tian et al., Photonic Transformer Chip: Interference Is All You Need, PhotoniX 6, 45 (2025)"
+    doi: "10.1186/s43074-025-00182-7"
+    url: "https://doi.org/10.1186/s43074-025-00182-7"
+    local_filename: "s43074-025-00182-7.pdf"
+    sha256: "b3ebfe0a09f3d3a6ba0ebfe45a89b51de2e99945d5a93ad7ded083471e71e518"
+  supplementary_information:
+    citation: "Tian et al., PhotoniX 6, 45 (2025), Supplementary Information"
+    source_locator:
+      SI3: "PDF pages 8-10 of 38"
+      SI4: "PDF pages 10-12 of 38"
+      table_S1: "PDF page 12 of 38"
+    local_filename: "43074_2025_182_MOESM1_ESM.pdf"
+    sha256: "af8b08a9647702dff2ca85c84e46fa8e8f017c43239e70e74750c66b9a28acfa"
+    note: "SHA-256 identifies the exact local source copy used for this freeze."
+
+source_facts:
+  architecture:
+    claim: "The PTC MZI cells use one external and two internal thermo-optic phase shifters."
+    provenance: tian_measured
+    locator: "Main article, Fig. 2 and associated device description"
+    interpretation: "Architecture reported for the Tian prototype; not an EIS/GF cell qualification."
+  SI3_device:
+    mzi_count: 11
+    phase_shifter_type: thermo_optic_integrated_heaters
+    waveguide_cross_section_nm:
+      width: 450
+      height: 220
+    heater:
+      material: TiN
+      length_um: 200
+      width_um: 2
+      thickness_nm: 120
+      resistance_ohm: 1000
+      resistance_qualifier: "approximately; source says measured resistances of all heaters are around 1 kΩ"
+    provenance: tian_measured
+    locator: "Supplementary Information SI-3, PDF pages 8-10"
+    limitations:
+      - "These are reported Tian prototype facts, not GF process parameters."
+      - "Do not substitute these dimensions or resistance into another PDK without explicit process mapping."
+  SI3_characterization:
+    heater_sweep:
+      voltage_start_V: 0
+      voltage_stop_V: 7
+      voltage_step_V: 0.005
+      activation: "one heater at a time"
+      provenance: tian_measured
+    representative_heaters:
+      count: 20
+      provenance: tian_measured
+      qualifier: "20 exemplary heater traces shown in Figure S6; not a claim that the complete chip has only 20 heaters."
+    fitted_single_heater_observable:
+      equation: "y = a*cos(b*V^2/R + c) + d"
+      source_equation: "SI-3 Eq. (S11)"
+      parameter_class: tian_fitted
+      units: "Not fully specified in source; y follows the power-meter observable and coefficients must retain source-native units."
+    phase_error_statistics:
+      reported_mean: 0.0017
+      reported_second_statistic: 0.0295
+      source_wording: "mean value μ=0.0017 and variance σ=0.0295"
+      ambiguity: "The source also uses σ in a bit-precision expression. Variance versus standard deviation is unresolved."
+      provenance: tian_measured
+      status: gap
+    phase_precision_claim:
+      reported: "better than 7.73 bit in most cases (>68%)"
+      source_expression: "log2(2π/σ)"
+      status: source_reported_interpretation_blocked
+      reason: "Do not independently derive or reuse until the meaning and units of σ are clarified."
+    phase_shifting_power:
+      reported_value_mW: 20
+      source_wording: "typical phase-shifting efficiency is ~20 mW"
+      provenance: tian_measured
+      status: source_reported_definition_gap
+      reason: "The source's phrase uses a power unit; do not relabel as Pπ or a universal phase-shifter efficiency without source clarification."
+  SI4_calibration:
+    topology:
+      description: "MZI-B supplies the amplitude-phase-coupled input; each MZI-A_i is modulated through its corresponding external phase shifter."
+      pair_count: 10
+      provenance: tian_measured
+      locator: "Supplementary Information SI-4 and Fig. S8(c)"
+    original_idealized_pair_fit:
+      equation: "A_i Ω B_i ∝ cos(a*V_B^2 + b)*cos(c*V_A^2 - a*V_B^2 + d)"
+      source_equation: "SI-4 Eq. (S12)"
+      parameter_class: tian_fitted
+      status: superseded_by_source_corrected_fit
+    corrected_nonideal_pair_fit:
+      equation: "A_i Ω B_i ∝ cos(a1*V_B^2 + b)*cos(c_i*V_A^2 - a2*V_B^2 + d_i) + e_i"
+      source_equation: "SI-4 Eq. (S13)"
+      parameter_class: tian_fitted
+      reasons_for_correction:
+        - "Fabrication imperfection and non-even 50:50 splitting reduce interference contrast."
+        - "Nonuniform grating-coupling efficiency contributes to contrast degradation."
+        - "Thermal crosstalk changes phase-shifter efficiency."
+        - "Heating by one phase shifter can induce phase or splitting changes in another."
+      fit_scope: "Scalar interference observable as reported; not a full complex-field transfer model."
+      coefficients:
+        shared_across_ten_groups:
+          a1: 0.0730
+          b: 4.5760
+          a2: 0.0638
+        per_table_row:
+          c_d_e: "See table-s1-calibration.yaml"
+      units: "Not explicitly supplied for Table S1 coefficients; preserve numerical values and mark units unspecified."
+      row_mapping:
+        status: gap
+        description: "The table states ten groups A_i and B_i, i=1..10, but does not print row labels. Table row order is retained; association of row 01..10 with i=1..10 is a documented inference, not a directly printed label."
+      provenance: tian_fitted
+      locator: "Supplementary Information SI-4 Eq. (S13), Fig. S8 and Table S1, PDF pages 10-12"
+
+provenance_classes:
+  - tian_measured
+  - tian_fitted
+  - tian_assumed
+  - tian_projected
+  - eis_assumed
+  - eis_derived
+  - eis_verified
+  - gap
+
+interpretation_gaps:
+  - id: GAP-S1-UNITS
+    question: "What are the exact units and normalization of the SI-4 fitted observable and Table S1 coefficients?"
+    status: open
+    rule: "Do not assign units from intuition; preserve source values and use a separate explicitly dimensioned EIS model."
+  - id: GAP-S1-ROW-MAP
+    question: "Does printed Table S1 row order correspond directly to A1/B1 through A10/B10?"
+    status: open
+    rule: "Keep source row identifiers; do not treat inferred group mapping as source-labelled fact."
+  - id: GAP-SI3-SIGMA
+    question: "Does 0.0295 denote variance or standard deviation, and in what phase unit?"
+    status: open
+    rule: "Block reuse of derived bit precision until resolved."
+  - id: GAP-SI3-20MW
+    question: "What exact phase-shift criterion does the reported approximately 20 mW describe?"
+    status: open
+    rule: "Do not relabel as Pπ or import as a GF/SOI design parameter."
+  - id: GAP-SI4-COMPLEX
+    question: "What complex optical transfer and reference-plane information is required beyond the scalar fitted interference observable?"
+    status: open
+    rule: "Do not equate the SI-4 scalar fit to a complex T_device(V, wavelength, temperature)."
+
+transfer_rules:
+  - "Tian source values remain in the tian_* namespace."
+  - "EIS/GF/AMF/TSMC characterization receives new eis_* records and its own raw data, fit residuals and uncertainty."
+  - "No optimizer may alter or refit the frozen Tian source records."
+  - "No generic or historical photonic parameter may be silently substituted for a missing source parameter."
+  - "No simulation, fit, formal theorem or layout result may be relabelled as physical measurement."
+  - "A source correction requires a versioned ledger change and review."
+  - "No KKA optimizer is authorized until the source/contract review and single-MZI reproduction gate are passed."
+
+scope_exclusions:
+  - "No foundry-specific PDK mapping."
+  - "No GF NDA PDK content."
+  - "No OASIS/GDS generation."
+  - "No array scaling or 64x64 physical mapping."
+  - "No optimizer objective, optimizer implementation or optimization run."
+  - "No claim of EIS fabrication, measurement, qualification or system-level energy advantage."
