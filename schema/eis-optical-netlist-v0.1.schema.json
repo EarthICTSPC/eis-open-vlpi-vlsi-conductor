@@ -54,17 +54,36 @@
           "parameters": {
             "type": "array",
             "items": {
-              "type": "array",
-              "prefixItems": [
-                {
+              "type": "object",
+              "required": [
+                "name",
+                "value",
+                "unit",
+                "evidence"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
                   "type": "string"
                 },
-                {
+                "unit": {
                   "type": "string"
+                },
+                "evidence": {
+                  "enum": [
+                    "tianReported",
+                    "sourceInterpretation",
+                    "eisArchitectureChoice",
+                    "sourceUnknown",
+                    "eisAssumed",
+                    "simulated"
+                  ]
                 }
-              ],
-              "minItems": 2,
-              "maxItems": 2
+              },
+              "additionalProperties": false
             }
           }
         },
