@@ -7,7 +7,7 @@ import pytest
 from eis_netlist_to_photonforge import lower_to_photonforge, validate_netlist
 
 
-EXAMPLE = Path(__file__).with_name("eis_tian_ptc_10_output_exploratory.json")
+EXAMPLE = Path(__file__).parents[2] / "schema" / "examples" / "eis_tian_ptc_10_output_exploratory.json"
 
 
 def load_example():
@@ -17,9 +17,10 @@ def load_example():
 def test_example_topology_counts():
     doc = load_example()
     validate_netlist(doc)
-    assert len([x for x in doc["instances"] if x["kind"] == "mziCell"]) == 11
-    assert sum(int(dict(x.get("parameters", [])).get("phase_shifters", "0"))
-               for x in doc["instances"] if x["kind"] == "mziCell") == 33
+    mzis = [x for x in doc["instances"] if x["kind"] == "mziCell"]
+    assert len(mzis) == 11
+    assert sum(int(next(p["value"] for p in x["parameters"] if p["name"] == "phase_shifters"))
+               for x in mzis) == 33
     assert len([x for x in doc["instances"] if x["kind"] == "balancedPhotodetector"]) == 10
 
 
