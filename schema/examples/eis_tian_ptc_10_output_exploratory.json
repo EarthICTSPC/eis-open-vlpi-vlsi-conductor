@@ -1,0 +1,1254 @@
+{
+  "schemaVersion": 1,
+  "name": "EIS_TIAN_INSPIRED_PTC_10_OUTPUT_EXPLORATORY",
+  "instances": [
+    {
+      "id": "laser_in",
+      "kind": "laser",
+      "ports": [
+        "out"
+      ],
+      "parameters": []
+    },
+    {
+      "id": "input_split_mmi",
+      "kind": "mmi1x2",
+      "ports": [
+        "in",
+        "out_a",
+        "out_b"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "evidence",
+          "eis_architecture_choice"
+        ]
+      ]
+    },
+    {
+      "id": "A_fanout_tree",
+      "kind": "fanoutTree",
+      "ports": [
+        "in",
+        "out_01",
+        "out_02",
+        "out_03",
+        "out_04",
+        "out_05",
+        "out_06",
+        "out_07",
+        "out_08",
+        "out_09",
+        "out_10"
+      ],
+      "parameters": [
+        [
+          "fanout",
+          "10"
+        ],
+        [
+          "geometry_status",
+          "logical_only"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_B_SHARED",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "role",
+          "shared_B"
+        ]
+      ]
+    },
+    {
+      "id": "B_broadcast_tree",
+      "kind": "fanoutTree",
+      "ports": [
+        "in",
+        "out_01",
+        "out_02",
+        "out_03",
+        "out_04",
+        "out_05",
+        "out_06",
+        "out_07",
+        "out_08",
+        "out_09",
+        "out_10"
+      ],
+      "parameters": [
+        [
+          "fanout",
+          "10"
+        ],
+        [
+          "geometry_status",
+          "logical_only"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_01",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "01"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_01",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "01"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_01",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "01"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_02",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "02"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_02",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "02"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_02",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "02"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_03",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "03"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_03",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "03"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_03",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "03"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_04",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "04"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_04",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "04"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_04",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "04"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_05",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "05"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_05",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "05"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_05",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "05"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_06",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "06"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_06",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "06"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_06",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "06"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_07",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "07"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_07",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "07"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_07",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "07"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_08",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "08"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_08",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "08"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_08",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "08"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_09",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "09"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_09",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "09"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_09",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "09"
+        ]
+      ]
+    },
+    {
+      "id": "MZI_A_10",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "phase_shifters",
+          "3"
+        ],
+        [
+          "splitter",
+          "mmi1x2"
+        ],
+        [
+          "combiner",
+          "mmi2x2"
+        ],
+        [
+          "channel",
+          "10"
+        ],
+        [
+          "role",
+          "A"
+        ]
+      ]
+    },
+    {
+      "id": "output_mmi_10",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        [
+          "geometry_status",
+          "abstract"
+        ],
+        [
+          "channel",
+          "10"
+        ]
+      ]
+    },
+    {
+      "id": "BPD_10",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        [
+          "channel",
+          "10"
+        ]
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "source": {
+        "instanceId": "laser_in",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "input_split_mmi",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "input_split_mmi",
+        "portName": "out_a"
+      },
+      "target": {
+        "instanceId": "A_fanout_tree",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "input_split_mmi",
+        "portName": "out_b"
+      },
+      "target": {
+        "instanceId": "MZI_B_SHARED",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_B_SHARED",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_01"
+      },
+      "target": {
+        "instanceId": "MZI_A_01",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_01",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_01",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_01"
+      },
+      "target": {
+        "instanceId": "output_mmi_01",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_01",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_01",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_02"
+      },
+      "target": {
+        "instanceId": "MZI_A_02",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_02",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_02",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_02"
+      },
+      "target": {
+        "instanceId": "output_mmi_02",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_02",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_02",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_03"
+      },
+      "target": {
+        "instanceId": "MZI_A_03",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_03",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_03",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_03"
+      },
+      "target": {
+        "instanceId": "output_mmi_03",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_03",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_03",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_04"
+      },
+      "target": {
+        "instanceId": "MZI_A_04",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_04",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_04",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_04"
+      },
+      "target": {
+        "instanceId": "output_mmi_04",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_04",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_04",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_05"
+      },
+      "target": {
+        "instanceId": "MZI_A_05",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_05",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_05",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_05"
+      },
+      "target": {
+        "instanceId": "output_mmi_05",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_05",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_05",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_06"
+      },
+      "target": {
+        "instanceId": "MZI_A_06",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_06",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_06",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_06"
+      },
+      "target": {
+        "instanceId": "output_mmi_06",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_06",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_06",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_07"
+      },
+      "target": {
+        "instanceId": "MZI_A_07",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_07",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_07",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_07"
+      },
+      "target": {
+        "instanceId": "output_mmi_07",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_07",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_07",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_08"
+      },
+      "target": {
+        "instanceId": "MZI_A_08",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_08",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_08",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_08"
+      },
+      "target": {
+        "instanceId": "output_mmi_08",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_08",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_08",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_09"
+      },
+      "target": {
+        "instanceId": "MZI_A_09",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_09",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_09",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_09"
+      },
+      "target": {
+        "instanceId": "output_mmi_09",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_09",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_09",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_10"
+      },
+      "target": {
+        "instanceId": "MZI_A_10",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_10",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_10",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_10"
+      },
+      "target": {
+        "instanceId": "output_mmi_10",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_10",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_10",
+        "portName": "optical_in"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "instanceId": "laser_in",
+      "portName": "out"
+    }
+  ],
+  "outputs": [
+    {
+      "instanceId": "BPD_01",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_02",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_03",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_04",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_05",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_06",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_07",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_08",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_09",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_10",
+      "portName": "electrical_out"
+    }
+  ]
+}
