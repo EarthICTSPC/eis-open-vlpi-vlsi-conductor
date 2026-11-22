@@ -1,0 +1,63 @@
+schema_id: eis.ledger.v0.1
+artifact_id: EIS-TIAN-KKA-LIFT-001A
+source: "Tian et al. (2025), Supplementary Information, Table S1"
+source_locator: "PDF page 12 of 38"
+table_title: "Fitting parameters for chip-non-ideal calibrated MZI behaviors"
+equation: "A_i Ω B_i ∝ cos(a1*V_B^2 + b)*cos(c_i*V_A^2 - a2*V_B^2 + d_i) + e_i"
+provenance: tian_fitted
+units: unspecified_in_source
+shared_coefficients:
+  a1: 0.0730
+  b: 4.5760
+  a2: 0.0638
+row_mapping:
+  source_statement: "Fitting parameters for all ten groups of A_i and B_i (i=1,2,...,10) are listed in Table S1."
+  explicit_row_labels_present: false
+  row_to_group_association: "Row order is preserved; assigning row 01..10 to i=1..10 is an inference and remains non-binding until confirmed."
+records:
+  - row_id: S1-row-01
+    c: 0.1210
+    d: 4.1363
+    e: -0.0159
+  - row_id: S1-row-02
+    c: 0.1135
+    d: 3.7057
+    e: 0.0059
+  - row_id: S1-row-03
+    c: 0.1115
+    d: -3.4004
+    e: 0.0079
+  - row_id: S1-row-04
+    c: 0.1152
+    d: 0.1490
+    e: -0.0058
+  - row_id: S1-row-05
+    c: 0.1161
+    d: 5.2457
+    e: 0.0002
+  - row_id: S1-row-06
+    c: 0.1187
+    d: -3.5212
+    e: 0.0086
+  - row_id: S1-row-07
+    c: 0.1186
+    d: -9.9666
+    e: 0.0161
+  - row_id: S1-row-08
+    c: 0.1203
+    d: -0.5490
+    e: -0.0128
+  - row_id: S1-row-09
+    c: 0.1238
+    d: 0.53860
+    e: -0.0098
+  - row_id: S1-row-10
+    c: 0.1305
+    d: 3.9400
+    e: -0.0007
+interpretation_constraints:
+  - "Do not infer units absent from the source."
+  - "Do not treat these fitted coefficients as raw measured traces."
+  - "Do not transfer these coefficients to GF, AMF, TSMC or an EIS device."
+  - "Do not silently attach row IDs to A_i/B_i group indices."
+  - "A source correction requires a versioned change and review."
