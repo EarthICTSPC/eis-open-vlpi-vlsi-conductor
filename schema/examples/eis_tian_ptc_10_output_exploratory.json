@@ -26,12 +26,6 @@
           "evidence": "eisArchitectureChoice"
         },
         {
-          "name": "evidence",
-          "value": "eis_architecture_choice",
-          "unit": "text",
-          "evidence": "sourceUnknown"
-        },
-        {
           "name": "mmi1x2_length_um",
           "value": "unknown",
           "unit": "um",
