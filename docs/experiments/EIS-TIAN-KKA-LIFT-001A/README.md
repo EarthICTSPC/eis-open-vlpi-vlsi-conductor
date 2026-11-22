@@ -3,7 +3,7 @@
 **Owner:** Earth ICT, SPC  
 **Version:** 0.1.0  
 **Status:** Source snapshot frozen; interpretation and EIS transfer gates remain open  
-**Branch:** \`eis-tian-kka-lift-001a-source-freeze\`  
+**Branch:** `eis-tian-kka-lift-001a-source-freeze`  
 **Primary source:** Tian et al., *Photonic Transformer Chip: Interference Is All You Need*, PhotoniX 6, 45 (2025), DOI: [10.1186/s43074-025-00182-7](https://doi.org/10.1186/s43074-025-00182-7).
 
 ## Purpose
@@ -12,20 +12,20 @@ Freeze the source facts and calibration model from Tian et al. before writing or
 
 This package is deliberately upstream of:
 
-- \`EIS-KKA-001\` scalar interference/operator contract;
-- \`EIS-PTC-MZI-001\` technology-independent three-heater MZI cell;
+- `EIS-KKA-001` scalar interference/operator contract;
+- `EIS-PTC-MZI-001` technology-independent three-heater MZI cell;
 - any SOI/GF/AMF/TSMC PDK mapping;
 - any optimization, array scaling, OASIS generation or fabrication.
 
 ## Frozen artifacts
 
-1. \`source-ledger.yaml\` — source identity, source facts, provenance classes, open interpretation items.
-2. \`table-s1-calibration.yaml\` — the ten Table S1 row records, retaining the shared coefficients and the row-order ambiguity.
-3. \`calibration-contract.md\` — SI-3/SI-4 calibration equations, scope, required records, and acceptance gates.
+1. `source-ledger.yaml` — source identity, source facts, provenance classes, open interpretation items.
+2. `table-s1-calibration.yaml` — the ten Table S1 row records, retaining the shared coefficients and the row-order ambiguity.
+3. `calibration-contract.md` — SI-3/SI-4 calibration equations, scope, required records, and acceptance gates.
 
 ## Source freeze and integrity
 
-The supplementary PDF used for transcription is identified by SHA-256 in \`source-ledger.yaml\`. The article PDF is also identified there. A changed source file requires a new source revision and a reviewed ledger diff; do not silently edit frozen source values.
+The supplementary PDF used for transcription is identified by SHA-256 in `source-ledger.yaml`. The article PDF is also identified there. A changed source file requires a new source revision and a reviewed ledger diff; do not silently edit frozen source values.
 
 ## Critical interpretation rules
 
@@ -41,16 +41,16 @@ The supplementary PDF used for transcription is identified by SHA-256 in \`sourc
 
 The original EIS ledger vocabulary is retained:
 
-- \`tian_measured\`
-- \`tian_fitted\`
-- \`tian_assumed\`
-- \`tian_projected\`
-- \`eis_assumed\`
-- \`eis_derived\`
-- \`eis_verified\`
-- \`gap\`
+- `tian_measured`
+- `tian_fitted`
+- `tian_assumed`
+- `tian_projected`
+- `eis_assumed`
+- `eis_derived`
+- `eis_verified`
+- `gap`
 
-No source-derived value may be promoted to \`eis_verified\`. A fit is not raw measurement; a source report is not an EIS replication; formal proof is not physical validation.
+No source-derived value may be promoted to `eis_verified`. A fit is not raw measurement; a source report is not an EIS replication; formal proof is not physical validation.
 
 ## Freeze rule
 
