@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from eis_netlist_to_photonforge import lower_to_photonforge, validate_netlist
+from eis_netlist_to_photonforge import (\n    lower_to_photonforge, lower_with_manifest, validate_netlist,\n)
 
 
 EXAMPLE = Path(__file__).parents[2] / "schema" / "examples" / "eis_tian_ptc_10_output_exploratory.json"
@@ -56,3 +56,13 @@ def test_missing_parameter_evidence_rejected():
     doc["instances"][1]["parameters"][0]["evidence"] = "unclassified"
     with pytest.raises(ValueError, match="evidence class"):
         validate_netlist(doc)
+
+
+def test_lowering_sidecar_preserves_source_evidence():
+    doc = load_example()
+    kinds = {item["kind"] for item in doc["instances"]}
+    registry = {kind: object() for kind in kinds}
+    result = lower_with_manifest(doc, registry)
+    assert len(result["photonforge_netlist"]["instances"]) == len(doc["instances"])
+    assert result["eis_manifest"]["instances"] == doc["instances"]
+    assert result["eis_manifest"]["outputs"] == doc["outputs"]
