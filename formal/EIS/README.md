@@ -44,3 +44,11 @@ No optimizer may modify a Lean-authored source netlist in place. Candidate varia
 The current 10-output Tian-inspired example is stored at `schema/examples/eis_tian_ptc_10_output_exploratory.json`. It contains 11 MZI macro-cell instances (10 A-side plus one shared B-side), 33 phase-shifter functions, ten output-combiner MMIs and ten BPDs. Source-derived values and unknowns are individually labelled in each parameter record. The A-side fanout and B-side broadcast remain logical-only abstractions; they are not physical splitter trees yet.
 
 The Python bridge is `experiments/eis-kka-001b-mzi-field/eis_netlist_to_photonforge.py`. It requires a caller-supplied component registry and fails closed if a component kind has no approved PhotonForge cell. It does not currently export top-level boundary ports because that mapping must be pinned to the selected PhotonForge API version and tested explicitly.
+
+## Lean example and current validation status
+
+The 10-output topology is also constructed in `formal/EIS/Examples/TianExploratory.lean`. It evaluates the structural validator and prints the serialized Lean JSON representation. The repository does not yet contain a pinned Lean toolchain or Lake project configuration, and a Lean compiler was not available in the current execution environment. Therefore the Lean source has **not yet been compiled** and the checked-in JSON example has not yet been confirmed byte-for-byte against Lean's emitted JSON.
+
+The JSON example was independently checked for declared endpoints, duplicate connection-port use, 11 MZI instances, 33 phase-shifter functions, ten BPD instances, and valid evidence-class labels.
+
+The Python adapter and its pytest tests are authored but have not yet been executed in this environment. PhotonForge is not installed here. No PhotonForge component was built, no layout was exported, and no Tidy3D job was submitted.
