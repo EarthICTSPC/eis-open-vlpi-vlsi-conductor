@@ -13,6 +13,22 @@ inductive ComponentKind where
   | balancedPhotodetector
   deriving Repr, BEq, DecidableEq, Inhabited, ToJson, FromJson
 
+inductive EvidenceClass where
+  | tianReported
+  | sourceInterpretation
+  | eisArchitectureChoice
+  | sourceUnknown
+  | eisAssumed
+  | simulated
+  deriving Repr, BEq, DecidableEq, Inhabited, ToJson, FromJson
+
+structure ParameterValue where
+  name : String
+  value : String
+  unit : String
+  evidence : EvidenceClass
+  deriving Repr, Inhabited, ToJson, FromJson
+
 structure PortRef where
   instanceId : String
   portName : String
@@ -22,7 +38,7 @@ structure ComponentInstance where
   id : String
   kind : ComponentKind
   ports : List String
-  parameters : List (String × String) := []
+  parameters : List ParameterValue := []
   deriving Repr, Inhabited, ToJson, FromJson
 
 structure OpticalConnection where
@@ -67,7 +83,6 @@ def boundaryPortsDisjoint (n : Netlist) : Bool :=
   let boundary := n.inputs ++ n.outputs
   boundary.length == boundary.eraseDups.length
 
-/-- Structural well-formedness only; not optical or physical correctness. -/
 def validateNetlist (n : Netlist) : Bool :=
   n.schemaVersion == 1 &&
   instanceIdsUnique n &&
