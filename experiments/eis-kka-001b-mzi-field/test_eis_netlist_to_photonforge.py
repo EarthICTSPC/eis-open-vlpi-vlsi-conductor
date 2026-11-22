@@ -1,0 +1,50 @@
+import copy
+import json
+from pathlib import Path
+
+import pytest
+
+from eis_netlist_to_photonforge import lower_to_photonforge, validate_netlist
+
+
+EXAMPLE = Path(__file__).with_name("eis_tian_ptc_10_output_exploratory.json")
+
+
+def load_example():
+    return json.loads(EXAMPLE.read_text())
+
+
+def test_example_topology_counts():
+    doc = load_example()
+    validate_netlist(doc)
+    assert len([x for x in doc["instances"] if x["kind"] == "mziCell"]) == 11
+    assert sum(int(dict(x.get("parameters", [])).get("phase_shifters", "0"))
+               for x in doc["instances"] if x["kind"] == "mziCell") == 33
+    assert len([x for x in doc["instances"] if x["kind"] == "balancedPhotodetector"]) == 10
+
+
+def test_duplicate_instance_rejected():
+    doc = load_example()
+    doc["instances"].append(copy.deepcopy(doc["instances"][0]))
+    with pytest.raises(ValueError, match="duplicate instance"):
+        validate_netlist(doc)
+
+
+def test_unknown_port_rejected():
+    doc = load_example()
+    doc["connections"][0]["target"]["portName"] = "not_a_port"
+    with pytest.raises(ValueError, match="undeclared port"):
+        validate_netlist(doc)
+
+
+def test_reused_connection_port_rejected():
+    doc = load_example()
+    doc["connections"].append(copy.deepcopy(doc["connections"][0]))
+    with pytest.raises(ValueError, match="more than one connection"):
+        validate_netlist(doc)
+
+
+def test_missing_cell_fails_closed():
+    doc = load_example()
+    with pytest.raises(KeyError, match="no approved PhotonForge cell"):
+        lower_to_photonforge(doc, {})
