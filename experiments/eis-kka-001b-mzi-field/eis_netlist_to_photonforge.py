@@ -8,7 +8,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 
-SUPPORTED_KINDS = {
+EVIDENCE_CLASSES = {\n    "tianReported",\n    "sourceInterpretation",\n    "eisArchitectureChoice",\n    "sourceUnknown",\n    "eisAssumed",\n    "simulated",\n}\n\nSUPPORTED_KINDS = {
     "laser",
     "mmi1x2",
     "mmi2x2",
