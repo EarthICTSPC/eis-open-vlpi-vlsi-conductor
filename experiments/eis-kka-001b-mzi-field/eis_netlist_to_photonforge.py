@@ -143,6 +143,30 @@ def lower_to_photonforge(
     }
 
 
+def lower_with_manifest(
+    document: Mapping[str, Any],
+    component_registry: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Return PhotonForge input plus an EIS provenance sidecar.
+
+    Pass only result["photonforge_netlist"] to pf.component_from_netlist().
+    Preserve result["eis_manifest"] beside the generated component/layout.
+    """
+    lowered = lower_to_photonforge(document, component_registry)
+    return {
+        "photonforge_netlist": lowered,
+        "eis_manifest": {
+            "schemaVersion": document["schemaVersion"],
+            "name": document["name"],
+            "instances": document["instances"],
+            "connections": document["connections"],
+            "inputs": document["inputs"],
+            "outputs": document["outputs"],
+            "registered_component_kinds": sorted(component_registry.keys()),
+        },
+    }
+
+
 def lower_and_build(document: Mapping[str, Any], component_registry: Mapping[str, Any]):
     """Build a PhotonForge component after the caller supplies approved cells."""
     import photonforge as pf
