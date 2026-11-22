@@ -49,3 +49,10 @@ def test_missing_cell_fails_closed():
     doc = load_example()
     with pytest.raises(KeyError, match="no approved PhotonForge cell"):
         lower_to_photonforge(doc, {})
+
+
+def test_missing_parameter_evidence_rejected():
+    doc = load_example()
+    doc["instances"][1]["parameters"][0]["evidence"] = "unclassified"
+    with pytest.raises(ValueError, match="evidence class"):
+        validate_netlist(doc)
