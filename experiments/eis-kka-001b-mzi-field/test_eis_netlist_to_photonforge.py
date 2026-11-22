@@ -4,7 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from eis_netlist_to_photonforge import (\n    lower_to_photonforge, lower_with_manifest, validate_netlist,\n)
+from eis_netlist_to_photonforge import (
+    lower_to_photonforge, lower_with_manifest, validate_netlist,
+)
 
 
 EXAMPLE = Path(__file__).parents[2] / "schema" / "examples" / "eis_tian_ptc_10_output_exploratory.json"
