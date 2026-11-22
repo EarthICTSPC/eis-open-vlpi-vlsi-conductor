@@ -22,7 +22,7 @@ def test_balanced_output_difference_is_cross_term():
     a, b = 0.7 + 0.2j, -0.1 + 0.8j
     result = simulate_mzi([a, b], kappa_in=0.0, kappa_out=0.5)
     np.testing.assert_allclose(result.balanced_difference,
-                               ideal_balanced_interference(a, b), atol=1e-14)
+                               ideal_balanced_interference(*result.arm_fields), atol=1e-14)
 
 
 def test_equal_arm_phase_shift_does_not_change_output_powers():
