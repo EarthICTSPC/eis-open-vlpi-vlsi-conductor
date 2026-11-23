@@ -1,0 +1,41 @@
+{
+  "protocol_version": "0.1.0",
+  "tile_id": "kka-tile-0001",
+  "tile_contract_id": "EIS-PTC-MZI-001@0.1.0",
+  "transaction_id": "txn-example-000001",
+  "sequence_number": 1,
+  "opcode": "EXECUTE",
+  "payload": {
+    "operation": "KKA_INTERFERENCE_BLOCK",
+    "workload_ref": "workload-fixture-001",
+    "acceptance_contract_id": "KKA-RESULT-ACCEPTANCE-001"
+  },
+  "buffers": [
+    {
+      "buffer_ref": "input-buffer-001",
+      "length_bytes": 4096,
+      "alignment_bytes": 64,
+      "access": "READ",
+      "memory_domain": "HOST_VISIBLE_NONCOHERENT",
+      "ownership": "TILE"
+    },
+    {
+      "buffer_ref": "output-buffer-001",
+      "length_bytes": 4096,
+      "alignment_bytes": 64,
+      "access": "WRITE",
+      "memory_domain": "HOST_VISIBLE_NONCOHERENT",
+      "ownership": "TILE"
+    }
+  ],
+  "deadline": null,
+  "calibration_epoch": "cal-epoch-fixture-000",
+  "result_flags": [
+    "RESULT_DATA",
+    "TIMING",
+    "TELEMETRY",
+    "ENERGY_LEDGER",
+    "PROVENANCE"
+  ],
+  "provenance_ref": "synthetic-fixture-only"
+}
