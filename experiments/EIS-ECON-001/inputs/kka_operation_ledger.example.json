@@ -1,0 +1,12 @@
+{
+  "source": "EIS-KKA-BENCH-001A",
+  "status": "illustrative_provenance_reference_only",
+  "attention_core": {
+    "heads": 2,
+    "sequence_length": 10,
+    "head_dimension": 5,
+    "value_dimension": 5,
+    "logical_interference_samples": 2000
+  },
+  "warning": "Logical interference samples are not physical operations, cycles, joules, or an energy-saving result."
+}
