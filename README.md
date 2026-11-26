@@ -380,7 +380,7 @@ Where proprietary tools or PDKs are required, the repository should identify the
 The repository will grow toward:
 
 ```text
-eis-open-vlpi-pdk/
+eis-open-vlpi-vlsi-conductor/
 ├── README.md
 ├── LICENSE
 ├── CONTRIBUTING.md
