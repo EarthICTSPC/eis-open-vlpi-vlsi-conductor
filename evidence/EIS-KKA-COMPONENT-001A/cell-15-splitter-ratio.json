@@ -1,0 +1,59 @@
+{
+  "record_id": "EIS-KKA-COMPONENT-001A-CELL-15",
+  "title": "Common-source splitter-ratio implication sweep",
+  "status": "PASS",
+  "evidence_class": "computationally-demonstrated",
+  "experiment_scope": "EIS-derived ideal lossless two-branch model under a declared common pre-split input-field convention",
+  "source_reference": {
+    "paper": "Tian et al., Photonic Transformer Chip: Interference Is All You Need",
+    "journal": "PhotoniX 6, 45 (2025)",
+    "doi": "10.1186/s43074-025-00182-7",
+    "equations": ["Supporting Information SI-1, Eq. S2", "Supporting Information SI-1, Eq. S3"]
+  },
+  "convention": {
+    "Ein": "common optical field before the upstream I/W branch division",
+    "eta": "power fraction delivered to I branch",
+    "I_branch_input": "sqrt(eta) * Ein",
+    "W_branch_input": "sqrt(1 - eta) * Ein",
+    "branch_models": "ideal lossless unitary MZI model; both output ports included in power accounting",
+    "phase_fitting": false,
+    "amplitude_fitting": false,
+    "phase_remapping": false
+  },
+  "run": {
+    "samples": 10000,
+    "seed": 20261129,
+    "eta_values": [0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75],
+    "tolerance": 1e-11
+  },
+  "results": {
+    "eta_0_50": {
+      "I_rms_relative_error": 7.157e-17,
+      "I_max_relative_error": 4.238e-16,
+      "W_rms_relative_error": 7.083e-17,
+      "W_max_relative_error": 5.132e-16,
+      "total_power_max_relative_error": 6.494e-16
+    },
+    "sweep_total_power_max_relative_error": 6.494e-16,
+    "off_center_ratios": "Both I and W source-field comparisons mismatch at every tested eta other than 0.50."
+  },
+  "acceptance": {
+    "equal_split_S2_S3_field_equivalence": "PASS",
+    "power_conservation_across_sweep": "PASS",
+    "off_center_ratios_mismatch_both_source_fields": "PASS",
+    "overall": "PASS"
+  },
+  "conclusion": "Within this EIS-derived model and the declared convention that Ein is the common pre-split field, eta = 0.50 is required to reproduce both Tian SI-1 S2 and S3 branch fields. Total power is conserved at all tested ratios.",
+  "limitations": [
+    "This result does not establish the fabricated upstream splitter ratio.",
+    "This result does not resolve the exact physical reference planes or normalization of Ein in Tian SI-1.",
+    "This result is not a physical measurement, foundry-PDK result, EM/FDTD qualification, or formal Lean proof.",
+    "The 50:50 internal MZI couplers are distinct from the upstream I/W branch splitter."
+  ],
+  "physical_status": "NOT_QUALIFIED",
+  "formal_status": "NOT_FORMALLY_VERIFIED",
+  "notebook_environment": {
+    "platform": "Tidy3D cloud notebook",
+    "python": "3.13.13"
+  }
+}
