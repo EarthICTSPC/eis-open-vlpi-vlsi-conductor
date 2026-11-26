@@ -1,0 +1,109 @@
+schema_version: "eis.engineering-memory-index.v0.1"
+repository: EarthICTSPC/eis-open-vlpi-vlsi-conductor
+purpose: >
+  Cold-start navigation for EIS engineers and authorized agents. This index
+  points to versioned source, contract, lowering, execution, verification,
+  evidence, and decision records. It does not replace those records.
+baseline:
+  branch: main
+  commit: 2480d428ef2196080c6aca0400111d78dac0f9ba
+  audited_at: "2026-11-26"
+  visibility: public
+authority:
+  engineering_charter: docs/00-overview/EIS_CONDUCTOR_CHARTER.md
+  agent_instructions: AGENTS.md
+  disclosure_doctrine: docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md
+  evidence_schema: schema/evidence/evidence.schema.yaml
+  legacy_task_specification: task/task-specification.yaml
+  harness_readme: harness/README.md
+  note: >
+    Existing task and evidence formats remain authoritative within their
+    respective workstreams. This index does not silently migrate or override
+    them.
+repositories_and_boundaries:
+  public_system_of_record: GitHub repository main branch and reviewed history
+  system_of_action: EIS Conductor and authorized orchestration
+  integration_transport: MCP and provider-specific connectors
+  controlled_material: >
+    NDA PDK contents, proprietary process rules/models, credentials, private
+    simulation data, and any material not approved for public disclosure or
+    agent processing remain outside this public repository.
+workstreams:
+  - id: EIS-CONDUCTOR-MEMORY-001
+    role: conductor_governance
+    status: proposed_in_this_pr
+    records:
+      - docs/00-overview/EIS_CONDUCTOR_CHARTER.md
+      - AGENTS.md
+      - docs/00-overview/EIS_ENGINEERING_MEMORY_INDEX.yaml
+    related_issues:
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/43
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/44
+  - id: EIS-TIAN-KKA-LIFT-001A
+    role: source_interpretation_and_calibration
+    status: draft_pr_not_merged
+    related_pr: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/pull/98
+    note: >
+      Draft PR contains the Tian source ledger, SI-3/SI-4 interpretation
+      controls, Table S1 fitted-value classification, and numerical reference
+      gate. Treat its contents as proposed until reviewed and merged.
+  - id: EIS-KKA-001B
+    role: separate_soi_mzi_complex_field_reference
+    status: draft_pr_not_merged
+    related_pr: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/pull/99
+    note: >
+      Draft analytical reference model. It does not establish physical
+      validation or transfer a foundry-specific parameter set.
+  - id: EIS-KKA-THERMAL-COUPON-001
+    role: soi_thermal_interaction_experiment_plan
+    status: draft_pr_not_merged
+    related_pr: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/pull/97
+    note: >
+      Draft spacing-first characterization plan; no EIS coupon fabrication,
+      measurement, paid simulation, or safe-spacing result is implied.
+  - id: EIS-PTC-MZI-001
+    role: technology_independent_three_heater_mzi_cell
+    status: specified_issue_with_draft_implementation
+    related_issue: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/79
+    related_pr: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/pull/81
+    note: >
+      PR #81 is a draft implementation stacked on PR #78. Check both PRs and
+      their current base/head state before treating any implementation as
+      integrated.
+  - id: EIS-PDA-CONTRACT-001
+    role: contract_governed_photonic_design_automation
+    status: specified_issue_with_draft_implementation
+    related_issue: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/76
+    related_pr: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/pull/77
+  - id: EIS-KKA-64-001
+    role: foundry_neutral_scale_up_feasibility
+    status: specified_issue_with_multiple_subtasks
+    related_issue: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/66
+    related_records:
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/67
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/68
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/69
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/70
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/71
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/72
+      - https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/73
+    note: >
+      Logical 64x64 score relationships must not be equated to a physical
+      count of 4096 MZI/PTC cells without an explicit mapping.
+  - id: EIS-LEGAL-001
+    role: controlled_data_and_ai_assisted_engineering_boundary
+    status: specified_issue_legal_review_pending
+    related_issue: https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/issues/55
+cold_start_questions:
+  - "What requirement or decision is being addressed?"
+  - "Which primary source and source interpretation support it?"
+  - "Which contract revision and hash define the intended behavior?"
+  - "Which lowering, toolchain, and configuration produced the artifact?"
+  - "Which evidence record and independent checks support the result?"
+  - "What is assumed, fitted, projected, unresolved, blocked, or not run?"
+  - "What is the next action, and who has authority to approve it?"
+update_rule: >
+  Update this index in the same reviewed PR that adds or materially changes a
+  canonical workstream record. Preserve historical links and statuses; do not
+  mark a draft PR as merged or an evidence gap as closed without checking the
+  live repository state.

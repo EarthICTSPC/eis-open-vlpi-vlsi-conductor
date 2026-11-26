@@ -380,7 +380,7 @@ Where proprietary tools or PDKs are required, the repository should identify the
 The repository will grow toward:
 
 ```text
-eis-open-vlpi-pdk/
+eis-open-vlpi-vlsi-conductor/
 ├── README.md
 ├── LICENSE
 ├── CONTRIBUTING.md
@@ -450,6 +450,22 @@ The repository's governing document is:
 [`docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md`](docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md)
 
 Read that document before treating repository contents as a complete implementation specification.
+
+## Conductor operating model and agent entry point
+
+This repository is also the versioned engineering memory and reviewed operating record for the EIS Conductor. The Conductor links requirements, source interpretations, formal contracts, engineering lowerings, tool executions, independent verification, evidence, and decisions.
+
+**Every agent must start with [AGENTS.md](AGENTS.md).** It defines the cold-start reading sequence, trust boundaries, approval rules, and Git workflow.
+
+The governing records are:
+- [EIS Conductor Charter](docs/00-overview/EIS_CONDUCTOR_CHARTER.md) — authority, roles, evidence gates, and autonomy limits.
+- [Engineering Memory Index](docs/00-overview/EIS_ENGINEERING_MEMORY_INDEX.yaml) — navigable links to active workstreams and their current record locations.
+- [Open VLPI Disclosure Doctrine](docs/00-overview/EIS_Open_VLPI_Disclosure_Doctrine.md) — public/controlled boundary and disclosure discipline.
+- [Task/result envelope schema](schema/verification/conductor-task-result-envelope.schema.json) — proposed versioned interface binding bounded agent work to a contract and independent acceptance.
+
+The index is a navigation layer, not a replacement for canonical workstream contracts, source ledgers, experiment specifications, or evidence manifests. A referenced draft PR remains a proposal until reviewed and merged. The Conductor must retrieve and verify the current repository state rather than infer status from a stale summary.
+
+GitHub is the public system of record; the Conductor is the system of action; MCP and provider connectors are integration transport. Controlled foundry data, credentials, and restricted artifacts remain outside this public repository unless specifically authorized for disclosure.
 
 ## Status
 
