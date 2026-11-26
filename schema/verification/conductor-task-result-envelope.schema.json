@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EarthICTSPC/eis-open-vlpi-vlsi-conductor/blob/main/schema/verification/conductor-task-result-envelope.schema.json",
+  "title": "EIS Conductor Task and Result Envelope",
+  "description": "Versioned task/result envelope binding bounded agent execution to an EIS contract, inputs, tool identity, permissions, evidence requirements, and independent Conductor acceptance.",
+  "oneOf": [
+    { "$ref": "#/$defs/task" },
+    { "$ref": "#/$defs/result" }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["uri", "role"],
+      "properties": {
+        "uri": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "media_type": { "type": "string" },
+        "disclosure": {
+          "type": "string",
+          "enum": ["public", "controlled_reference_only", "restricted"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "tool": {
+      "type": "object",
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "provider": { "type": "string" },
+        "mcp_server": { "type": "string" },
+        "model": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "contract": {
+      "type": "object",
+      "required": ["id", "revision", "sha256"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "uri": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "task": {
+      "type": "object",
+      "required": [
+        "envelope_version", "kind", "task_id", "created_at",
+        "contract", "scope", "inputs", "assigned_tool",
+        "required_evidence", "acceptance", "approval"
+      ],
+      "properties": {
+        "envelope_version": { "const": "eis.conductor.envelope.v0.1" },
+        "kind": { "const": "task" },
+        "task_id": { "type": "string", "minLength": 1 },
+        "created_at": { "type": "string", "format": "date-time" },
+        "contract": { "$ref": "#/$defs/contract" },
+        "scope": {
+          "type": "object",
+          "required": ["description", "allowed_actions", "prohibited_actions"],
+          "properties": {
+            "description": { "type": "string", "minLength": 1 },
+            "allowed_actions": { "type": "array", "items": { "type": "string" } },
+            "prohibited_actions": { "type": "array", "items": { "type": "string" } },
+            "stop_conditions": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        },
+        "inputs": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+        "assigned_tool": { "$ref": "#/$defs/tool" },
+        "required_evidence": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "acceptance": {
+          "type": "object",
+          "required": ["rules", "independent_verification_required"],
+          "properties": {
+            "rules": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "independent_verification_required": { "type": "boolean" },
+            "validator": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "resource_limits": {
+          "type": "object",
+          "properties": {
+            "max_runtime_seconds": { "type": "integer", "minimum": 0 },
+            "max_cost": { "type": "number", "minimum": 0 },
+            "currency": { "type": "string" },
+            "external_compute_allowed": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "approval": {
+          "type": "object",
+          "required": ["state", "authority"],
+          "properties": {
+            "state": { "type": "string", "enum": ["not_required", "pending", "approved", "denied"] },
+            "authority": { "type": "string" },
+            "approval_record": { "type": "string" },
+            "scope_limit": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "envelope_version", "kind", "task_id", "contract",
+        "assigned_tool", "reported_status", "completed_at",
+        "outputs", "method", "limitations"
+      ],
+      "properties": {
+        "envelope_version": { "const": "eis.conductor.envelope.v0.1" },
+        "kind": { "const": "result" },
+        "task_id": { "type": "string", "minLength": 1 },
+        "contract": { "$ref": "#/$defs/contract" },
+        "assigned_tool": { "$ref": "#/$defs/tool" },
+        "reported_status": {
+          "type": "string",
+          "enum": ["completed", "failed", "partial", "blocked", "not_run"]
+        },
+        "completed_at": { "type": "string", "format": "date-time" },
+        "input_hashes": { "type": "array", "items": { "$ref": "#/$defs/sha256" } },
+        "outputs": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+        "method": { "type": "string", "minLength": 1 },
+        "assumptions": { "type": "array", "items": { "type": "string" } },
+        "limitations": { "type": "array", "items": { "type": "string" } },
+        "logs": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+        "proposed_next_action": { "type": "string" },
+        "conductor_acceptance": {
+          "type": "object",
+          "required": ["decision", "reason"],
+          "properties": {
+            "decision": { "type": "string", "enum": ["ACCEPT", "REJECT", "INCONCLUSIVE"] },
+            "reason": { "type": "string", "minLength": 1 },
+            "validator": { "type": "string" },
+            "checked_at": { "type": "string", "format": "date-time" },
+            "evidence_refs": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
