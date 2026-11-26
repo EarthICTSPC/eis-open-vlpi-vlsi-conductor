@@ -41,7 +41,7 @@ Important consequences:
 
 1. The inspected Lean file contains no `E_in`, `E_I`, or `E_W` source-normalization symbol.
 2. The lifting therefore makes no pre-split/post-split commitment for Tian's `E_in`.
-3. `noncomputable` is a Lean executability annotation; it does not mean the mathematical cross term is undefined or physically unknown.
+3. `noncomputable` is a Lean declaration annotation; it does not mean the mathematical cross term is undefined or physically unknown. The inspected commit does not document why the keyword is required, so this contract does not infer a specific implementation reason from it.
 4. The Lean definition is the real inner product / real cross term, equivalent under the documented convention to `Re(a * conj b)`.
 
 The EIS branch-source convention in this contract is therefore a lowering-side refinement/modeling convention, not a redefinition of a symbol already fixed in this Lean file.
@@ -74,7 +74,7 @@ This is a mathematical bridge candidate; its exact Lean implementation and proof
 
 ## 3. Field symbols and normalization
 
-The following names are reserved to prevent ambiguous reuse of `E_in`:
+The following names are reserved to prevent ambiguous reuse of `E_in`. The SI-1 source mapping is now explicit at the ideal-model level:
 
 | Symbol | Meaning | Status |
 |---|---|---|
@@ -83,7 +83,7 @@ The following names are reserved to prevent ambiguous reuse of `E_in`:
 | `E_W,in` | Field at the W-branch input reference plane, after upstream division | EIS contract symbol |
 | `E_I'` | Complex field appearing in Tian SI-1 S2 | Source equation symbol |
 | `E_W'` | Complex field appearing in Tian SI-1 S3 | Source equation symbol |
-| `E_{in}^{Tian}` | Literal `E_in` as used in SI-1 S2/S3; physical reference plane not yet resolved | Source symbol, interpretation open |
+| `E_{in}^{Tian}` | Literal `E_in` at the laser/input plane before the first MMI in SI-1 Figure S1 | Source symbol; ideal-model reference plane resolved |
 
 For an ideal lossless upstream splitter, EIS may model:
 
@@ -94,7 +94,7 @@ E_{W,in}=\sqrt{1-\eta}\,E_{src},
 
 where `eta` is the I-branch power fraction and \(0\leq\eta\leq1\).
 
-**Do not equate** `E_src`, `E_I,in`, `E_W,in`, and `E_in^Tian` until source reference planes and normalization are documented.
+**Source mapping:** for the ideal SI-1 model, `E_src = E_in^Tian` at the laser/input plane before the first MMI. The SI-1 equations encode `E_I,in = E_W,in = E_src/√2` in field amplitude, corresponding to an equal power split under the ideal lossless convention. Keep these names distinct in code so the mapping remains explicit. For a practical device, use measured branch transfer coefficients rather than assuming exact equality.
 
 ## 4. Topology decomposition
 
@@ -106,7 +106,7 @@ Externally coupled input field at the upstream reference plane. Its normalizatio
 
 ### T1 — Upstream I/W branch division
 
-Divides the common input into the I and W computational branches. The physical ratio is currently **UNRESOLVED**. Cell 15 does not qualify this physical splitter.
+Divides the common input into the I and W computational branches. SI-1 Figure S1 and Eqs. S2/S3 establish the nominal ideal 50:50 source-model split. The actual fabricated ratio remains **UNRESOLVED / NOT MEASURED** by this audit; SI-4 expressly acknowledges non-even 50:50 splitting from fabrication imperfections.
 
 ### T2 — I and W branch modulators
 
@@ -154,9 +154,9 @@ Acceptance:
 - Power conservation across sweep: PASS
 - All tested off-center ratios mismatch both source fields: PASS
 
-**Permitted conclusion:** Under the EIS-derived ideal two-branch model and the explicit convention that `E_src` is the common pre-split field, `eta = 0.50` is required to reproduce both SI-1 S2 and S3 branch fields.
+**Permitted conclusion:** Cell 15 independently reproduces the ideal SI-1 normalization. Its equal-split result is now corroborated by SI-1 Figure S1, which places `E_in` before the first MMI, and by the common `E_in/√2` factors in S2/S3.
 
-**Not permitted:** claiming that Cell 15 proves the fabricated upstream splitter is physically 50:50, or that Tian's SI-1 `E_in` has been conclusively located at the common pre-split plane.
+**Not permitted:** claiming that Cell 15 or the nominal SI-1 equations prove the fabricated upstream splitter is exactly 50:50. SI-4 explicitly identifies fabrication-induced non-even splitting.
 
 Evidence classification: **computationally-demonstrated** for this model. It is not a Lean proof, physical measurement, EM/FDTD qualification, foundry-PDK qualification, or fabricated-device result.
 
@@ -166,9 +166,9 @@ Before full PhotonForge lowering, the source-to-model mapping must identify:
 
 | Plane | Required definition | Current status |
 |---|---|---|
-| RP0 | External input / common source field plane | Exact SI-1 correspondence unresolved |
-| RP1-I | I-branch input immediately after upstream division | Physical splitter ratio unresolved |
-| RP1-W | W-branch input immediately after upstream division | Physical splitter ratio unresolved |
+| RP0 | Laser/common input field plane before the first MMI | SI-1 Figure S1 resolved at ideal diagram level; calibrated physical plane/normalization not measured |
+| RP1-I | I-branch input immediately after upstream MMI | Ideal equal split specified by SI-1 S2; actual device transfer coefficient unmeasured |
+| RP1-W | W-branch input immediately after upstream MMI | Ideal equal split specified by SI-1 S3; actual device transfer coefficient unmeasured |
 | RP2-I | I-branch MZI/modulator input plane | Port mapping and normalization to verify |
 | RP2-W | W-branch MZI/modulator input plane | Port mapping and normalization to verify |
 | RP3-S/M | Each MZI signal and monitor output plane | Complete port mapping required |
