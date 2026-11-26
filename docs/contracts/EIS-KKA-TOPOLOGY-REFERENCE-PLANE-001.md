@@ -18,7 +18,7 @@ Primary source: Tian et al., *Photonic Transformer Chip: Interference Is All You
 
 The EIS source audit has independently transcribed and numerically checked SI-1 Eqs. S2–S4. The main paper describes the externally coupled optical input being divided into two portions: one portion is split among the A paths, while the other is modulated as B and broadcast to the M ports. The paper also describes MZI signal and monitor outputs and balanced-detection arrangements.
 
-These statements support a high-level multi-branch architecture. They do not, by themselves, identify the exact upstream splitter ratio, the SI-1 field reference planes, or every normalization convention needed to identify each equation's (E_{in}) with a physical node.
+These statements support a high-level multi-branch architecture. They do not, by themselves, identify the exact upstream splitter ratio, the SI-1 field reference planes, or every normalization convention needed to identify each equation's \(E_{in}\) with a physical node.
 
 ### 2.2 PhysLib lifting boundary
 
@@ -50,23 +50,23 @@ The EIS branch-source convention in this contract is therefore a lowering-side r
 
 The PhysLib identity concerns:
 
-[
+\[
 2\operatorname{Re}(a\overline b).
-]
+\]
 
 The audited Tian SI-1 Eq. S4 is:
 
-[
+\[
 P_{out}=2\operatorname{Im}(E_I'\overline{E_W'}).
-]
+\]
 
 These are related by an explicit phase rotation:
 
-[
+\[
 2\operatorname{Im}(E_I'\overline{E_W'})
 =
 2\operatorname{Re}((-iE_I')\overline{E_W'}).
-]
+\]
 
 Thus the quadrature observable can be represented using the real-cross-term formalization only after explicitly rotating one field by (-\pi/2), or by adding a separately named quadrature-cross-term definition and proving the relation. Do not silently identify S4 with the unrotated real cross term.
 
@@ -87,12 +87,12 @@ The following names are reserved to prevent ambiguous reuse of `E_in`:
 
 For an ideal lossless upstream splitter, EIS may model:
 
-[
+\[
 E_{I,in}=\sqrt{\eta}\,E_{src},\qquad
 E_{W,in}=\sqrt{1-\eta}\,E_{src},
-]
+\]
 
-where `eta` is the I-branch power fraction and (0\leq\eta\leq1).
+where `eta` is the I-branch power fraction and \(0\leq\eta\leq1\).
 
 **Do not equate** `E_src`, `E_I,in`, `E_W,in`, and `E_in^Tian` until source reference planes and normalization are documented.
 
