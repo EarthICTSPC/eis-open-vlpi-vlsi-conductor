@@ -137,27 +137,31 @@ PhysLib's theorem about normSq(a+b) establishes the generic real cross-term iden
 
 The EIS bridge can instantiate the **algebraic cross-term component** of S4. It must not claim that the complete optical/detection circuit has been formally verified by that theorem alone.
 
-## 6. Lean bridge candidate (not yet compiled)
+## 6. Lean bridge target (proof pending)
 
-The intended EIS-side theorem statement is structurally:
+The exact mathematical target for the Lean bridge is:
 
-    theorem tian_s4_eq_two_mul_opticalCrossTerm
-        (E_I_prime E_W_prime : Complex) :
-        2 * Optics.opticalCrossTerm
-          (-Complex.I * E_I_prime) E_W_prime
-          =
-        2 * (E_I_prime * star E_W_prime).im := by
-      -- proof to be completed against the exact Mathlib version and imports
-      sorry
+[
+\operatorname{opticalCrossTerm}(-iE_I',E_W')
+=\operatorname{Im}(E_I'\overline{E_W'}).
+]
 
-This is deliberately labeled a candidate. Do not commit it as a passing theorem until:
-1. the exact Lean and Mathlib versions are pinned;
-2. the expression is checked against the actual opticalCrossTerm definition;
-3. the proof compiles without sorry;
-4. the S2/S3 field definitions are connected to the symbols used in the theorem; and
-5. the source-to-lowering convention is documented at the interface.
+Consequently:
 
-A more robust final theorem may state S4 in terms of the explicit phase variables and S2/S3 amplitude definitions, rather than assuming arbitrary complex fields. That would connect the complete source equations, not merely the generic quadrature identity.
+[
+P_{out}=2\,\operatorname{opticalCrossTerm}(-iE_I',E_W').
+]
+
+This section is a theorem specification, not a claim that a Lean theorem has already been compiled or proved. The lifting collaborator and EIS must agree where the theorem belongs: in PhysLib as a general quadrature-to-real-cross-term lemma, or in an EIS-side module importing the existing PhysLib definition.
+
+Before marking the bridge formally verified:
+1. Pin the exact Lean and Mathlib toolchain.
+2. Check the expression against the actual `Optics.opticalCrossTerm` definition and its inner-product convention.
+3. Prove the identity without `sorry`.
+4. Connect the S2/S3 source field definitions to the fields used by the bridge theorem.
+5. Keep detector gain, responsivity, offsets, noise, and calibration outside this algebraic theorem unless separately modeled and proved.
+
+A robust source-level theorem should state S4 using the explicit S2/S3 phase and signed-amplitude definitions, then derive the generic quadrature identity. That connects the complete source equations rather than merely proving a generic identity for arbitrary complex fields.
 
 ## 7. Evidence classification and remaining unknowns
 
