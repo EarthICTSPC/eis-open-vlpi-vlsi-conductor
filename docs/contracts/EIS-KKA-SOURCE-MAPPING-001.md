@@ -47,7 +47,7 @@ E_W' = E_W exp(i theta_W)
 
 The shared E_in/sqrt(2) coefficient agrees with the two-branch equal-amplitude split shown in Figure S1. Under the ideal lossless convention, that is a 50:50 power division.
 
-**Physical qualification caveat:** SI-4 explicitly says fabrication imperfections can induce non-even 50:50 beam splitting and non-uniform grating-coupling efficiency, degrading interference contrast. Therefore the ideal source split is nominally equal, but the actual fabricated input-MMI ratio is not proven to be exactly 50:50 by S2/S3. A physical model must expose the branch transfer coefficients or splitter imbalance as calibrated parameters.
+**Physical qualification caveat:** SI-4 explicitly says fabrication imperfections can induce non-even 50:50 beam splitting and non-uniform grating-coupling efficiency, degrading interference contrast. Therefore the ideal source split is nominally equal, but the actual fabricated input-MMI ratio is not proven to be exactly 50:50 by S2/S3. SI-4's note is about fabrication-induced splitter imbalance in the chip's interference path; it does not, in the cited sentence, localize that imbalance specifically to the first input MMI. A physical model must expose the relevant branch/coupler transfer coefficients as calibrated parameters.
 
 ## 3. Topology and reference planes
 
