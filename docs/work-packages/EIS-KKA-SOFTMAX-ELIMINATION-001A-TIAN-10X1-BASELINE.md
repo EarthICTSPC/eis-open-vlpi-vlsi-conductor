@@ -211,3 +211,73 @@ No physical component simulation is required to pass Gates A–D.
 7. Report PASS / FAIL / BLOCKED for every test; do not proceed to physical lowering as if a blocked computational gate had passed.
 
 **Governing result:** A successful 10×1 baseline is evidence of useful SoftMax-free KKA attention on a reproducible workload. It is not yet evidence of a qualified photonic implementation or an energy advantage.
+
+
+## 11. Source-ledger update — Supporting Information review (2026-11-27)
+
+### 11.1 Primary source artifacts reviewed
+
+- Main article: [Tian et al., PhotoniX 6, 45 (2025)](https://doi.org/10.1186/ s43074-025-00182-7).
+- Publisher-hosted Supporting Information PDF: [Supplementary Information (38 pages)](https://static-content.springer.com/esm/art%3A10.1186%2Fs43074-025-00182-7/MediaObjects/43074_2025_182_MOESM1_ESM.pdf).
+- SI-13 is titled “Pseudo-codes for the training of the ViT network with standard self-attention or KKA, and 3-hidden-layers MLP network with KKA or FC layer”. It contains forward/backward pseudocode for standard attention and KKA. It is pseudocode, not a complete executable implementation or a complete training configuration.
+- Main-article Methods report PyTorch, SGD, momentum 0.9, weight decay 0.0001, MNIST batch size 128, and two attention heads. The exact MNIST ViT learning rate, epoch count, scheduler, random seeds, initialization details, and complete dataloader/validation procedure are not established by the currently reviewed article text and SI-13.
+- The article states that numerical data and a public code version are available from the authors on reasonable request. An author request for the exact code, data, and missing training configuration remains an action item.
+
+### 11.2 KKA operator authority — do not substitute a convenient proxy
+
+The paper's general KKA computational operator is the interference cross-term:
+\[
+\mathcal I(a,b)=2\operatorname{Re}(a b^*).
+\]
+For vector/tensor implementations, conjugation, reduction axes, normalization, and the association/order of the successive KKA operations must be specified explicitly. The paper's operator is not defined by independently learned amplitude/phase projections followed by an arbitrary normalization.
+
+The SI-1 balanced-detector circuit derivation has a quadrature form:
+\[
+P_{out}=2\operatorname{Im}(E_I'\overline{E_W'}).
+\]
+This is circuit-specific and is not a replacement definition for the general KKA operator. The exact algebraic bridge is:
+\[
+P_{out}=2\operatorname{Re}((-iE_I')\overline{E_W'})
+=2\operatorname{opticalCrossTerm}(-iE_I',E_W'),
+\]
+where PhysLib's real cross-term convention is \(\operatorname{Re}(a\overline b)\). The phase-coordinate rotation is an algebraic equivalence; it does not assert that a new physical phase shifter is required.
+
+### 11.3 SI-13 algorithm detail requiring explicit reconciliation
+
+SI-13 supplies pseudocode for standard self-attention and KKA forward/backward passes. The KKA pseudocode describes KKA Q/K/V construction and an interference-based score calculation. Its weighted aggregation notation includes an intermediate \(\alpha\) and an ordinary multiplication by V, while the main article's compact KKA expression writes the final aggregation as another interference operation. This notation/implementation relationship must be reconciled against the authors' code or an unambiguous derivation before freezing a canonical executable tensor operator. Do not silently choose one interpretation.
+
+### 11.4 Rejected proxy implementation — friend-supplied exploratory code
+
+The separately reviewed eis_kka_softmax_elimination.py is **not** a Tian reproduction and is not accepted as the canonical KKA implementation. It may be retained only as a clearly labelled non-Tian exploratory comparator. Reasons:
+
+1. tanh amplitude projections and independently learned phase projections do not implement Tian's S6/S7 mapping or establish the paper's KKA operator.
+2. torch.polar is supplied with potentially negative tanh outputs as magnitudes; this is not a valid faithful encoding of the intended nonnegative field magnitude.
+3. The score 2*Im(Eq @ Ekᴴ) imports the SI-1 circuit-specific quadrature form as a generic attention score, without the required phase-coordinate bridge; Tian's general KKA operator is the real cross-term.
+4. L1 row normalization is an added rule, not established as Tian's KKA normalization.
+5. The implementation retains ordinary learned linear Q/K/V projections and ordinary matrix multiplication for value aggregation; it therefore does not demonstrate that Tian's interference primitive replaces the declared sequence of computational operations.
+6. The synthetic task label is directly determined by the first token's first feature, which the residual path can preserve; the task does not establish that attention is doing useful work.
+7. It lacks a held-out validation/test protocol and does not reproduce the paper's MNIST ViT architecture or source training protocol.
+
+This rejection is scoped to source fidelity. It does not say the proxy code is useless for experimentation; it says it cannot be cited as evidence for Tian KKA or SoftMax-elimination performance.
+
+### 11.5 Evidence status and next source actions
+
+| Item | Status | Evidence class |
+|---|---|---|
+| Main article architecture and reported numerical/physical results | Reviewed | SOURCE-REPORTED |
+| SI-13 standard-attention and KKA pseudocode | Reviewed | SOURCE-REPORTED |
+| SI-13 as complete executable implementation | Not established | UNRESOLVED |
+| Full MNIST ViT training configuration | Partially reported | PARTIAL / UNRESOLVED |
+| General KKA real interference cross-term | Source mathematical definition | SOURCE-DEFINED |
+| SI-1 quadrature detector equation and real-cross-term bridge | Algebraic derivation reviewed; formal Lean proof pending | DERIVED / PROOF-PENDING |
+| Friend-supplied proxy as Tian implementation | Rejected | NOT-SOURCE-FAITHFUL |
+| EIS reproduction of the numerical baseline | Not run | NOT-YET-REPRODUCED |
+| EIS physical or energy qualification | Not established | NOT-QUALIFIED |
+
+Immediate actions:
+1. Request the authors' exact PyTorch code, numerical data, full MNIST ViT configuration, and clarification of the SI-13 KKA weighted-aggregation notation.
+2. In PhysLib, define and prove the general complex-field real-interference operator independently of the SI-1 circuit.
+3. Prove the SI-1 quadrature-to-real-cross-term bridge as a separate theorem, preserving the source's field and reference-plane conventions.
+4. Only after the tensor-level KKA sequence and SI-13 notation are reconciled, freeze the canonical PhysLib KKA contract and generate/validate the Python reference adapter from that authority.
+
+**Gate:** No implementation is accepted as “Tian KKA” merely because it is complex-valued, SoftMax-free, or uses an interference-like score. Source equation, tensor semantics, normalization, and operation order must all be traceable.
