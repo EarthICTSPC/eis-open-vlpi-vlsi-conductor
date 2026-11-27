@@ -226,3 +226,15 @@ The document may evolve as evidence improves. A reference PDK finding does not a
 
 **Earth ICT, SPC (EIS)**  
 *Open physical-computing infrastructure for an Earth-first ICT future.*
+
+
+## 13. Reference assessment and community register
+
+The following subordinate documents apply this specification to reference evidence. They do not modify or replace the requirements baseline:
+
+- [EIS-FAB-REF-TIAN-001 — Tian KKA / SOI reference evidence assessment](EIS-FAB-REF-TIAN-001.md)
+- [EIS-FAB-REF-CORNERSTONE-001 — CORNERSTONE Si220 evidence assessment](EIS-FAB-REF-CORNERSTONE-001.md)
+- [EIS-FAB-REF-SIEPIC-001 — SiEPIC EBeam evidence assessment](EIS-FAB-REF-SIEPIC-001.md)
+- [EIS-FAB-COMMUNITY-GAPS-001 — Photonic community gap and contribution register](EIS-FAB-COMMUNITY-GAPS-001.md)
+
+The assessments distinguish source-reported, modeled, simulated, measured, and foundry-confirmed evidence. They are living records and should be updated as maintainers, researchers, foundries, and independent reviewers contribute information. A reference assessment may identify a gap or suggest a requirement change; it does not silently redefine an EIS requirement. Proposed changes follow the change-control process above.
