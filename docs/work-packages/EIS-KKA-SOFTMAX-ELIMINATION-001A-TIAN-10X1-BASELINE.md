@@ -217,7 +217,7 @@ No physical component simulation is required to pass Gates A–D.
 
 ### 11.1 Primary source artifacts reviewed
 
-- Main article: [Tian et al., PhotoniX 6, 45 (2025)](https://doi.org/10.1186/ s43074-025-00182-7).
+- Main article: [Tian et al., PhotoniX 6, 45 (2025)](https://doi.org/10.1186/s43074-025-00182-7).
 - Publisher-hosted Supporting Information PDF: [Supplementary Information (38 pages)](https://static-content.springer.com/esm/art%3A10.1186%2Fs43074-025-00182-7/MediaObjects/43074_2025_182_MOESM1_ESM.pdf).
 - SI-13 is titled “Pseudo-codes for the training of the ViT network with standard self-attention or KKA, and 3-hidden-layers MLP network with KKA or FC layer”. It contains forward/backward pseudocode for standard attention and KKA. It is pseudocode, not a complete executable implementation or a complete training configuration.
 - Main-article Methods report PyTorch, SGD, momentum 0.9, weight decay 0.0001, MNIST batch size 128, and two attention heads. The exact MNIST ViT learning rate, epoch count, scheduler, random seeds, initialization details, and complete dataloader/validation procedure are not established by the currently reviewed article text and SI-13.
