@@ -1,6 +1,6 @@
 # EIS-FAB-REF-TIAN-001 — Tian KKA / SOI Reference Evidence Assessment
 
-**Parent specification:** [EIS-FAB-REQ-001](../EIS-FAB-REQ-001.md)  
+**Parent specification:** [EIS-FAB-REQ-001](EIS-FAB-REQ-001.md)  
 **Status:** Source-led assessment; open issues remain  
 **Reference:** Tian et al., *Photonic Transformer Chip: Interference Is All You Need*, PhotoniX 6, 45 (2025), [DOI 10.1186/s43074-025-00182-7](https://doi.org/10.1186/s43074-025-00182-7).  
 **Supporting Information:** [Publisher-hosted SI PDF](https://static-content.springer.com/esm/art:10.1186%2Fs43074-025-00182-7/MediaObjects/43074_2025_182_MOESM1_ESM.pdf).
