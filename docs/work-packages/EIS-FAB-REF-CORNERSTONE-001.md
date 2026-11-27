@@ -1,6 +1,6 @@
 # EIS-FAB-REF-CORNERSTONE-001 — CORNERSTONE Si220 Evidence Assessment
 
-**Parent specification:** [EIS-FAB-REQ-001](../EIS-FAB-REQ-001.md)  
+**Parent specification:** [EIS-FAB-REQ-001](EIS-FAB-REQ-001.md)  
 **Status:** Read-only source and package audit; no PDK installation or solver run authorized  
 **Reference platform:** CORNERSTONE Photonics / University of Southampton; open Si220 SOI PDK ecosystem.  
 **Package examined:** `cspdk` wheel 2.1.0 source and metadata, plus public CORNERSTONE/gdsfactory documentation. Exact wheel hash and environment should be added to the machine-readable evidence manifest when available.
