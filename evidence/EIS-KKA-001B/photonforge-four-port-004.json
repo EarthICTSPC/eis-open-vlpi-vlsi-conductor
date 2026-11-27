@@ -1,0 +1,62 @@
+{
+  "evidence_id": "EIS-KKA-PF-4PORT-004",
+  "title": "PhotonForge four-port SOI MZI parameter-space comparison",
+  "status": "PASS_PARAMETER_SWEEP",
+  "evidence_class": "analytical_software_cross_backend",
+  "timestamp_date": "2026-11-27",
+  "environment": {
+    "photonforge_version": "1.5.1",
+    "frequency_hz": 193500000000000.0,
+    "frequency_scope": "single_frequency",
+    "port_order": ["left_0", "left_1", "right_0", "right_1"],
+    "s_matrix_convention": "rows=outputs, columns=inputs",
+    "photonforge_element_key_convention": "(input_port, output_port)",
+    "numpy_reference": "eis_mzi_reference",
+    "photonforge_model": "EISKKAFourPortMZIModel"
+  },
+  "sweep": {
+    "case_count": 22,
+    "explicit_cases": 6,
+    "seeded_cases": 16,
+    "random_seed": 20261127,
+    "parameters": [
+      "kappa_in",
+      "kappa_out",
+      "phase_rad[0:2]",
+      "arm_loss_db[0:2]"
+    ],
+    "coverage": [
+      "symmetric and asymmetric couplers",
+      "boundary coupling ratios 0 and 1",
+      "independent arm phases",
+      "zero and nonzero arm losses"
+    ]
+  },
+  "acceptance": {
+    "tolerance": 1e-12,
+    "passed_cases": 22,
+    "total_cases": 22,
+    "max_complex_s_error": 0.0,
+    "max_reciprocity_residual": 0.0,
+    "max_eigenvalue_of_s_dagger_s": 1.0,
+    "lossless_unitarity": "PASS",
+    "lossy_contractivity": "PASS",
+    "overall": "PASS"
+  },
+  "model_assumptions": [
+    "ideal reciprocal two-coupler MZI",
+    "zero reflection blocks",
+    "arm loss represented by scalar field attenuation",
+    "dissipative channels are not explicit ports",
+    "frequency-independent analytical model at the tested frequency"
+  ],
+  "limitations": [
+    "not a Tidy3D electromagnetic simulation",
+    "not a foundry PDK compact model",
+    "not a physical layout or design-rule check",
+    "not fabricated-device evidence",
+    "not full Tian modulator-interferometer cascade or BPD validation",
+    "no spectral or polarization sweep"
+  ],
+  "interpretation": "PhotonForge S-parameters matched the independent NumPy reference exactly for all 22 tested parameter cases. Reciprocity, lossless unitarity, and lossy contractivity checks passed. This validates the analytical PhotonForge adapter over the stated test set only."
+}

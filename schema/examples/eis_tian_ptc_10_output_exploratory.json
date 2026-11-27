@@ -1,0 +1,2286 @@
+{
+  "schemaVersion": 1,
+  "name": "EIS_TIAN_INSPIRED_PTC_10_OUTPUT_EXPLORATORY",
+  "instances": [
+    {
+      "id": "laser_in",
+      "kind": "laser",
+      "ports": [
+        "out"
+      ],
+      "parameters": []
+    },
+    {
+      "id": "input_split_mmi",
+      "kind": "mmi1x2",
+      "ports": [
+        "in",
+        "out_a",
+        "out_b"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "A_fanout_tree",
+      "kind": "fanoutTree",
+      "ports": [
+        "in",
+        "out_01",
+        "out_02",
+        "out_03",
+        "out_04",
+        "out_05",
+        "out_06",
+        "out_07",
+        "out_08",
+        "out_09",
+        "out_10"
+      ],
+      "parameters": [
+        {
+          "name": "fanout",
+          "value": "10",
+          "unit": "count",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "geometry_status",
+          "value": "logical_only",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        }
+      ]
+    },
+    {
+      "id": "MZI_B_SHARED",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "role",
+          "value": "shared_B",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "B_broadcast_tree",
+      "kind": "fanoutTree",
+      "ports": [
+        "in",
+        "out_01",
+        "out_02",
+        "out_03",
+        "out_04",
+        "out_05",
+        "out_06",
+        "out_07",
+        "out_08",
+        "out_09",
+        "out_10"
+      ],
+      "parameters": [
+        {
+          "name": "fanout",
+          "value": "10",
+          "unit": "count",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "geometry_status",
+          "value": "logical_only",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_01",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "01",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_01",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "01",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_01",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "01",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_02",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "02",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_02",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "02",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_02",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "02",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_03",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "03",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_03",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "03",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_03",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "03",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_04",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "04",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_04",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "04",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_04",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "04",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_05",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "05",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_05",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "05",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_05",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "05",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_06",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "06",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_06",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "06",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_06",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "06",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_07",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "07",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_07",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "07",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_07",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "07",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_08",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "08",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_08",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "08",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_08",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "08",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_09",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "09",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_09",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "09",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_09",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "09",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    },
+    {
+      "id": "MZI_A_10",
+      "kind": "mziCell",
+      "ports": [
+        "in",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "phase_shifters",
+          "value": "3",
+          "unit": "count",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "splitter",
+          "value": "mmi1x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "combiner",
+          "value": "mmi2x2",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "channel",
+          "value": "10",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "role",
+          "value": "A",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "waveguide_width_nm",
+          "value": "450",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "waveguide_height_nm",
+          "value": "220",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_material",
+          "value": "TiN",
+          "unit": "text",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_length_um",
+          "value": "200",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_width_um",
+          "value": "2",
+          "unit": "um",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_thickness_nm",
+          "value": "120",
+          "unit": "nm",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "heater_sheet_resistance_ohm_sq",
+          "value": "12",
+          "unit": "ohm/sq",
+          "evidence": "tianReported"
+        },
+        {
+          "name": "mmi1x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi1x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "output_mmi_10",
+      "kind": "mmi2x2",
+      "ports": [
+        "in_a",
+        "in_b",
+        "out",
+        "out_complement"
+      ],
+      "parameters": [
+        {
+          "name": "geometry_status",
+          "value": "abstract",
+          "unit": "text",
+          "evidence": "eisArchitectureChoice"
+        },
+        {
+          "name": "channel",
+          "value": "10",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        },
+        {
+          "name": "mmi2x2_length_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        },
+        {
+          "name": "mmi2x2_width_um",
+          "value": "unknown",
+          "unit": "um",
+          "evidence": "sourceUnknown"
+        }
+      ]
+    },
+    {
+      "id": "BPD_10",
+      "kind": "balancedPhotodetector",
+      "ports": [
+        "optical_in",
+        "electrical_out"
+      ],
+      "parameters": [
+        {
+          "name": "channel",
+          "value": "10",
+          "unit": "text",
+          "evidence": "sourceInterpretation"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "source": {
+        "instanceId": "laser_in",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "input_split_mmi",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "input_split_mmi",
+        "portName": "out_a"
+      },
+      "target": {
+        "instanceId": "A_fanout_tree",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "input_split_mmi",
+        "portName": "out_b"
+      },
+      "target": {
+        "instanceId": "MZI_B_SHARED",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_B_SHARED",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_01"
+      },
+      "target": {
+        "instanceId": "MZI_A_01",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_01",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_01",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_01"
+      },
+      "target": {
+        "instanceId": "output_mmi_01",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_01",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_01",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_02"
+      },
+      "target": {
+        "instanceId": "MZI_A_02",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_02",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_02",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_02"
+      },
+      "target": {
+        "instanceId": "output_mmi_02",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_02",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_02",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_03"
+      },
+      "target": {
+        "instanceId": "MZI_A_03",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_03",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_03",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_03"
+      },
+      "target": {
+        "instanceId": "output_mmi_03",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_03",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_03",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_04"
+      },
+      "target": {
+        "instanceId": "MZI_A_04",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_04",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_04",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_04"
+      },
+      "target": {
+        "instanceId": "output_mmi_04",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_04",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_04",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_05"
+      },
+      "target": {
+        "instanceId": "MZI_A_05",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_05",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_05",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_05"
+      },
+      "target": {
+        "instanceId": "output_mmi_05",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_05",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_05",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_06"
+      },
+      "target": {
+        "instanceId": "MZI_A_06",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_06",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_06",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_06"
+      },
+      "target": {
+        "instanceId": "output_mmi_06",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_06",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_06",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_07"
+      },
+      "target": {
+        "instanceId": "MZI_A_07",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_07",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_07",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_07"
+      },
+      "target": {
+        "instanceId": "output_mmi_07",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_07",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_07",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_08"
+      },
+      "target": {
+        "instanceId": "MZI_A_08",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_08",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_08",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_08"
+      },
+      "target": {
+        "instanceId": "output_mmi_08",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_08",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_08",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_09"
+      },
+      "target": {
+        "instanceId": "MZI_A_09",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_09",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_09",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_09"
+      },
+      "target": {
+        "instanceId": "output_mmi_09",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_09",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_09",
+        "portName": "optical_in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "A_fanout_tree",
+        "portName": "out_10"
+      },
+      "target": {
+        "instanceId": "MZI_A_10",
+        "portName": "in"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "MZI_A_10",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "output_mmi_10",
+        "portName": "in_a"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "B_broadcast_tree",
+        "portName": "out_10"
+      },
+      "target": {
+        "instanceId": "output_mmi_10",
+        "portName": "in_b"
+      }
+    },
+    {
+      "source": {
+        "instanceId": "output_mmi_10",
+        "portName": "out"
+      },
+      "target": {
+        "instanceId": "BPD_10",
+        "portName": "optical_in"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "instanceId": "laser_in",
+      "portName": "out"
+    }
+  ],
+  "outputs": [
+    {
+      "instanceId": "BPD_01",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_02",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_03",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_04",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_05",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_06",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_07",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_08",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_09",
+      "portName": "electrical_out"
+    },
+    {
+      "instanceId": "BPD_10",
+      "portName": "electrical_out"
+    }
+  ]
+}
