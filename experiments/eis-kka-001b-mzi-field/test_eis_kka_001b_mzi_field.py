@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from eis_kka_001b_mzi_field import (\n    directional_coupler, ideal_balanced_interference, mzi_scattering_matrix, simulate_mzi,\n)
+from eis_kka_001b_mzi_field import directional_coupler, ideal_balanced_interference, mzi_scattering_matrix, simulate_mzi
 
 
 def test_directional_coupler_is_unitary():
