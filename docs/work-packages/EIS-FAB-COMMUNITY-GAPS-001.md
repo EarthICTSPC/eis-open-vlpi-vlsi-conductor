@@ -1,6 +1,6 @@
 # EIS-FAB-COMMUNITY-GAPS-001 — Photonic Community Gap and Contribution Register
 
-**Parent specification:** [EIS-FAB-REQ-001](../EIS-FAB-REQ-001.md)  
+**Parent specification:** [EIS-FAB-REQ-001](EIS-FAB-REQ-001.md)  
 **Related assessments:**
 - [EIS-FAB-REF-TIAN-001](EIS-FAB-REF-TIAN-001.md)
 - [EIS-FAB-REF-CORNERSTONE-001](EIS-FAB-REF-CORNERSTONE-001.md)
