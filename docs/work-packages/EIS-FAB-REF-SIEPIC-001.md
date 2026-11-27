@@ -1,6 +1,6 @@
 # EIS-FAB-REF-SIEPIC-001 — SiEPIC EBeam Evidence Assessment
 
-**Parent specification:** [EIS-FAB-REQ-001](../EIS-FAB-REQ-001.md)  
+**Parent specification:** [EIS-FAB-REQ-001](EIS-FAB-REQ-001.md)  
 **Status:** Read-only environment and source inventory; no new installation or simulation authorized  
 **Reference:** [SiEPIC EBeam PDK](https://github.com/SiEPIC/SiEPIC_EBeam_PDK), SiEPIC-Tools / KLayout ecosystem, and [PhotonForge SiEPIC workflow documentation](https://docs.flexcompute.com/projects/photonforge/en/latest/quick_start/passive.html).  
 **Inspected package:** `siepic-forge` 1.2.2; PhotonForge 1.5.1 in the EIS notebook environment.
