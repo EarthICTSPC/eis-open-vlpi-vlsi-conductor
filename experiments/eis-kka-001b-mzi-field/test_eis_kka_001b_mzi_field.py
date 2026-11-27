@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from eis_kka_001b_mzi_field import directional_coupler, ideal_balanced_interference, simulate_mzi
+from eis_kka_001b_mzi_field import (\n    directional_coupler, ideal_balanced_interference, mzi_scattering_matrix, simulate_mzi,\n)
 
 
 def test_directional_coupler_is_unitary():
@@ -41,3 +41,59 @@ def test_arm_loss_does_not_increase_total_power():
 def test_invalid_coupler_fraction_rejected():
     with pytest.raises(ValueError):
         directional_coupler(1.01)
+
+
+
+def test_lossless_four_port_scattering_matrix_is_reciprocal_and_unitary():
+    s = mzi_scattering_matrix(
+        kappa_in=0.37,
+        kappa_out=0.62,
+        phase_rad=(0.73, -1.21),
+        arm_loss_db=(0.0, 0.0),
+    )
+    np.testing.assert_allclose(s, s.T, atol=1e-14)
+    np.testing.assert_allclose(s.conj().T @ s, np.eye(4), atol=1e-13)
+
+
+def test_four_port_forward_block_matches_complex_field_model():
+    rng = np.random.default_rng(20261127)
+    for _ in range(100):
+        fields = rng.normal(size=2) + 1j * rng.normal(size=2)
+        kappa_in, kappa_out = rng.uniform(size=2)
+        phase = rng.uniform(-np.pi, np.pi, size=2)
+        loss = rng.uniform(0.0, 2.0, size=2)
+        s = mzi_scattering_matrix(
+            kappa_in=kappa_in,
+            kappa_out=kappa_out,
+            phase_rad=phase,
+            arm_loss_db=loss,
+        )
+        result = simulate_mzi(
+            fields,
+            kappa_in=kappa_in,
+            kappa_out=kappa_out,
+            phase_rad=phase,
+            arm_loss_db=loss,
+        )
+        np.testing.assert_allclose(s[2:, :2] @ fields, result.output_fields,
+                                   rtol=1e-13, atol=1e-13)
+
+
+def test_lossy_four_port_matrix_is_reciprocal_and_subunitary():
+    s = mzi_scattering_matrix(
+        kappa_in=0.41,
+        kappa_out=0.58,
+        phase_rad=(0.2, -0.9),
+        arm_loss_db=(0.5, 1.7),
+    )
+    np.testing.assert_allclose(s, s.T, atol=1e-14)
+    eigenvalues = np.linalg.eigvalsh(s.conj().T @ s)
+    assert np.all(eigenvalues <= 1.0 + 1e-13)
+    assert np.all(eigenvalues >= -1e-13)
+
+
+def test_four_port_matrix_rejects_invalid_phase_and_loss():
+    with pytest.raises(ValueError):
+        mzi_scattering_matrix(phase_rad=(0.0, np.nan))
+    with pytest.raises(ValueError):
+        mzi_scattering_matrix(arm_loss_db=(0.0, -0.1))
