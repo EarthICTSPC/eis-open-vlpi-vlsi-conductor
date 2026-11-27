@@ -83,3 +83,36 @@ Passing these tests verifies algebraic implementation only, not a fabricated dev
 Before Tidy3D, document source/assumption labels for waveguide cross-section and layer stack, wavelength/polarization, material dispersion, coupler geometry/gap/interaction length/port planes, arm geometry/heater placement, boundary conditions and mesh convergence.
 
 Use the labels tian_reported, source_unknown, eis_assumed, and simulated. Unknowns remain explicit. Extract complex coupler/MZI fields at defined reference planes and estimate cloud cost before submission. Only then compare physical outputs with this analytical reference.
+
+
+## Four-port scattering lowering
+
+The analytical transfer model now has a reciprocal four-port scattering representation with port order
+\([left_0,left_1,right_0,right_1]\). Define the forward transfer block:
+
+\[
+U=C(\kappa_{out})\,
+\operatorname{diag}(10^{-L_j/20}e^{i\phi_j})\,
+C(\kappa_{in}).
+\]
+
+The idealized scattering matrix is:
+
+\[
+S=\begin{bmatrix}
+0 & U^T\\
+U & 0
+\end{bmatrix}.
+\]
+
+The zero diagonal blocks mean that this model assumes no reflections. The transpose in the reverse block is the reciprocal-network convention; it is not a Hermitian transpose. With zero arm loss, the matrix is unitary. With positive arm loss, it remains symmetric (reciprocal) but is subunitary because dissipative channels are not represented as explicit ports.
+
+This is a backend-neutral network lowering target for a later PhotonForge component adapter. Port ordering, reference planes, and the no-reflection assumption must be preserved by that adapter. It is not yet a PhotonForge model, foundry compact model, Tidy3D result, or physical qualification.
+
+The expanded algebraic tests check:
+- reciprocity \(S=S^T\);
+- lossless unitarity \(S^\dagger S=I\);
+- lossy contractivity (eigenvalues of \(S^\dagger S\) do not exceed one);
+- agreement of the forward S-block with the existing complex-field evaluator over deterministic randomized cases.
+
+The current tests are software/algebra evidence only. The next adapter gate must compare the PhotonForge component's port-indexed S-matrix against this reference at the same frequency, port ordering, and normalization before any geometry-specific claim is made.
