@@ -85,3 +85,40 @@ def simulate_mzi(
 def ideal_balanced_interference(field_a: complex, field_b: complex) -> float:
     """Ideal 50:50 output-port difference: 2 Re(A B*)."""
     return float(2.0 * np.real(complex(field_a) * np.conj(complex(field_b))))
+
+
+def mzi_scattering_matrix(
+    *,
+    kappa_in: float = 0.5,
+    kappa_out: float = 0.5,
+    phase_rad: ArrayLike = (0.0, 0.0),
+    arm_loss_db: ArrayLike = (0.0, 0.0),
+) -> ComplexArray:
+    """Return the idealized reciprocal 4-port MZI scattering matrix.
+
+    Port ordering is [left_0, left_1, right_0, right_1]. The forward
+    left-to-right transfer block is U = C_out @ D @ C_in; reciprocity
+    sets the reverse block to U.T. Reflection blocks are zero by model
+    definition. With zero arm loss, S is unitary. With positive arm loss,
+    S is reciprocal but subunitary because dissipative channels are omitted.
+
+    This is an analytical network representation, not a foundry compact
+    model or a claim about a measured SOI device.
+    """
+    phase = np.asarray(phase_rad, dtype=float)
+    loss = np.asarray(arm_loss_db, dtype=float)
+    if phase.shape != (2,) or not np.isfinite(phase).all():
+        raise ValueError("phase_rad must be two finite radians values")
+    if loss.shape != (2,) or not np.isfinite(loss).all() or np.any(loss < 0):
+        raise ValueError("arm_loss_db must be two finite nonnegative values")
+
+    cin = directional_coupler(kappa_in)
+    cout = directional_coupler(kappa_out)
+    field_attenuation = 10.0 ** (-loss / 20.0)
+    arm_transfer = np.diag(field_attenuation * np.exp(1j * phase))
+    forward = cout @ arm_transfer @ cin
+
+    scattering = np.zeros((4, 4), dtype=np.complex128)
+    scattering[:2, 2:] = forward.T
+    scattering[2:, :2] = forward
+    return scattering
